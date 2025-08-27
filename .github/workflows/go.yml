@@ -22,5 +22,5 @@ jobs:
       - uses: extractions/setup-just@v3
 
       - name: Test
-        working-directory: ./generate
+        working-directory: .generate
         run: just generate v3.4.1

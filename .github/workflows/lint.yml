@@ -25,7 +25,7 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: latest
-          working-directory: ./generate
+          working-directory: .generate
 
   go-mod-tidy:
     name: go-mod-tidy
@@ -39,7 +39,7 @@ jobs:
           cache-dependency-path: .generate/go.sum
 
       - name: Run go mod tidy
-        working-directory: ./generate
+        working-directory: .generate
         run: go mod tidy
 
       - name: Check git diff
@@ -58,4 +58,4 @@ jobs:
 
       - name: Check headers
         run: go tool github.com/elastic/go-licenser -license ASL2-Short -d
-        working-directory: ./generate
+        working-directory: .generate
