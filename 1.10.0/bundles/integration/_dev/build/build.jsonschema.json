@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "dependencies"
+  ],
+  "properties": {
+    "dependencies": {
+      "description": "Package dependencies",
+      "type": "object",
+      "properties": {
+        "ecs": {
+          "description": "ECS dependency",
+          "type": "object",
+          "required": [
+            "reference"
+          ],
+          "properties": {
+            "reference": {
+              "description": "Source reference",
+              "type": "string",
+              "pattern": "^git@.+"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

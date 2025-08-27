@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.1.2/integration/data_stream/_dev/test/pipeline/expected.jsonschema.json",
+  "type": "object",
+  "required": [
+    "expected"
+  ],
+  "properties": {
+    "expected": {
+      "description": "Expected test result",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/optionalTestResult"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "optionalTestResult": {
+      "anyOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

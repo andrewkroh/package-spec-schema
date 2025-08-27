@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.2.1/integration/data_stream/_dev/test/policy/config.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "data_stream": {
+      "description": "Configuration for the data stream.",
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "vars": {
+          "description": "Variables used to configure settings defined in the data stream manifest.",
+          "$ref": "./../config.jsonschema.json#/definitions/vars"
+        }
+      },
+      "additionalProperties": false
+    },
+    "input": {
+      "description": "The input of the package to test.",
+      "type": "string"
+    },
+    "skip": {
+      "$ref": "./../config.jsonschema.json#/definitions/skip"
+    },
+    "vars": {
+      "description": "Variables used to configure settings defined in the package manifest.",
+      "$ref": "./../config.jsonschema.json#/definitions/vars"
+    }
+  },
+  "additionalProperties": false
+}

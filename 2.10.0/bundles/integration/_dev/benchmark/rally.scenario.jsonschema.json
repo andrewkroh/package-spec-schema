@@ -1,0 +1,1172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "data_stream"
+  ],
+  "properties": {
+    "description": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/description"
+    },
+    "benchmark_time_period": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/benchmark_time_period"
+    },
+    "corpora": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/corpora"
+    },
+    "data_stream": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/data_stream"
+    },
+    "package": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/package"
+    },
+    "version": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/version"
+    },
+    "wait_for_data_timeout": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/wait_for_data_timeout"
+    },
+    "warmup_time_period": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/warmup_time_period"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "https://schemas.elastic.dev/package-spec/2.10.0/integration/_dev/benchmark/system.scenario.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "required": [
+        "data_stream",
+        "input"
+      ],
+      "properties": {
+        "description": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/description"
+        },
+        "benchmark_time_period": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/benchmark_time_period"
+        },
+        "corpora": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/corpora"
+        },
+        "data_stream": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/data_stream"
+        },
+        "input": {
+          "description": "The input of the package to benchmark.",
+          "type": "string"
+        },
+        "package": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/package"
+        },
+        "vars": {
+          "description": "The package level variables.",
+          "default": null,
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "version": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/version"
+        },
+        "wait_for_data_timeout": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/wait_for_data_timeout"
+        },
+        "warmup_time_period": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/warmup_time_period"
+        }
+      },
+      "additionalProperties": false,
+      "definitions": {
+        "description": {
+          "description": "A description of the benchmark scenario.",
+          "type": "string"
+        },
+        "benchmark_time_period": {
+          "description": "A time period as a duration string for the duration of the benchmark.\nBy default the value is 0 seconds, which means that the benchmark will run until no more data is ingested.\n",
+          "default": "",
+          "type": "string",
+          "example": "10m"
+        },
+        "corpora": {
+          "description": "Corpora settings.",
+          "type": "object",
+          "required": [
+            "generator"
+          ],
+          "properties": {
+            "generator": {
+              "description": "Configuration for the corpus generator.",
+              "type": "object",
+              "required": [
+                "size",
+                "template",
+                "config",
+                "fields"
+              ],
+              "properties": {
+                "config": {
+                  "description": "Configuration for the generator.",
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "description": "Config path.",
+                      "type": "string"
+                    },
+                    "raw": {
+                      "description": "Raw config.",
+                      "type": "object"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "fields": {
+                  "description": "Fields description for the generator.",
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "description": "Fields path.",
+                      "type": "string"
+                    },
+                    "raw": {
+                      "description": "Raw fields.",
+                      "type": "object"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "size": {
+                  "description": "A string describing the amount of data to generate.",
+                  "deprecated": true,
+                  "type": "string",
+                  "example": "10MiB"
+                },
+                "template": {
+                  "description": "Configuration for the generator template.",
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "description": "The type of template.",
+                      "default": "placeholder",
+                      "type": "string",
+                      "enum": [
+                        "placeholder",
+                        "gotext"
+                      ]
+                    },
+                    "path": {
+                      "description": "Template path.",
+                      "type": "string"
+                    },
+                    "raw": {
+                      "description": "Raw template.",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "tot_events": {
+                  "description": "An integer describing the total number of events to generate.",
+                  "type": "integer",
+                  "example": 1000
+                }
+              },
+              "additionalProperties": false
+            },
+            "input_service": {
+              "description": "Options for the service (found in ./deploy/docker) that will send corpora logs to the elastic agents.",
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "description": "The name of the input service.",
+                  "type": "string"
+                },
+                "signal": {
+                  "description": "The signal to send to the service once the benchmark is ready to start.",
+                  "default": "",
+                  "type": "string",
+                  "example": "SIGHUP"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "data_stream": {
+          "description": "Data-stream parameters.",
+          "type": "object",
+          "oneOf": [
+            {
+              "required": [
+                "name"
+              ]
+            },
+            {
+              "required": [
+                "dataset"
+              ]
+            }
+          ],
+          "properties": {
+            "dataset": {
+              "description": "The name of the dataset to benchmark.",
+              "type": "string"
+            },
+            "name": {
+              "description": "The name of the dataset to benchmark.",
+              "type": "string"
+            },
+            "vars": {
+              "description": "The data_stream specific variables.",
+              "default": null,
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "package": {
+          "description": "The package to benchmark.",
+          "type": "string"
+        },
+        "policy_template": {
+          "description": "The policy template to use, if none is set, will pick the first one in the list.\n",
+          "type": "string"
+        },
+        "wait_for_data_timeout": {
+          "description": "Timeout for waiting for data during a benchmark.",
+          "default": "10m",
+          "type": "string",
+          "example": "10m"
+        },
+        "warmup_time_period": {
+          "description": "A time period as a duration string for warmup of the benchmark. \nAll response data captured during warmup will not show up in the measurement results.\nBy default the value is 0 seconds, which means that all data captured will be taken into account for the benchmark results.\n",
+          "default": "",
+          "type": "string",
+          "example": "10s"
+        }
+      }
+    },
+    "https://schemas.elastic.dev/package-spec/2.10.0/integration/data_stream/manifest.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "description": "Title of data stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+          "examples": [
+            "AWS Billing Metrics",
+            "Linux Metrics",
+            "User Activity Logs"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of data stream",
+          "examples": [
+            "metrics"
+          ],
+          "type": "string",
+          "enum": [
+            "metrics",
+            "logs",
+            "synthetics",
+            "traces",
+            "profiling"
+          ]
+        },
+        "dataset": {
+          "description": "Name of data set.",
+          "type": "string"
+        },
+        "dataset_is_prefix": {
+          "description": "if true, the index pattern in the ES template will contain the dataset as a prefix only",
+          "default": false,
+          "type": "boolean"
+        },
+        "elasticsearch": {
+          "description": "Elasticsearch asset definitions",
+          "type": "object",
+          "properties": {
+            "dynamic_dataset": {
+              "description": "When set to true, agents running this integration are granted data stream privileges for all datasets of its type",
+              "type": "boolean"
+            },
+            "dynamic_namespace": {
+              "description": "When set to true, agents running this integration are granted data stream privileges for all namespaces of its type",
+              "type": "boolean"
+            },
+            "index_mode": {
+              "description": "Index mode to use. Index mode can be used to enable use case specific functionalities.\nThis setting must be installed in the composable index template, not in the package component templates.",
+              "examples": [
+                "time_series"
+              ],
+              "type": "string",
+              "enum": [
+                "time_series"
+              ]
+            },
+            "index_template": {
+              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/elasticsearch_index_template"
+            },
+            "privileges": {
+              "description": "Elasticsearch privilege requirements",
+              "type": "object",
+              "properties": {
+                "indices": {
+                  "description": "Elasticsearch index privilege requirements",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "source_mode": {
+              "description": "Source mode to use. This configures how the document source (`_source`) is stored\nfor this data stream.\nIf configured as `default`, this mode is not configured and it uses Elasticsearch defaults.\nIf configured as `synthetic`, it enables [synthetic source](https://www.elastic.co/guide/en/elasticsearch/reference/8.4/mapping-source-field.html#synthetic-source),\nthat doesn't store the source, but tries to rebuild it from the indexed fields when queried.\nIf no configured or set to `synthetic`, users may override the setting from Fleet UI.",
+              "examples": [
+                "synthetic"
+              ],
+              "type": "string",
+              "enum": [
+                "default",
+                "synthetic"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "hidden": {
+          "description": "Specifies if a data stream is hidden, resulting in dot prefixed system indices. To set the data stream hidden without those dot prefixed indices, check `elasticsearch.index_template.data_stream.hidden` flag.\n",
+          "deprecated": true,
+          "type": "boolean"
+        },
+        "ilm_policy": {
+          "description": "The name of an existing ILM (Index Lifecycle Management) policy",
+          "examples": [
+            "diagnostics"
+          ],
+          "type": "string"
+        },
+        "release": {
+          "description": "Stability of data stream.",
+          "examples": [
+            "beta"
+          ],
+          "type": "string",
+          "enum": [
+            "experimental",
+            "beta"
+          ]
+        },
+        "streams": {
+          "description": "Streams offered by data stream.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "description",
+              "input"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of the stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+                "examples": [
+                  "AWS Billing Metrics",
+                  "Linux Metrics",
+                  "User Activity Logs"
+                ],
+                "type": "string"
+              },
+              "description": {
+                "description": "Description of the stream. It should describe what is being collected and with what collector, following the structure \"Collect X from Y with X\".\n",
+                "examples": [
+                  "Collect Metrics from AWS Billing service using Elastic Agent.",
+                  "Collect Metrics from Linux servers with Elastic Agent.",
+                  "Collect Logs from Apache Web Server using Elastic Agent."
+                ],
+                "type": "string"
+              },
+              "enabled": {
+                "description": "Is stream enabled?",
+                "type": "boolean"
+              },
+              "input": {
+                "examples": [
+                  "aws/metrics",
+                  "s3",
+                  "file"
+                ],
+                "type": "string"
+              },
+              "template_path": {
+                "description": "Path to Elasticsearch index template for stream.",
+                "type": "string"
+              },
+              "vars": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false,
+      "definitions": {
+        "elasticsearch_index_template": {
+          "description": "Index template definition",
+          "type": "object",
+          "properties": {
+            "data_stream": {
+              "description": "Data stream section of index template",
+              "type": "object",
+              "properties": {
+                "hidden": {
+                  "description": "Makes the data stream hidden",
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "ingest_pipeline": {
+              "description": "Elasticsearch ingest pipeline settings",
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "description": "Ingest pipeline name",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "mappings": {
+              "description": "Mappings section of index template",
+              "type": "object"
+            },
+            "settings": {
+              "description": "Settings section of index template",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        "input_variable_value": {
+          "examples": [
+            "null",
+            "",
+            "some string",
+            1234,
+            true,
+            [
+              3,
+              "mixed",
+              true
+            ],
+            [
+              [
+                "array",
+                1
+              ],
+              [
+                "array",
+                2
+              ]
+            ]
+          ],
+          "anyOf": [
+            {
+              "type": [
+                "string",
+                "integer",
+                "boolean",
+                "null"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
+              }
+            }
+          ]
+        },
+        "vars": {
+          "description": "Input variables.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "select"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "options"
+              ],
+              "properties": {
+                "options": {
+                  "description": "List of options for select type",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "value",
+                      "text"
+                    ],
+                    "properties": {
+                      "text": {
+                        "examples": [
+                          "node",
+                          "cluster"
+                        ],
+                        "type": "string"
+                      },
+                      "value": {
+                        "examples": [
+                          "node",
+                          "cluster"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "min_items": 1
+                }
+              }
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "options"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of variable.",
+                "examples": [
+                  "Hosts"
+                ],
+                "type": "string"
+              },
+              "description": {
+                "description": "Short description of variable.",
+                "examples": [
+                  "Hosts of integration service to connect to"
+                ],
+                "type": "string"
+              },
+              "default": {
+                "description": "Default value(s) for variable",
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
+              },
+              "type": {
+                "description": "Data type of variable.",
+                "examples": [
+                  "text"
+                ],
+                "type": "string",
+                "enum": [
+                  "bool",
+                  "email",
+                  "integer",
+                  "password",
+                  "select",
+                  "text",
+                  "textarea",
+                  "time_zone",
+                  "url",
+                  "yaml"
+                ]
+              },
+              "required": {
+                "description": "Is variable required?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "multi": {
+                "description": "Can variable contain multiple values?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Variable name.",
+                "examples": [
+                  "hosts"
+                ],
+                "type": "string"
+              },
+              "options": true,
+              "secret": {
+                "description": "Specifying that a variable is secret means that Kibana will store the value separate from the package policy in a more secure index.  This is useful for passwords and other sensitive information. One caveat is that secrets are write-only, once a user writes a secret var they cannot read it again, only overwrite it.\n",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "show_user": {
+                "description": "Should this variable be shown to the user by default?",
+                "examples": [
+                  false
+                ],
+                "default": true,
+                "type": "boolean"
+              },
+              "url_allowed_schemes": {
+                "description": "List of allowed URL schemes for the url type. If empty, any scheme is allowed. An empty string can be used to indicate that the scheme is not mandatory.\n",
+                "examples": [
+                  [
+                    "http",
+                    "https"
+                  ],
+                  [
+                    "redis",
+                    "rediss"
+                  ],
+                  [
+                    "",
+                    "mysql"
+                  ]
+                ],
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "https://schemas.elastic.dev/package-spec/2.10.0/integration/manifest.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "required": [
+        "format_version",
+        "name",
+        "title",
+        "description",
+        "version",
+        "type",
+        "owner"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/title"
+        },
+        "description": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/description"
+        },
+        "type": {
+          "description": "The type of package.",
+          "examples": [
+            "integration"
+          ],
+          "type": "string",
+          "enum": [
+            "integration"
+          ]
+        },
+        "format_version": {
+          "description": "The version of the package specification format used by this package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/version"
+        },
+        "categories": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/categories"
+        },
+        "conditions": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/conditions"
+        },
+        "elasticsearch": {
+          "description": "Elasticsearch requirements",
+          "type": "object",
+          "properties": {
+            "privileges": {
+              "description": "Elasticsearch privilege requirements",
+              "type": "object",
+              "properties": {
+                "cluster": {
+                  "description": "Elasticsearch cluster privilege requirements",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "icons": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/icons"
+        },
+        "name": {
+          "description": "The name of the package.",
+          "examples": [
+            "apache"
+          ],
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "owner": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/owner"
+        },
+        "policy_templates": {
+          "description": "List of policy templates offered by this package.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "title",
+              "description"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of policy template.",
+                "examples": [
+                  "Apache logs and metrics"
+                ],
+                "type": "string"
+              },
+              "description": {
+                "description": "Longer description of policy template.",
+                "examples": [
+                  "Collect logs and metrics from Apache instances"
+                ],
+                "type": "string"
+              },
+              "categories": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/categories"
+              },
+              "data_streams": {
+                "description": "List of data streams compatible with the policy template.",
+                "type": "array",
+                "items": {
+                  "description": "Data stream name",
+                  "examples": [
+                    "ec2_logs",
+                    "spamfirewall",
+                    "access"
+                  ],
+                  "type": "string",
+                  "format": "data-stream-name"
+                }
+              },
+              "icons": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/icons"
+              },
+              "inputs": {
+                "description": "List of inputs supported by policy template.",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "title",
+                    "description"
+                  ],
+                  "properties": {
+                    "title": {
+                      "description": "Title of input.",
+                      "examples": [
+                        "Collect logs from Apache instances"
+                      ],
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "Longer description of input.",
+                      "examples": [
+                        "Collecting Apache access and error logs"
+                      ],
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of input.",
+                      "type": "string"
+                    },
+                    "input_group": {
+                      "description": "Name of the input group",
+                      "type": "string",
+                      "enum": [
+                        "logs",
+                        "metrics"
+                      ]
+                    },
+                    "multi": {
+                      "description": "Can input be defined multiple times",
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "template_path": {
+                      "description": "Path of the config template for the input.",
+                      "examples": [
+                        "./agent/input/template.yml.hbs"
+                      ],
+                      "type": "string"
+                    },
+                    "vars": {
+                      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Name of policy template.",
+                "examples": [
+                  "apache"
+                ],
+                "type": "string"
+              },
+              "screenshots": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/screenshots"
+              },
+              "vars": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "screenshots": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/screenshots"
+        },
+        "source": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/source"
+        },
+        "vars": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+        },
+        "version": {
+          "description": "The version of the package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.10.0~1integration~1manifest.jsonschema.json/definitions/version"
+        }
+      },
+      "additionalProperties": false,
+      "definitions": {
+        "title": {
+          "description": "Title of the package. It should be the usual title given to the product, service or kind of source being managed by this package.\n",
+          "examples": [
+            "Apache HTTP Server",
+            "MySQL",
+            "AWS"
+          ],
+          "type": "string"
+        },
+        "description": {
+          "description": "A longer description of the package. It should describe, at least all the kinds of data that is collected and with what collectors, following the structure \"Collect X from Y with X\".\n",
+          "examples": [
+            "Collect logs and metrics from Apache HTTP Servers with Elastic Agent.",
+            "Collect logs and metrics from Amazon Web Services with Elastic Agent."
+          ],
+          "type": "string"
+        },
+        "categories": {
+          "description": "Categories to which this package belongs.",
+          "type": "array",
+          "items": {
+            "examples": [
+              "web"
+            ],
+            "type": "string",
+            "enum": [
+              "advanced_analytics_ueba",
+              "analytics_engine",
+              "application_observability",
+              "app_search",
+              "auditd",
+              "authentication",
+              "aws",
+              "azure",
+              "big_data",
+              "cdn_security",
+              "cloud",
+              "config_management",
+              "connector",
+              "connector_client",
+              "connector_package",
+              "containers",
+              "content_source",
+              "crawler",
+              "credential_management",
+              "crm",
+              "custom",
+              "custom_logs",
+              "database_security",
+              "datastore",
+              "dns_security",
+              "edr_xdr",
+              "elasticsearch_sdk",
+              "elastic_stack",
+              "email_security",
+              "enterprise_search",
+              "firewall_security",
+              "google_cloud",
+              "iam",
+              "ids_ips",
+              "infrastructure",
+              "java_observability",
+              "kubernetes",
+              "language_client",
+              "languages",
+              "load_balancer",
+              "message_queue",
+              "monitoring",
+              "native_search",
+              "network",
+              "network_security",
+              "notification",
+              "observability",
+              "os_system",
+              "process_manager",
+              "productivity",
+              "productivity_security",
+              "proxy_security",
+              "sdk_search",
+              "security",
+              "stream_processing",
+              "support",
+              "threat_intel",
+              "ticketing",
+              "version_control",
+              "virtualization",
+              "vpn_security",
+              "vulnerability_management",
+              "web",
+              "web_application_firewall",
+              "websphere",
+              "workplace_search"
+            ]
+          }
+        },
+        "conditions": {
+          "description": "Conditions under which this package can be installed.",
+          "type": "object",
+          "properties": {
+            "elastic": {
+              "description": "Elastic conditions",
+              "type": "object",
+              "properties": {
+                "capabilities": {
+                  "description": "Stack features that are required by the package to work properly.\nThe package should not be used in deployments without the indicated features.\nPackages that don't indicate any capability condition can be used on any deployment.",
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "apm",
+                      "enterprise_search",
+                      "observability",
+                      "security",
+                      "serverless_search",
+                      "uptime"
+                    ]
+                  }
+                },
+                "subscription": {
+                  "description": "The subscription required for this package.",
+                  "examples": [
+                    "basic"
+                  ],
+                  "default": "basic",
+                  "type": "string",
+                  "enum": [
+                    "basic",
+                    "gold",
+                    "platinum",
+                    "enterprise"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "kibana": {
+              "description": "Kibana conditions",
+              "type": "object",
+              "properties": {
+                "version": {
+                  "description": "Kibana versions compatible with this package.",
+                  "examples": [
+                    ">=7.9.0"
+                  ],
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "icons": {
+          "description": "List of icons for by this package.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "src"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of icon.",
+                "examples": [
+                  "Apache Logo"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "MIME type of the icon image file.",
+                "examples": [
+                  "image/svg+xml"
+                ],
+                "type": "string"
+              },
+              "dark_mode": {
+                "description": "Is this icon to be shown in dark mode?",
+                "default": false,
+                "type": "boolean"
+              },
+              "size": {
+                "description": "Size of the icon.",
+                "examples": [
+                  "32x32"
+                ],
+                "type": "string"
+              },
+              "src": {
+                "description": "Relative path to the icon's image file.",
+                "examples": [
+                  "/img/logo_apache.svg"
+                ],
+                "type": "string",
+                "format": "relative-path"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "owner": {
+          "type": "object",
+          "required": [
+            "github"
+          ],
+          "properties": {
+            "github": {
+              "description": "Github team name of the package maintainer.",
+              "type": "string",
+              "pattern": "^(([a-zA-Z0-9-]+)|([a-zA-Z0-9-]+\\/[a-zA-Z0-9-]+))$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "screenshots": {
+          "description": "List of screenshots of Kibana assets created by this package.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "src",
+              "title"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of screenshot.",
+                "examples": [
+                  "Apache HTTPD Server Status"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "MIME type of the screenshot image file.",
+                "examples": [
+                  "image/png"
+                ],
+                "type": "string"
+              },
+              "size": {
+                "description": "Size of the screenshot.",
+                "examples": [
+                  "1215x1199"
+                ],
+                "type": "string"
+              },
+              "src": {
+                "description": "Relative path to the screenshot's image file.",
+                "examples": [
+                  "/img/apache_httpd_server_status.png"
+                ],
+                "type": "string",
+                "format": "relative-path"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "source": {
+          "description": "Information about the source of the package.",
+          "type": "object",
+          "properties": {
+            "license": {
+              "description": "Identifier of the license of the package, as specified in https://spdx.org/licenses/.",
+              "examples": [
+                "Elastic-2.0"
+              ],
+              "type": "string",
+              "enum": [
+                "Apache-2.0",
+                "Elastic-2.0"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "version": {
+          "description": "Version of the package, following semantic versioning. It can include pre-release labels.",
+          "examples": [
+            "1.0.0",
+            "1.0.0-beta1",
+            "1.0.0-SNAPSHOT",
+            "1.0.0-next"
+          ],
+          "type": "string",
+          "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?$"
+        }
+      }
+    }
+  }
+}

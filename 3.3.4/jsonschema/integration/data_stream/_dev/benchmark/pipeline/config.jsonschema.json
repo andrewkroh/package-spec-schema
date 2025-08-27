@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.3.4/integration/data_stream/_dev/benchmark/pipeline/config.jsonschema.json",
+  "type": "object",
+  "required": [
+    "num_docs"
+  ],
+  "properties": {
+    "num_docs": {
+      "description": "Number of documents contained in each benchmark request. Sampled from the included events.",
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}

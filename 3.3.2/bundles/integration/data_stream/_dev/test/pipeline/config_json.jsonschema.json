@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "dynamic_fields": {
+      "description": "Dynamic fields with regular expressions defining their variable values.",
+      "type": "object"
+    },
+    "fields": {
+      "description": "Field definitions",
+      "type": "object"
+    },
+    "numeric_keyword_fields": {
+      "description": "List of keyword type fields allowed to have a numeric value.",
+      "type": "array"
+    },
+    "skip": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.2~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/skip"
+    },
+    "string_number_fields": {
+      "description": "List of numeric type fields allowed to have a string value if it can be parsed as a number.",
+      "type": "array"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "https://schemas.elastic.dev/package-spec/3.3.2/integration/data_stream/_dev/test/config.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "definitions": {
+        "skip": {
+          "description": "If this test should be skipped, more information about why it was skipped.",
+          "type": "object",
+          "required": [
+            "reason",
+            "link"
+          ],
+          "properties": {
+            "link": {
+              "description": "Link to issue with more details about skipped test or to track re-enabling skipped test.",
+              "type": "string",
+              "example": "https://github.com/elastic/integrations/issues/520"
+            },
+            "reason": {
+              "description": "Short explanation for why test has been skipped.",
+              "type": "string",
+              "example": "Flaky test"
+            }
+          },
+          "additionalProperties": false
+        },
+        "vars": {
+          "description": "Variables defined for the test case.",
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "data_stream.dataset": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9\\._]*$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

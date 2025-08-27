@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/2.11.0/integration/changelog.jsonschema.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "version",
+      "changes"
+    ],
+    "properties": {
+      "changes": {
+        "description": "List of changes in package version.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "description",
+            "type",
+            "link"
+          ],
+          "properties": {
+            "description": {
+              "description": "Description of change.",
+              "examples": [
+                "Fix broken template"
+              ],
+              "type": "string"
+            },
+            "type": {
+              "description": "Type of change.",
+              "type": "string",
+              "enum": [
+                "breaking-change",
+                "bugfix",
+                "enhancement"
+              ]
+            },
+            "link": {
+              "description": "Link to issue or PR describing change in detail.",
+              "examples": [
+                "https://github.com/elastic/integrations/pull/550"
+              ],
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "version": {
+        "description": "Package version.",
+        "$ref": "./manifest.jsonschema.json#/definitions/version"
+      }
+    },
+    "additionalProperties": false
+  }
+}
