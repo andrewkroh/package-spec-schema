@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/1.1.0/data_stream/_dev/test/static/config.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "skip": {
+      "$ref": "./../skip.jsonschema.json#/definitions/skip"
+    }
+  }
+}

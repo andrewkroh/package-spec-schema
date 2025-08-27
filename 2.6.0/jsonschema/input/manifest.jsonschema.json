@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/2.6.0/input/manifest.jsonschema.json",
+  "type": "object",
+  "required": [
+    "format_version",
+    "name",
+    "title",
+    "description",
+    "version",
+    "type",
+    "owner"
+  ],
+  "properties": {
+    "title": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/title"
+    },
+    "description": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/description"
+    },
+    "type": {
+      "description": "The type of package.",
+      "examples": [
+        "input"
+      ],
+      "type": "string",
+      "enum": [
+        "input"
+      ]
+    },
+    "format_version": {
+      "description": "The version of the package specification format used by this package.",
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/version"
+    },
+    "categories": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/categories"
+    },
+    "conditions": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/conditions"
+    },
+    "elasticsearch": {
+      "description": "Elasticsearch asset definitions",
+      "type": "object",
+      "properties": {
+        "index_template": {
+          "$ref": "../integration/data_stream/manifest.jsonschema.json#/definitions/elasticsearch_index_template"
+        }
+      },
+      "additionalProperties": false
+    },
+    "icons": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/icons"
+    },
+    "name": {
+      "description": "The name of the package.",
+      "examples": [
+        "apache"
+      ],
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "owner": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/owner"
+    },
+    "policy_templates": {
+      "description": "List of policy templates offered by this package.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "description",
+          "type",
+          "input"
+        ],
+        "properties": {
+          "title": {
+            "description": "Title of policy template.",
+            "examples": [
+              "Apache logs and metrics"
+            ],
+            "type": "string"
+          },
+          "description": {
+            "description": "Longer description of policy template.",
+            "examples": [
+              "Collect logs and metrics from Apache instances"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of data stream",
+            "examples": [
+              "metrics"
+            ],
+            "type": "string",
+            "enum": [
+              "metrics",
+              "logs",
+              "synthetics",
+              "traces"
+            ]
+          },
+          "icons": {
+            "$ref": "../integration/manifest.jsonschema.json#/definitions/icons"
+          },
+          "input": {
+            "examples": [
+              "aws/metrics",
+              "s3",
+              "file"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of policy template.",
+            "examples": [
+              "apache"
+            ],
+            "type": "string"
+          },
+          "screenshots": {
+            "$ref": "../integration/manifest.jsonschema.json#/definitions/screenshots"
+          },
+          "template_path": {
+            "description": "Path to Elasticsearch index template for stream.",
+            "type": "string"
+          },
+          "vars": {
+            "$ref": "../integration/data_stream/manifest.jsonschema.json#/definitions/vars"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "screenshots": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/screenshots"
+    },
+    "source": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/source"
+    },
+    "vars": {
+      "$ref": "../integration/data_stream/manifest.jsonschema.json#/definitions/vars"
+    },
+    "version": {
+      "description": "The version of the package.",
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/version"
+    }
+  },
+  "additionalProperties": false
+}

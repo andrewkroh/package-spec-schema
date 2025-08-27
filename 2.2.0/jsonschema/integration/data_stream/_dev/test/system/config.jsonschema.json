@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/2.2.0/integration/data_stream/_dev/test/system/config.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "skip": {
+      "$ref": "./../skip.jsonschema.json#/definitions/skip"
+    },
+    "wait_for_data_timeout": {
+      "description": "Timeout for waiting for metrics data during a system test.",
+      "type": "string",
+      "example": "10m"
+    }
+  }
+}

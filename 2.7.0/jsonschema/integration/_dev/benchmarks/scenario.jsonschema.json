@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/2.7.0/integration/_dev/benchmarks/scenario.jsonschema.json",
+  "type": "object",
+  "required": [
+    "version",
+    "data_stream",
+    "description",
+    "corpora"
+  ],
+  "properties": {
+    "description": {
+      "description": "A description of the benchmark scenario.",
+      "type": "string"
+    },
+    "corpora": {
+      "description": "Corpora settings.",
+      "type": "object",
+      "required": [
+        "input_service"
+      ],
+      "properties": {
+        "input_service": {
+          "description": "The service (found in ./deploy/docker) that will send corpora logs to the elastic agents.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "data_stream": {
+      "description": "The data-stream to benchmark.",
+      "type": "string"
+    },
+    "version": {
+      "$ref": "../../manifest.jsonschema.json#/definitions/version"
+    },
+    "warmup_time_period": {
+      "description": "A time period in seconds for warmup of the benchmark. \nAll response data captured during warmup will not show up in the measurement results.\nBy default the value is 0 seconds, which means that all data captured will be taken into account for the benchmark results.\n",
+      "default": 0,
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}

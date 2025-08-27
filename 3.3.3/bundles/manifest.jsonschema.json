@@ -1,0 +1,2455 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Package Manifest",
+  "description": "Schema for package manifests.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "content"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/content-manifest"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "input"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/input-manifest"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "integration"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/integration-manifest"
+      }
+    }
+  ],
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        [
+          "content",
+          "input",
+          "integration"
+        ]
+      ]
+    }
+  },
+  "$defs": {
+    "content-manifest": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1content~1manifest.jsonschema.json"
+    },
+    "https://schemas.elastic.dev/package-spec/3.3.3/content/manifest.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "required": [
+        "format_version",
+        "name",
+        "title",
+        "description",
+        "version",
+        "type",
+        "owner"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/title"
+        },
+        "description": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/description"
+        },
+        "type": {
+          "description": "The type of package.",
+          "examples": [
+            "content"
+          ],
+          "type": "string",
+          "enum": [
+            "content"
+          ]
+        },
+        "format_version": {
+          "description": "The version of the package specification format used by this package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/version"
+        },
+        "categories": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/categories"
+        },
+        "conditions": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/conditions"
+        },
+        "discovery": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1content~1manifest.jsonschema.json/definitions/discovery"
+        },
+        "icons": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/icons"
+        },
+        "name": {
+          "description": "The name of the package.",
+          "examples": [
+            "apache"
+          ],
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "owner": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/owner"
+        },
+        "screenshots": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/screenshots"
+        },
+        "source": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/source"
+        },
+        "version": {
+          "description": "The version of the package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/version"
+        }
+      },
+      "additionalProperties": false,
+      "definitions": {
+        "discovery": {
+          "description": "Description of the data this package can be used with. It can be used to discover the package from elements in the existing data.\n",
+          "type": "object",
+          "properties": {
+            "fields": {
+              "description": "Description of the fields this package can be used with.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the field.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "https://schemas.elastic.dev/package-spec/3.3.3/input/manifest.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "required": [
+        "format_version",
+        "name",
+        "title",
+        "description",
+        "version",
+        "type",
+        "owner"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/title"
+        },
+        "description": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/description"
+        },
+        "type": {
+          "description": "The type of package.",
+          "examples": [
+            "input"
+          ],
+          "type": "string",
+          "enum": [
+            "input"
+          ]
+        },
+        "format_version": {
+          "description": "The version of the package specification format used by this package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/version"
+        },
+        "agent": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/agent"
+        },
+        "categories": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/categories"
+        },
+        "conditions": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/conditions"
+        },
+        "elasticsearch": {
+          "description": "Elasticsearch asset definitions",
+          "type": "object",
+          "properties": {
+            "index_template": {
+              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/elasticsearch_index_template"
+            }
+          },
+          "additionalProperties": false
+        },
+        "icons": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/icons"
+        },
+        "name": {
+          "description": "The name of the package.",
+          "examples": [
+            "apache"
+          ],
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "owner": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/owner"
+        },
+        "policy_templates": {
+          "description": "List of policy templates offered by this package.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "title",
+              "description",
+              "type",
+              "input"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of policy template.",
+                "examples": [
+                  "Apache logs and metrics"
+                ],
+                "type": "string"
+              },
+              "description": {
+                "description": "Longer description of policy template.",
+                "examples": [
+                  "Collect logs and metrics from Apache instances"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "Type of data stream",
+                "examples": [
+                  "metrics"
+                ],
+                "type": "string",
+                "enum": [
+                  "metrics",
+                  "logs",
+                  "synthetics",
+                  "traces"
+                ]
+              },
+              "configuration_links": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/configuration_links"
+              },
+              "deployment_modes": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/deployment_modes"
+              },
+              "icons": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/icons"
+              },
+              "input": {
+                "examples": [
+                  "aws/metrics",
+                  "s3",
+                  "file"
+                ],
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of policy template.",
+                "examples": [
+                  "apache"
+                ],
+                "type": "string"
+              },
+              "screenshots": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/screenshots"
+              },
+              "template_path": {
+                "description": "Path to Elasticsearch index template for stream.",
+                "type": "string"
+              },
+              "vars": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "screenshots": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/screenshots"
+        },
+        "source": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/source"
+        },
+        "vars": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+        },
+        "version": {
+          "description": "The version of the package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/version"
+        }
+      },
+      "additionalProperties": false
+    },
+    "https://schemas.elastic.dev/package-spec/3.3.3/integration/data_stream/fields/fields.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "const": "aggregate_metric_double"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "default_metric"
+              ],
+              "properties": {
+                "default_metric": {
+                  "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/definitions/metric_aggregation"
+                }
+              }
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "default_metric"
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "const": "aggregate_metric_double"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "metrics"
+              ],
+              "properties": {
+                "metrics": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/definitions/metric_aggregation"
+                  }
+                }
+              }
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "metrics"
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "boolean",
+                    "date",
+                    "double",
+                    "geo_point",
+                    "ip",
+                    "keyword",
+                    "long"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "runtime": {
+                  "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/definitions/runtime"
+                }
+              }
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "runtime"
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "not": {
+                "required": [
+                  "object_type"
+                ]
+              },
+              "required": [
+                "metric_type"
+              ]
+            },
+            "then": {
+              "oneOf": [
+                {
+                  "required": [
+                    "type"
+                  ],
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "histogram",
+                        "aggregate_metric_double",
+                        "long",
+                        "integer",
+                        "short",
+                        "byte",
+                        "double",
+                        "float",
+                        "half_float",
+                        "scaled_float",
+                        "unsigned_long"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "external"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "object_type"
+              ]
+            },
+            "then": {
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "object"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "metric_type",
+                "object_type"
+              ],
+              "properties": {
+                "type": {
+                  "const": "object"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "type",
+                "object_type"
+              ],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "object"
+                  ]
+                },
+                "object_type": {
+                  "enum": [
+                    "histogram",
+                    "long",
+                    "integer",
+                    "short",
+                    "byte",
+                    "double",
+                    "float",
+                    "half_float",
+                    "scaled_float",
+                    "unsigned_long"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "const": "object"
+                }
+              }
+            },
+            "then": {
+              "oneOf": [
+                {
+                  "required": [
+                    "object_type"
+                  ],
+                  "properties": {
+                    "enabled": {
+                      "const": true
+                    }
+                  }
+                },
+                {
+                  "not": {
+                    "required": [
+                      "object_type"
+                    ]
+                  },
+                  "required": [
+                    "enabled"
+                  ],
+                  "properties": {
+                    "enabled": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "fields"
+              ],
+              "properties": {
+                "fields": {
+                  "minContent": 1
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "group",
+                    "nested"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "subobjects"
+              ]
+            },
+            "then": {
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "object"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "inference_id"
+              ]
+            },
+            "then": {
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "semantic_text"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "description": {
+            "description": "Short description of field",
+            "type": "string"
+          },
+          "default_metric": true,
+          "type": {
+            "description": "Datatype of field. If the type is set to object, a dynamic mapping is created. In this case, if the name doesn't contain any wildcard, the wildcard is added as the last segment of the path.\n",
+            "type": "string",
+            "enum": [
+              "aggregate_metric_double",
+              "alias",
+              "histogram",
+              "constant_keyword",
+              "text",
+              "match_only_text",
+              "keyword",
+              "long",
+              "integer",
+              "short",
+              "byte",
+              "double",
+              "float",
+              "half_float",
+              "scaled_float",
+              "date",
+              "date_nanos",
+              "boolean",
+              "binary",
+              "integer_range",
+              "float_range",
+              "long_range",
+              "double_range",
+              "date_range",
+              "ip_range",
+              "group",
+              "geo_point",
+              "object",
+              "ip",
+              "nested",
+              "flattened",
+              "wildcard",
+              "version",
+              "unsigned_long",
+              "counted_keyword",
+              "semantic_text"
+            ]
+          },
+          "pattern": {
+            "description": "Regular expression pattern matching the allowed values for the field. This is used for development-time data validation.\n",
+            "examples": [
+              "^[a-zA-Z]$"
+            ],
+            "type": "string"
+          },
+          "analyzer": {
+            "description": "Name of the analyzer to use for indexing. Unless search_analyzer is specified this analyzer is used for both indexing and searching. Only valid for 'type: text'.\n",
+            "type": "string"
+          },
+          "copy_to": {
+            "description": "The copy_to parameter allows you to copy the values of multiple fields into a group field, which can then be queried as a single field.\n",
+            "type": "string"
+          },
+          "date_format": {
+            "description": "The date format(s) that can be parsed. Type date format default to `strict_date_optional_time||epoch_millis`, see the [doc](https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html#date-params).\nIn JSON documents, dates are represented as strings. Elasticsearch uses a set of preconfigured formats to recognize and parse these strings into a long value representing _milliseconds-since-the-epoch_ in UTC.\nBesides the [built-in formats](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html#built-in-date-formats), your own [custom formats](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html#custom-date-formats) can be specified using the familiar `yyyy/MM/dd` syntax.\n",
+            "type": "string"
+          },
+          "dimension": {
+            "description": "Declare a field as dimension of time series. This is attached to the field as a `time_series_dimension` mapping parameter.\n",
+            "default": false,
+            "type": "boolean"
+          },
+          "doc_values": {
+            "description": "Controls whether doc values are enabled for a field. All fields which support doc values have them enabled by default. If you are sure that you don’t need to sort or aggregate on a field, or access the field value from a script, you can disable doc values in order to save disk space. You cannot disable doc values for wildcard fields.\n",
+            "type": "boolean"
+          },
+          "dynamic": {
+            "description": "The dynamic parameter controls whether new fields are added dynamically. It accepts the following values:\ntrue -  New fields are added to the mapping (default).\nruntime - New fields are added to the mapping as runtime fields. These fields are not indexed, and are loaded from _source at query time.\nfalse - New fields are ignored. These fields will not be indexed or searchable, but will still appear in the _source field of returned hits. These fields will not be added to the mapping, and new fields must be added explicitly.\nstrict -  If new fields are detected, an exception is thrown and the document is rejected. New fields must be explicitly added to the mapping.\n",
+            "default": true,
+            "enum": [
+              true,
+              false,
+              "strict",
+              "runtime"
+            ]
+          },
+          "enabled": {
+            "description": "The enabled setting, which can be applied only to the top-level mapping definition and to object fields, causes Elasticsearch to skip parsing of the contents of the field entirely. The JSON can still be retrieved from the _source field, but it is not searchable or stored in any other way.\n",
+            "type": "boolean"
+          },
+          "example": {
+            "description": "Example values for this field.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "object"
+              }
+            ]
+          },
+          "expected_values": {
+            "description": "An array of expected values for the field. When defined, these are the only expected values.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "external": {
+            "description": "External source reference",
+            "type": "string",
+            "enum": [
+              "ecs"
+            ]
+          },
+          "fields": {
+            "description": "Sub-fields, when type is group",
+            "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json"
+          },
+          "ignore_above": {
+            "description": "Strings longer than the ignore_above setting will not be indexed or stored. For arrays of strings, ignore_above will be applied for each array element separately and string elements longer than ignore_above will not be indexed or stored. Fleet honors this for `keyword` and `wildcard` types. Defaults to 1024.\n",
+            "default": 1024,
+            "type": "integer"
+          },
+          "ignore_malformed": {
+            "description": "Trying to index the wrong data type into a field throws an exception  by default, and rejects the whole document. The ignore_malformed  parameter, if set to true, allows the exception to be ignored. The  malformed field is not indexed, but other fields in the document are  processed normally. Defaults to false.\n",
+            "default": false,
+            "type": "boolean"
+          },
+          "include_in_parent": {
+            "description": "For nested field types, this specifies if all fields in the nested object are also added to the parent document as standard (flat) fields.\n",
+            "default": false,
+            "type": "boolean"
+          },
+          "include_in_root": {
+            "description": "For nested field types, this specifies if all fields in the nested object are also added to the root document as standard (flat) fields.\n",
+            "default": false,
+            "type": "boolean"
+          },
+          "index": {
+            "description": "The index option controls whether field values are indexed. Fields that are not indexed are typically not queryable.\n",
+            "default": true,
+            "type": "boolean"
+          },
+          "inference_id": {
+            "description": "For semantic_text fields, this specifies the id of the inference endpoint associated with the field\n",
+            "type": "string"
+          },
+          "metric_type": {
+            "description": "The metric type of a numeric field. This is attached to the field as a `time_series_metric` mapping parameter. A gauge is a single-value measurement that can go up or down over time, such as a temperature. A counter is a single-value cumulative counter that only goes up, such as the number of requests processed by a web server. By default, no metric type is associated with a field.\n",
+            "type": "string",
+            "enum": [
+              "counter",
+              "gauge"
+            ]
+          },
+          "metrics": true,
+          "multi_fields": {
+            "description": "It is often useful to index the same field in different ways for different purposes. This is the purpose of multi-fields. For instance, a string field could be mapped as a text field for full-text search, and as a keyword field for sorting or aggregations.\nFleet honors this for `keyword`, `text`, and `wildcard` types.\n",
+            "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json"
+          },
+          "name": {
+            "description": "Name of field. Names containing dots are automatically split into sub-fields. Names with wildcards generate dynamic mappings.\n",
+            "type": "string",
+            "pattern": "^[\\-*_\\/@A-Za-z0-9]+(\\.[\\-*_\\/@A-Za-z0-9]+)*$"
+          },
+          "normalize": {
+            "description": "Specifies the expected normalizations for a field. `array` normalization implies that the values in the field should always be an array, even if they are single values.\n",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "array"
+              ]
+            }
+          },
+          "normalizer": {
+            "description": "Specifies the name of a normalizer to apply to keyword fields. A simple normalizer called lowercase ships with elasticsearch and can be used. Custom normalizers can be defined as part of analysis index settings.\n",
+            "type": "string"
+          },
+          "null_value": {
+            "description": "The null_value parameter allows you to replace explicit null values with the specified value so that it can be indexed and searched.\nA null value cannot be indexed or searched. When a field is set to null, (or an empty array or an array of null values) it is treated as though that field has no values.\nThe null_value needs to be the same data type as the field. For instance, a long field cannot have a string null_value.\nThe null_value only influences how data is indexed, it doesn’t modify the _source document.\n",
+            "examples": [
+              "NULL"
+            ]
+          },
+          "object_type": {
+            "description": "Type of the members of the object when `type: object` is used. In these cases a dynamic template is created so direct subobjects of this field have the type indicated. When `object_type_mapping_type` is also used, the dynamic mapping is only applied to values that have the given type, as detected by the JSON parser.\n",
+            "type": "string",
+            "enum": [
+              "boolean",
+              "byte",
+              "double",
+              "float",
+              "histogram",
+              "keyword",
+              "long",
+              "object",
+              "short",
+              "text",
+              "integer",
+              "half_float",
+              "scaled_float",
+              "unsigned_long"
+            ]
+          },
+          "object_type_mapping_type": {
+            "description": "Type that members of a field of with `type: object` must have in the source document. This type corresponds to the data type detected by the JSON parser, and is translated to the `match_mapping_type` parameter of Elasticsearch dynamic templates.\n",
+            "type": "string",
+            "enum": [
+              "*",
+              "array",
+              "double",
+              "false",
+              "long",
+              "null",
+              "object",
+              "string",
+              "true"
+            ]
+          },
+          "path": {
+            "description": "For alias type fields this is the path to the target field. Note that this must be the full path, including any parent objects (e.g. object1.object2.field).\n",
+            "type": "string"
+          },
+          "runtime": true,
+          "scaling_factor": {
+            "description": "The scaling factor to use when encoding values. Values will be multiplied by this factor at index time and rounded to the closest long value. For instance, a scaled_float with a scaling_factor of 10 would internally store 2.34 as 23 and all search-time operations (queries, aggregations, sorting) will behave as if the document had a value of 2.3. High values of scaling_factor improve accuracy but also increase space requirements. Only valid for 'type: scaled_float'.\n",
+            "default": 1000,
+            "type": "integer"
+          },
+          "search_analyzer": {
+            "description": "Name of the analyzer to use for searching. Only valid for 'type: text'.\n",
+            "type": "string"
+          },
+          "store": {
+            "description": "By default, field values are indexed, but not stored. This means that the field can be queried, but the original field cannot be retrieved. Setting this value to true ensures that the field is also stored, what is useful in situations where the field would not be available even in the _source, like when synthetic source mode is enabled.\n",
+            "default": false,
+            "type": "boolean"
+          },
+          "subobjects": {
+            "description": "Specifies if field names containing dots should be expanded into subobjects. For example, if this is set to `true`, a field named `foo.bar` will be expanded into an object with a field named `bar` inside an object named `foo`.\n",
+            "default": true,
+            "type": "boolean"
+          },
+          "unit": {
+            "description": "Unit type to associate with a numeric field. This is attached to the field as metadata (via `meta`). By default, a field does not have a unit. The convention for percents is to use value 1 to mean 100%.\n",
+            "type": "string",
+            "enum": [
+              "byte",
+              "percent",
+              "d",
+              "h",
+              "m",
+              "s",
+              "ms",
+              "micros",
+              "nanos"
+            ]
+          },
+          "value": {
+            "description": "The value to associate with a constant_keyword field.",
+            "type": "string"
+          }
+        },
+        "patternProperties": {
+          "^(default_field|norms)$": {
+            "type": "boolean"
+          },
+          "^(footnote|format|title)$": {
+            "type": "string"
+          },
+          "^(level|group)$": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "definitions": {
+        "metric_aggregation": {
+          "type": "string",
+          "enum": [
+            "min",
+            "max",
+            "sum",
+            "value_count",
+            "avg"
+          ]
+        },
+        "runtime": {
+          "description": "Specifies if this field is evaluated at query time. If it is set to true, it creates a runtime script with `params._source['<field>']`. If this field is a string, it creates the runtime script using this string set in the definition. More info at https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime-mapping-fields.html\n",
+          "examples": [
+            true,
+            "doc['message'].value().doSomething()"
+          ],
+          "default": false,
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        }
+      }
+    },
+    "https://schemas.elastic.dev/package-spec/3.3.3/integration/data_stream/manifest.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "description": "Title of data stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+          "examples": [
+            "AWS Billing Metrics",
+            "Linux Metrics",
+            "User Activity Logs"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of data stream",
+          "examples": [
+            "metrics"
+          ],
+          "type": "string",
+          "enum": [
+            "metrics",
+            "logs",
+            "synthetics",
+            "traces",
+            "profiling"
+          ]
+        },
+        "agent": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/agent"
+        },
+        "dataset": {
+          "description": "Name of data set.",
+          "type": "string"
+        },
+        "dataset_is_prefix": {
+          "description": "if true, the index pattern in the ES template will contain the dataset as a prefix only",
+          "default": false,
+          "type": "boolean"
+        },
+        "elasticsearch": {
+          "description": "Elasticsearch asset definitions",
+          "type": "object",
+          "properties": {
+            "dynamic_dataset": {
+              "description": "When set to true, agents running this integration are granted data stream privileges for all datasets of its type",
+              "type": "boolean"
+            },
+            "dynamic_namespace": {
+              "description": "When set to true, agents running this integration are granted data stream privileges for all namespaces of its type",
+              "type": "boolean"
+            },
+            "index_mode": {
+              "description": "Index mode to use. Index mode can be used to enable use case specific functionalities.\nThis setting must be installed in the composable index template, not in the package component templates.",
+              "examples": [
+                "time_series"
+              ],
+              "type": "string",
+              "enum": [
+                "time_series"
+              ]
+            },
+            "index_template": {
+              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/elasticsearch_index_template"
+            },
+            "privileges": {
+              "description": "Elasticsearch privilege requirements",
+              "type": "object",
+              "properties": {
+                "indices": {
+                  "description": "Elasticsearch index privilege requirements",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "source_mode": {
+              "description": "Source mode to use. This configures how the document source (`_source`) is stored\nfor this data stream.\nIf configured as `default`, this mode is not configured and it uses Elasticsearch defaults.\nIf configured as `synthetic`, it enables [synthetic source](https://www.elastic.co/guide/en/elasticsearch/reference/8.4/mapping-source-field.html#synthetic-source),\nthat doesn't store the source, but tries to rebuild it from the indexed fields when queried.\nIf no configured or set to `synthetic`, users may override the setting from Fleet UI.",
+              "examples": [
+                "synthetic"
+              ],
+              "type": "string",
+              "enum": [
+                "default",
+                "synthetic"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "hidden": {
+          "description": "Specifies if a data stream is hidden, resulting in dot prefixed system indices. To set the data stream hidden without those dot prefixed indices, check `elasticsearch.index_template.data_stream.hidden` flag.\n",
+          "deprecated": true,
+          "type": "boolean"
+        },
+        "ilm_policy": {
+          "description": "The name of an existing ILM (Index Lifecycle Management) policy",
+          "examples": [
+            "diagnostics"
+          ],
+          "type": "string"
+        },
+        "release": {
+          "description": "Stability of data stream.",
+          "examples": [
+            "beta"
+          ],
+          "type": "string",
+          "enum": [
+            "experimental",
+            "beta"
+          ]
+        },
+        "streams": {
+          "description": "Streams offered by data stream.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "description",
+              "input"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of the stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+                "examples": [
+                  "AWS Billing Metrics",
+                  "Linux Metrics",
+                  "User Activity Logs"
+                ],
+                "type": "string"
+              },
+              "description": {
+                "description": "Description of the stream. It should describe what is being collected and with what collector, following the structure \"Collect X from Y with X\".\n",
+                "examples": [
+                  "Collect Metrics from AWS Billing service using Elastic Agent.",
+                  "Collect Metrics from Linux servers with Elastic Agent.",
+                  "Collect Logs from Apache Web Server using Elastic Agent."
+                ],
+                "type": "string"
+              },
+              "required_vars": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/required_vars"
+              },
+              "enabled": {
+                "description": "Is stream enabled?",
+                "type": "boolean"
+              },
+              "input": {
+                "examples": [
+                  "aws/metrics",
+                  "s3",
+                  "file"
+                ],
+                "type": "string"
+              },
+              "template_path": {
+                "description": "Path to Elasticsearch index template for stream.",
+                "type": "string"
+              },
+              "vars": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false,
+      "definitions": {
+        "required_vars": {
+          "description": "Required conditional variables for the package.",
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_]+$": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "minItems": 1,
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "Required variable name",
+                    "examples": [
+                      "hosts"
+                    ],
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "Value of the variable, if not present we validate the var's presense",
+                    "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "elasticsearch_index_template": {
+          "description": "Index template definition",
+          "type": "object",
+          "properties": {
+            "data_stream": {
+              "description": "Data stream section of index template",
+              "type": "object",
+              "properties": {
+                "hidden": {
+                  "description": "Makes the data stream hidden",
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "ingest_pipeline": {
+              "description": "Elasticsearch ingest pipeline settings",
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "description": "Ingest pipeline name",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "mappings": {
+              "description": "Mappings section of index template",
+              "type": "object",
+              "properties": {
+                "date_detection": {
+                  "description": "If true, new string fields will be checked to see if their contents match with `dynamic_date_formats`. If they do, the field is dynamically added with type `date`. Set to false to disable this feature.\n",
+                  "type": "boolean"
+                },
+                "dynamic": {
+                  "description": "Control if new fields can be added dynamically. When set to `false`, new fields are not indexed. When set to `strict`, fields must be explicitly added to the mapping. With `runtime`, fields are not indexed, but added as runtime fields. Defaults to `true`, where Elasticsearch tries to index any new field.\n",
+                  "oneOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "runtime",
+                        "strict"
+                      ]
+                    }
+                  ]
+                },
+                "dynamic_date_formats": {
+                  "description": "Custom date formats to use for date detection.",
+                  "type": "array",
+                  "items": {
+                    "examples": [
+                      [
+                        "strict_date_optional_time",
+                        "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"
+                      ],
+                      [
+                        "MM/dd/yyyy"
+                      ]
+                    ],
+                    "type": "string"
+                  }
+                },
+                "dynamic_templates": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "maxProperties": 1,
+                    "patternProperties": {
+                      "^_embedded_ecs": {
+                        "type": "object",
+                        "properties": {
+                          "mapping": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/type"
+                              },
+                              "doc_values": {
+                                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/doc_values"
+                              },
+                              "fields": {
+                                "type": "object",
+                                "minProperties": 1,
+                                "additionalProperties": {
+                                  "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/elasticsearch_index_template/properties/mappings/properties/dynamic_templates/items/patternProperties/%5E_embedded_ecs/properties/mapping"
+                                }
+                              },
+                              "ignore_malformed": {
+                                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/ignore_malformed"
+                              },
+                              "index": {
+                                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/index"
+                              },
+                              "scaling_factor": {
+                                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/scaling_factor"
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          "match": {
+                            "type": "string"
+                          },
+                          "match_mapping_type": {
+                            "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/elasticsearch_index_template/properties/mappings/properties/dynamic_templates/items/additionalProperties/properties/match_mapping_type"
+                          },
+                          "path_match": {
+                            "type": "string"
+                          },
+                          "path_unmatch": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": {
+                      "type": "object",
+                      "properties": {
+                        "mapping": {
+                          "type": "object",
+                          "properties": {
+                            "default_metric": {
+                              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/default_metric"
+                            },
+                            "type": {
+                              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/type"
+                            },
+                            "ignore_above": {
+                              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/ignore_above"
+                            },
+                            "index": {
+                              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/index"
+                            },
+                            "metrics": {
+                              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/metrics"
+                            },
+                            "scaling_factor": {
+                              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/scaling_factor"
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "match_mapping_type": {
+                          "oneOf": [
+                            {
+                              "type": "boolean"
+                            },
+                            {
+                              "type": "string",
+                              "enum": [
+                                "null",
+                                "true",
+                                "false",
+                                "double",
+                                "long",
+                                "string",
+                                "object",
+                                "array"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "subobjects": {
+                  "description": "Turn the support for subobjects on or off in the mapping configuration for the data stream.\nBy default, it's set to `true`, enabling Elasticsearch to expands fields that contain dots in their names to their corresponding object structure.\nSetting it to `false` restricts objects from holding subobjects, enabling storing documents with dot-contained field names and common prefixes.\nIt is still possible to send documents that have objects to a data stream that has set subobjects to `false`.\nExample when the subobjects mapping option is `false`:\nPUT my-index-000001 {\n  \"mappings\": {\n    \"subobjects\": false \n  }\n}\nPUT my-index-000001/_doc/metric_1 {\n  \"time\" : \"100ms\", \n  \"time.min\" : \"10ms\",\n  \"time.max\" : \"900ms\"\n}                \nBefore disabling subobjects, consider the following implications:\n\n  - Nested field types cannot be used in data streams.\n  - The subobjects mapping definition is immutable.\n  - This setting depends on auto-flattening mappings,\n    which comes with limitations [^1] for integration\n    and custom mappings in data streams without\n    subobjects.\n  - Auto-flattening is available starting from version\n    8.14, integrations must be on at least this\n    version.\n\nFor comprehensive details on subobjects, refer to the Elasticsearch documentation [^2].\n\n[^1]: Auto-flattening limitations are documented at: https://www.elastic.co/guide/en/elasticsearch/reference/master/subobjects.html#_auto_flattening_object_mappings\n[^2]: Elasticsearch documentation on subobjects: https://www.elastic.co/guide/en/elasticsearch/reference/current/subobjects.html\n",
+                  "default": true,
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "settings": {
+              "description": "Settings section of index template",
+              "type": "object",
+              "properties": {
+                "analysis": {
+                  "type": "object",
+                  "properties": {
+                    "analyzer": {
+                      "description": "Definition of custom analyzer.",
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "description": "Type of analyzer",
+                            "type": "string",
+                            "enum": [
+                              "pattern"
+                            ]
+                          },
+                          "pattern": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "index": {
+                  "type": "object",
+                  "properties": {
+                    "codec": {
+                      "description": "Type of compression to use. The default is to use LZ4, `best_compression` uses DEFLATE, with higher compression but lower ingestion performance.\n",
+                      "type": "string",
+                      "enum": [
+                        "default",
+                        "best_compression"
+                      ]
+                    },
+                    "mapping": {
+                      "type": "object",
+                      "patternProperties": {
+                        "^(dimension|nested|total)_fields$": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "description": "Limit on the number of fields of this kind on this data stream.",
+                              "type": "integer"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "sort": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "description": "Fields used to sort the document in the Lucene segments.",
+                          "oneOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          ]
+                        },
+                        "order": {
+                          "description": "The sort order to use for each field.",
+                          "oneOf": [
+                            {
+                              "type": "string",
+                              "enum": [
+                                "asc",
+                                "desc"
+                              ]
+                            },
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "asc",
+                                  "desc"
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "number_of_shards": {
+                  "description": "Number of primary shards that the data stream should have.",
+                  "default": 1,
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "input_variable_value": {
+          "examples": [
+            "null",
+            "",
+            "some string",
+            1234,
+            true,
+            [
+              3,
+              "mixed",
+              true
+            ],
+            [
+              [
+                "array",
+                1
+              ],
+              [
+                "array",
+                2
+              ]
+            ]
+          ],
+          "anyOf": [
+            {
+              "type": [
+                "string",
+                "integer",
+                "boolean",
+                "null"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
+              }
+            }
+          ]
+        },
+        "vars": {
+          "description": "Input variables.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "select"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "options"
+                  ],
+                  "properties": {
+                    "options": {
+                      "description": "List of options for select type",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "text"
+                        ],
+                        "properties": {
+                          "text": {
+                            "examples": [
+                              "node",
+                              "cluster"
+                            ],
+                            "type": "string"
+                          },
+                          "value": {
+                            "examples": [
+                              "node",
+                              "cluster"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "min_items": 1
+                    }
+                  }
+                },
+                "else": {
+                  "not": {
+                    "required": [
+                      "options"
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "anyOf": [
+                    {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "name": {
+                              "pattern": "(access_key|api_key|passphrase|password|secret|token)"
+                            }
+                          }
+                        },
+                        {
+                          "not": {
+                            "properties": {
+                              "name": {
+                                "pattern": "(_file|_url)$"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "properties": {
+                        "type": {
+                          "const": "password"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "secret"
+                  ]
+                }
+              }
+            ],
+            "required": [
+              "name",
+              "type"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of variable.",
+                "examples": [
+                  "Hosts"
+                ],
+                "type": "string"
+              },
+              "description": {
+                "description": "Short description of variable.",
+                "examples": [
+                  "Hosts of integration service to connect to"
+                ],
+                "type": "string"
+              },
+              "default": {
+                "description": "Default value(s) for variable",
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
+              },
+              "type": {
+                "description": "Data type of variable.",
+                "examples": [
+                  "text"
+                ],
+                "type": "string",
+                "enum": [
+                  "bool",
+                  "email",
+                  "integer",
+                  "password",
+                  "select",
+                  "text",
+                  "textarea",
+                  "time_zone",
+                  "url",
+                  "yaml"
+                ]
+              },
+              "required": {
+                "description": "Is variable required?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "hide_in_deployment_modes": {
+                "description": "Whether this variable should be hidden in the UI for agent policies intended to some specific deployment modes.\n",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "agentless"
+                  ]
+                }
+              },
+              "multi": {
+                "description": "Can variable contain multiple values?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Variable name.",
+                "examples": [
+                  "hosts"
+                ],
+                "type": "string"
+              },
+              "options": true,
+              "secret": {
+                "description": "Specifying that a variable is secret means that Kibana will store the value separate from the package policy in a more secure index.  This is useful for passwords and other sensitive information. One caveat is that secrets are write-only, once a user writes a secret var they cannot read it again, only overwrite it.\n",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "show_user": {
+                "description": "Should this variable be shown to the user by default?",
+                "examples": [
+                  false
+                ],
+                "default": true,
+                "type": "boolean"
+              },
+              "url_allowed_schemes": {
+                "description": "List of allowed URL schemes for the url type. If empty, any scheme is allowed. An empty string can be used to indicate that the scheme is not mandatory.\n",
+                "examples": [
+                  [
+                    "http",
+                    "https"
+                  ],
+                  [
+                    "redis",
+                    "rediss"
+                  ],
+                  [
+                    "",
+                    "mysql"
+                  ]
+                ],
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "https://schemas.elastic.dev/package-spec/3.3.3/integration/manifest.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "policy_templates": {
+                "maxItems": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "policy_templates_behavior": {
+                "default": "all",
+                "enum": [
+                  "all"
+                ]
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "policy_templates_behavior": {
+                "default": "all",
+                "enum": [
+                  "combined_policy",
+                  "individual_policies",
+                  "all"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "required": [
+        "format_version",
+        "name",
+        "title",
+        "description",
+        "version",
+        "type",
+        "owner"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/title"
+        },
+        "description": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/description"
+        },
+        "type": {
+          "description": "The type of package.",
+          "examples": [
+            "integration"
+          ],
+          "type": "string",
+          "enum": [
+            "integration"
+          ]
+        },
+        "format_version": {
+          "description": "The version of the package specification format used by this package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/version"
+        },
+        "agent": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/agent"
+        },
+        "categories": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/categories"
+        },
+        "conditions": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/conditions"
+        },
+        "elasticsearch": {
+          "description": "Elasticsearch requirements",
+          "type": "object",
+          "properties": {
+            "privileges": {
+              "description": "Elasticsearch privilege requirements",
+              "type": "object",
+              "properties": {
+                "cluster": {
+                  "description": "Elasticsearch cluster privilege requirements",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "icons": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/icons"
+        },
+        "name": {
+          "description": "The name of the package.",
+          "examples": [
+            "apache"
+          ],
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "owner": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/owner"
+        },
+        "policy_templates": {
+          "description": "List of policy templates offered by this package.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "title",
+              "description"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of policy template.",
+                "examples": [
+                  "Apache logs and metrics"
+                ],
+                "type": "string"
+              },
+              "description": {
+                "description": "Longer description of policy template.",
+                "examples": [
+                  "Collect logs and metrics from Apache instances"
+                ],
+                "type": "string"
+              },
+              "categories": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/categories"
+              },
+              "configuration_links": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/configuration_links"
+              },
+              "data_streams": {
+                "description": "List of data streams compatible with the policy template.",
+                "type": "array",
+                "items": {
+                  "description": "Data stream name",
+                  "examples": [
+                    "ec2_logs",
+                    "spamfirewall",
+                    "access"
+                  ],
+                  "type": "string",
+                  "format": "data-stream-name"
+                }
+              },
+              "deployment_modes": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/deployment_modes"
+              },
+              "icons": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/icons"
+              },
+              "inputs": {
+                "description": "List of inputs supported by policy template.",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "title",
+                    "description"
+                  ],
+                  "properties": {
+                    "title": {
+                      "description": "Title of input.",
+                      "examples": [
+                        "Collect logs from Apache instances"
+                      ],
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "Longer description of input.",
+                      "examples": [
+                        "Collecting Apache access and error logs"
+                      ],
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of input.",
+                      "type": "string"
+                    },
+                    "required_vars": {
+                      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/required_vars"
+                    },
+                    "input_group": {
+                      "description": "Name of the input group",
+                      "type": "string",
+                      "enum": [
+                        "logs",
+                        "metrics"
+                      ]
+                    },
+                    "multi": {
+                      "description": "Can input be defined multiple times",
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "template_path": {
+                      "description": "Path of the config template for the input.",
+                      "examples": [
+                        "./agent/input/template.yml.hbs"
+                      ],
+                      "type": "string"
+                    },
+                    "vars": {
+                      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Name of policy template.",
+                "examples": [
+                  "apache"
+                ],
+                "type": "string"
+              },
+              "screenshots": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/screenshots"
+              },
+              "vars": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "policy_templates_behavior": {
+          "description": "Expected behavior when there are more than one policy template defined. When set to `combined_policy`, a single policy template is available that combines all the defined templates. When set to `individual_policies`, all policies are individually available, but there is no combined policy. The default value is `all`, where the combined policy template is available along with the individual policies.\n",
+          "type": "string"
+        },
+        "screenshots": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/screenshots"
+        },
+        "source": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/source"
+        },
+        "vars": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+        },
+        "version": {
+          "description": "The version of the package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json/definitions/version"
+        }
+      },
+      "additionalProperties": false,
+      "definitions": {
+        "title": {
+          "description": "Title of the package. It should be the usual title given to the product, service or kind of source being managed by this package.\n",
+          "examples": [
+            "Apache HTTP Server",
+            "MySQL",
+            "AWS"
+          ],
+          "type": "string"
+        },
+        "description": {
+          "description": "A longer description of the package. It should describe, at least all the kinds of data that is collected and with what collectors, following the structure \"Collect X from Y with X\".\n",
+          "examples": [
+            "Collect logs and metrics from Apache HTTP Servers with Elastic Agent.",
+            "Collect logs and metrics from Amazon Web Services with Elastic Agent."
+          ],
+          "type": "string"
+        },
+        "agent": {
+          "description": "Declarations related to Agent configurations or requirements.",
+          "type": "object",
+          "properties": {
+            "privileges": {
+              "type": "object",
+              "properties": {
+                "root": {
+                  "description": "Set to true if collection requires root privileges in the agent.",
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "categories": {
+          "description": "Categories to which this package belongs.",
+          "type": "array",
+          "items": {
+            "examples": [
+              "web"
+            ],
+            "type": "string",
+            "enum": [
+              "advanced_analytics_ueba",
+              "analytics_engine",
+              "application_observability",
+              "app_search",
+              "auditd",
+              "authentication",
+              "aws",
+              "azure",
+              "big_data",
+              "cdn_security",
+              "cloud",
+              "cloudsecurity_cdr",
+              "config_management",
+              "connector",
+              "connector_client",
+              "connector_package",
+              "containers",
+              "content_source",
+              "crawler",
+              "credential_management",
+              "crm",
+              "custom",
+              "custom_logs",
+              "database_security",
+              "datastore",
+              "dns_security",
+              "edr_xdr",
+              "elasticsearch_sdk",
+              "elastic_stack",
+              "email_security",
+              "enterprise_search",
+              "firewall_security",
+              "google_cloud",
+              "iam",
+              "ids_ips",
+              "infrastructure",
+              "java_observability",
+              "kubernetes",
+              "language_client",
+              "languages",
+              "load_balancer",
+              "message_queue",
+              "monitoring",
+              "native_search",
+              "network",
+              "network_security",
+              "notification",
+              "observability",
+              "os_system",
+              "process_manager",
+              "productivity",
+              "productivity_security",
+              "proxy_security",
+              "sdk_search",
+              "security",
+              "siem",
+              "stream_processing",
+              "support",
+              "threat_intel",
+              "ticketing",
+              "version_control",
+              "virtualization",
+              "vpn_security",
+              "vulnerability_management",
+              "web",
+              "web_application_firewall",
+              "websphere",
+              "workplace_search"
+            ]
+          }
+        },
+        "conditions": {
+          "description": "Conditions under which this package can be installed.",
+          "type": "object",
+          "properties": {
+            "elastic": {
+              "description": "Elastic conditions",
+              "type": "object",
+              "properties": {
+                "capabilities": {
+                  "description": "Stack features that are required by the package to work properly.\nThe package should not be used in deployments without the indicated features.\nPackages that don't indicate any capability condition can be used on any deployment.",
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "apm",
+                      "enterprise_search",
+                      "observability",
+                      "security",
+                      "serverless_search",
+                      "uptime"
+                    ]
+                  }
+                },
+                "subscription": {
+                  "description": "The subscription required for this package.",
+                  "examples": [
+                    "basic"
+                  ],
+                  "default": "basic",
+                  "type": "string",
+                  "enum": [
+                    "basic",
+                    "gold",
+                    "platinum",
+                    "enterprise"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "kibana": {
+              "description": "Kibana conditions",
+              "type": "object",
+              "properties": {
+                "version": {
+                  "description": "Kibana versions compatible with this package.",
+                  "examples": [
+                    ">=7.9.0"
+                  ],
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "configuration_links": {
+          "description": "List of links related to inputs and policy templates.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "url",
+              "type"
+            ],
+            "properties": {
+              "title": {
+                "description": "Link title",
+                "type": "string"
+              },
+              "type": {
+                "description": "Type of link. `next_steps` for links to locations that can be relevant right after configuring the policy. `action` for actions that can be performed while the policy is in use.",
+                "type": "string",
+                "enum": [
+                  "action",
+                  "next_step"
+                ]
+              },
+              "content": {
+                "description": "Link description",
+                "type": "string"
+              },
+              "url": {
+                "description": "Link url. Format is `http://...` or `https://...` for external links,  `kbn:/app/...` for links internal to Kibana.",
+                "type": "string",
+                "pattern": "^(http(s)?://|kbn:/)"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "deployment_modes": {
+          "description": "Options related to the deployment modes. The deployment mode refers to the mode used to deploy the Elastic Agents running this policy.\n",
+          "type": "object",
+          "properties": {
+            "default": {
+              "description": "Options specific to the default deployment mode, where agents are normally managed by users, explicitly enrolled to Fleet and visible in UIs.\n",
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "description": "Indicates if the default deployment mode is available for this template policy. It is enabled by default.\n",
+                  "default": true,
+                  "type": "boolean"
+                }
+              }
+            },
+            "agentless": {
+              "description": "Options specific to the Agentless deployment mode. This mode is used in offerings where the Elastic Agents running these policies are fully managed for the user.\n",
+              "type": "object",
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "enabled": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "organization",
+                      "division",
+                      "team"
+                    ]
+                  }
+                }
+              ],
+              "properties": {
+                "division": {
+                  "description": "The division responsible for the integration. This is used to tag the agentless agent deployments for monitoring.\n",
+                  "examples": [
+                    "cloud-security"
+                  ],
+                  "type": "string"
+                },
+                "enabled": {
+                  "description": "Indicates if the agentless deployment mode is available for this template policy. It is disabled by default.\n",
+                  "default": false,
+                  "type": "boolean"
+                },
+                "is_default": {
+                  "description": "On policy templates that support multiple deployment modes, this setting can be set to true to use agentless mode by default.\n",
+                  "default": false,
+                  "type": "boolean"
+                },
+                "organization": {
+                  "description": "The responsible organization of the integration. This is used to tag the agentless agent deployments for monitoring.\n",
+                  "examples": [
+                    "security"
+                  ],
+                  "type": "string"
+                },
+                "resources": {
+                  "description": "The computing resources specifications for the Agentless deployment.\n",
+                  "type": "object",
+                  "properties": {
+                    "requests": {
+                      "description": "The computing resources that the Agentless deployment will be initially allocated.\n",
+                      "type": "object",
+                      "properties": {
+                        "cpu": {
+                          "description": "The amount of CPUs that the Agentless deployment will be initially allocated.\n",
+                          "examples": [
+                            "1",
+                            "1.5",
+                            "1500m"
+                          ],
+                          "type": "string"
+                        },
+                        "memory": {
+                          "description": "The amount of memory that the Agentless deployment will be initially allocated.\n",
+                          "examples": [
+                            "1G",
+                            "1.5G"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "team": {
+                  "description": "The team responsible for the integration. This is used to tag the agentless agent deployments for monitoring.\n",
+                  "examples": [
+                    "cloud-security-posture-management"
+                  ],
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "icons": {
+          "description": "List of icons for by this package.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "src"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of icon.",
+                "examples": [
+                  "Apache Logo"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "MIME type of the icon image file.",
+                "examples": [
+                  "image/svg+xml"
+                ],
+                "type": "string"
+              },
+              "dark_mode": {
+                "description": "Is this icon to be shown in dark mode?",
+                "default": false,
+                "type": "boolean"
+              },
+              "size": {
+                "description": "Size of the icon.",
+                "examples": [
+                  "32x32"
+                ],
+                "type": "string"
+              },
+              "src": {
+                "description": "Relative path to the icon's image file.",
+                "examples": [
+                  "/img/logo_apache.svg"
+                ],
+                "type": "string",
+                "format": "relative-path"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "owner": {
+          "type": "object",
+          "required": [
+            "github",
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "description": "Describes who owns the package and the level of support that is provided. The 'elastic' value indicates that the package is built and maintained by Elastic. The 'partner' value indicates that the package is built and maintained by a partner vendor and may include involvement from Elastic. The 'community' value indicates the package is built and maintained by non-Elastic community members.\n",
+              "examples": [
+                "community"
+              ],
+              "default": "community",
+              "type": "string",
+              "enum": [
+                "elastic",
+                "partner",
+                "community"
+              ]
+            },
+            "github": {
+              "description": "Github team name of the package maintainer.",
+              "examples": [
+                "elastic",
+                "apm-agent-java",
+                "ux_infra_team"
+              ],
+              "type": "string",
+              "pattern": "^(([a-zA-Z0-9-_]+)|([a-zA-Z0-9-_]+\\/[a-zA-Z0-9-_]+))$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "screenshots": {
+          "description": "List of screenshots of Kibana assets created by this package.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "src",
+              "title"
+            ],
+            "properties": {
+              "title": {
+                "description": "Title of screenshot.",
+                "examples": [
+                  "Apache HTTPD Server Status"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "MIME type of the screenshot image file.",
+                "examples": [
+                  "image/png"
+                ],
+                "type": "string"
+              },
+              "size": {
+                "description": "Size of the screenshot.",
+                "examples": [
+                  "1215x1199"
+                ],
+                "type": "string"
+              },
+              "src": {
+                "description": "Relative path to the screenshot's image file.",
+                "examples": [
+                  "/img/apache_httpd_server_status.png"
+                ],
+                "type": "string",
+                "format": "relative-path"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "source": {
+          "description": "Information about the source of the package.",
+          "type": "object",
+          "properties": {
+            "license": {
+              "description": "Identifier of the license of the package, as specified in https://spdx.org/licenses/.",
+              "examples": [
+                "Elastic-2.0"
+              ],
+              "type": "string",
+              "enum": [
+                "Apache-2.0",
+                "Elastic-2.0"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "version": {
+          "description": "Version of the package, following semantic versioning. It can include pre-release labels.",
+          "examples": [
+            "1.0.0",
+            "1.0.0-beta1",
+            "1.0.0-SNAPSHOT",
+            "1.0.0-next"
+          ],
+          "type": "string",
+          "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?$"
+        }
+      }
+    },
+    "input-manifest": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1input~1manifest.jsonschema.json"
+    },
+    "integration-manifest": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.3~1integration~1manifest.jsonschema.json"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/2.0.0/integration/data_stream/_dev/test/pipeline/common_config.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "dynamic_fields": {
+      "description": "Dynamic fields with regular expressions defining their variable values.",
+      "type": "object"
+    },
+    "fields": {
+      "description": "Field definitions",
+      "type": "object"
+    },
+    "multiline": {
+      "description": "Multi-line configuration",
+      "type": "object"
+    },
+    "numeric_keyword_fields": {
+      "description": "List of keyword type fields allowed to have a numeric value.",
+      "type": "array"
+    },
+    "skip": {
+      "$ref": "../skip.jsonschema.json#/definitions/skip"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "agent": {
+      "description": "Configuration overrides for the Elastic Agent",
+      "type": "object",
+      "properties": {
+        "base_image": {
+          "description": "Elastic Agent image to be used for testing. Setting `default` will be used the same Elastic Agent image as the stack. Setting `systemd` will use  the image containing all the binaries for running Beats (collectors) based in an OS compatible with systemd. Setting `complete` will use the \"complete\" image, that includes all supported collectors plus a web browser and the required runtime for synthetic testing.\n",
+          "default": "default",
+          "type": "string",
+          "enum": [
+            "default",
+            "complete",
+            "systemd"
+          ]
+        },
+        "linux_capabilities": {
+          "description": "Linux Capabilities that must been enabled in the system to run the Elastic Agent process",
+          "type": "array",
+          "items": {
+            "description": "Capability name",
+            "examples": [
+              "AUDIT_CONTROL",
+              "AUDIT_READ"
+            ],
+            "type": "string",
+            "enum": [
+              "AUDIT_CONTROL",
+              "AUDIT_READ",
+              "AUDIT_WRITE",
+              "BLOCK_SUSPEND",
+              "BPF",
+              "CHECKPOINT_RESTORE",
+              "CHOWN",
+              "DAC_OVERRIDE",
+              "DAC_READ_SEARCH",
+              "FOWNER",
+              "FSETID",
+              "IPC_LOCK",
+              "IPC_OWNER",
+              "KILL",
+              "LEASE",
+              "LINUX_IMMUTABLE",
+              "MAC_ADMIN",
+              "MAC_OVERRIDE",
+              "MKNOD",
+              "NET_ADMIN",
+              "NET_BIND_SERVICE",
+              "NET_BROADCAST",
+              "NET_RAW",
+              "PERFORM",
+              "SETFCAP",
+              "SETGID",
+              "SETPCAP",
+              "SETUID",
+              "SYS_ADMIN",
+              "SYS_BOOT",
+              "SYS_CHROOT",
+              "SYS_MODULE",
+              "SYS_NICE",
+              "SYS_PACCT",
+              "SYS_PTRACE",
+              "SYS_RAWIO",
+              "SYS_RESOURCE",
+              "SYS_TIME",
+              "SYS_TTY_CONFIG",
+              "SYSLOG",
+              "WAKE_ALARM"
+            ]
+          }
+        },
+        "pid_mode": {
+          "description": "Control access to PID namespaces. When set to `host`, the Elastic Agent will have access to the PID namespace of the host.\n",
+          "type": "string",
+          "enum": [
+            "host"
+          ]
+        },
+        "ports": {
+          "description": "List of ports to be exposed to access to the Elastic Agent",
+          "type": "array",
+          "items": {
+            "description": "Port to be exposed, as defined in https://docs.docker.com/compose/compose-file/compose-file-v2/#ports",
+            "examples": [
+              "3000",
+              "8000:8000",
+              "127.0.0.1:7443:7443",
+              "8000:8000/udp"
+            ],
+            "type": "string"
+          }
+        },
+        "pre_start_script": {
+          "description": "Optional: Custom sh script to be executed before starting the Elastic Agent process (e.g. export environment variables)",
+          "type": "object",
+          "required": [
+            "contents"
+          ],
+          "properties": {
+            "contents": {
+              "description": "Code to run before starting the Elastic Agent.",
+              "default": "",
+              "type": "string"
+            },
+            "language": {
+              "description": "Programming language of the pre-start script. Currently, only \"sh\" is supported.",
+              "default": "sh",
+              "type": "string",
+              "enum": [
+                "sh"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "provisioning_script": {
+          "description": "Optional: Script to run to customize the system where Elastic Agent runs (e.g. installing new libraries/dependencies)",
+          "type": "object",
+          "required": [
+            "contents"
+          ],
+          "properties": {
+            "contents": {
+              "description": "Code to run as a provisioning script.",
+              "default": "",
+              "type": "string"
+            },
+            "language": {
+              "description": "Programming language of the provisioning script.",
+              "examples": [
+                "sh",
+                "bash",
+                "python"
+              ],
+              "default": "sh",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "runtime": {
+          "description": "Runtime to run the Elastic Agent process",
+          "default": "docker",
+          "type": "string",
+          "enum": [
+            "docker"
+          ]
+        },
+        "user": {
+          "description": "User that runs the Elastic Agent process",
+          "default": "",
+          "type": "string",
+          "example": "root"
+        }
+      }
+    },
+    "data_stream": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "vars": {
+          "description": "Variables used to configure settings defined in the data stream manifest.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.5~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/vars"
+        }
+      }
+    },
+    "skip": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.5~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/skip"
+    },
+    "skip_ignored_fields": {
+      "description": "If listed here, elastic-package system tests will not fail if values for the specified field names can't be indexed for any incoming documents. This should only be used if the failure is related to the test environment and wouldn't happen in production. Mitigate the issue via mapping or pipeline changes otherwise.\n",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "example": "error.message"
+      }
+    },
+    "vars": {
+      "description": "Variables used to configure settings defined in the package manifest.",
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.5~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/vars"
+    },
+    "wait_for_data_timeout": {
+      "description": "Timeout for waiting for metrics data during a system test.",
+      "type": "string",
+      "example": "10m"
+    }
+  },
+  "$defs": {
+    "https://schemas.elastic.dev/package-spec/3.3.5/integration/data_stream/_dev/test/config.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "definitions": {
+        "skip": {
+          "description": "If this test should be skipped, more information about why it was skipped.",
+          "type": "object",
+          "required": [
+            "reason",
+            "link"
+          ],
+          "properties": {
+            "link": {
+              "description": "Link to issue with more details about skipped test or to track re-enabling skipped test.",
+              "type": "string",
+              "example": "https://github.com/elastic/integrations/issues/520"
+            },
+            "reason": {
+              "description": "Short explanation for why test has been skipped.",
+              "type": "string",
+              "example": "Flaky test"
+            }
+          },
+          "additionalProperties": false
+        },
+        "vars": {
+          "description": "Variables defined for the test case.",
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "data_stream.dataset": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9\\._]*$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

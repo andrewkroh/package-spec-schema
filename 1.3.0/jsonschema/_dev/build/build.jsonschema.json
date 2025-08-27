@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/1.3.0/_dev/build/build.jsonschema.json",
+  "type": "object",
+  "required": [
+    "dependencies"
+  ],
+  "properties": {
+    "dependencies": {
+      "description": "Package dependencies",
+      "type": "object",
+      "properties": {
+        "ecs": {
+          "description": "ECS dependency",
+          "type": "object",
+          "required": [
+            "reference"
+          ],
+          "properties": {
+            "reference": {
+              "description": "Source reference",
+              "type": "string",
+              "pattern": "^git@.+"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

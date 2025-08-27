@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/2.13.0/integration/validation.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "errors": {
+      "description": "Rules to manage the validation results",
+      "type": "object",
+      "properties": {
+        "exclude_checks": {
+          "description": "List of validation codes that will be skipped",
+          "type": "array",
+          "items": {
+            "examples": [
+              "SVR00001"
+            ],
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

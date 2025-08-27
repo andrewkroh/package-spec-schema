@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/2.13.0/integration/_dev/benchmark/rally.scenario.jsonschema.json",
+  "type": "object",
+  "required": [
+    "data_stream"
+  ],
+  "properties": {
+    "description": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/description"
+    },
+    "benchmark_time_period": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/benchmark_time_period"
+    },
+    "corpora": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/corpora"
+    },
+    "data_stream": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/data_stream"
+    },
+    "package": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/package"
+    },
+    "version": {
+      "$ref": "../../manifest.jsonschema.json#/definitions/version"
+    },
+    "wait_for_data_timeout": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/wait_for_data_timeout"
+    },
+    "warmup_time_period": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/warmup_time_period"
+    }
+  },
+  "additionalProperties": false
+}

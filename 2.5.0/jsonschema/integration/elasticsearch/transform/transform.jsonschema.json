@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/2.5.0/integration/elasticsearch/transform/transform.jsonschema.json",
+  "title": "Root",
+  "description": "schema definition for transform configuration object",
+  "type": "object",
+  "oneOf": [
+    {
+      "required": [
+        "pivot"
+      ]
+    },
+    {
+      "required": [
+        "latest"
+      ]
+    }
+  ],
+  "required": [
+    "source",
+    "dest"
+  ],
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string",
+      "pattern": "^.*$"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string",
+      "pattern": "^.*$"
+    },
+    "_meta": {
+      "title": "Metadata",
+      "type": "object"
+    },
+    "dest": {
+      "title": "Dest",
+      "type": "object",
+      "required": [
+        "index"
+      ],
+      "properties": {
+        "index": {
+          "title": "Index",
+          "type": "string",
+          "pattern": "^.*$"
+        },
+        "pipeline": {
+          "title": "Pipeline",
+          "type": "string",
+          "pattern": "^.*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "frequency": {
+      "title": "Frequency",
+      "examples": [
+        "5m"
+      ],
+      "default": "60s",
+      "type": "string",
+      "pattern": "^.*$"
+    },
+    "latest": {
+      "title": "Latest",
+      "type": "object",
+      "required": [
+        "sort",
+        "unique_key"
+      ],
+      "properties": {
+        "sort": {
+          "title": "Sort",
+          "type": "string"
+        },
+        "unique_key": {
+          "title": "Unique key",
+          "type": "array"
+        }
+      },
+      "additionalProperties": false
+    },
+    "pivot": {
+      "title": "Pivot",
+      "type": "object",
+      "oneOf": [
+        {
+          "required": [
+            "aggregations"
+          ]
+        },
+        {
+          "required": [
+            "aggs"
+          ]
+        }
+      ],
+      "required": [
+        "group_by"
+      ],
+      "properties": {
+        "aggregations": {
+          "title": "Aggregations",
+          "type": "object"
+        },
+        "aggs": {
+          "title": "Aggregations",
+          "type": "object"
+        },
+        "group_by": {
+          "title": "Group_by",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "retention_policy": {
+      "oneOf": [
+        {
+          "required": [
+            "time"
+          ]
+        }
+      ],
+      "properties": {
+        "time": {
+          "title": "Root",
+          "description": "schema definition for a retention policy",
+          "type": "object",
+          "required": [
+            "field",
+            "max_age"
+          ],
+          "properties": {
+            "field": {
+              "title": "Field",
+              "examples": [
+                "@timestamp"
+              ],
+              "type": "string"
+            },
+            "max_age": {
+              "title": "Max age",
+              "examples": [
+                "10s"
+              ],
+              "default": "60s",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "settings": {
+      "title": "Settings",
+      "type": "object",
+      "properties": {
+        "align_checkpoints": {
+          "title": "align checkpoints",
+          "default": true,
+          "type": "boolean"
+        },
+        "dates_as_epoch_millis": {
+          "title": "Dates as epoch millis",
+          "default": false,
+          "type": "boolean"
+        },
+        "deduce_mappings": {
+          "title": "deduce mappings",
+          "default": true,
+          "type": "boolean"
+        },
+        "docs_per_second": {
+          "title": "docs per second",
+          "type": "number"
+        },
+        "max_page_search_size": {
+          "title": "max page search size",
+          "default": 500,
+          "type": "integer"
+        },
+        "use_point_in_time": {
+          "title": "use_point_in_time",
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "title": "Source",
+      "type": "object",
+      "required": [
+        "index"
+      ],
+      "properties": {
+        "index": {
+          "title": "Index",
+          "examples": [
+            "kibana_sample_data_ecommerce"
+          ],
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "pattern": "^.*$"
+        },
+        "query": {
+          "title": "query",
+          "type": "object"
+        },
+        "runtime_mappings": {
+          "title": "runtime mappings",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sync": {
+      "title": "Sync",
+      "type": "object",
+      "properties": {
+        "time": {
+          "title": "Time",
+          "type": "object",
+          "required": [
+            "field"
+          ],
+          "properties": {
+            "delay": {
+              "title": "Delay",
+              "examples": [
+                "10s"
+              ],
+              "default": "60s",
+              "type": "string",
+              "pattern": "^.*$"
+            },
+            "field": {
+              "title": "Field",
+              "examples": [
+                "@timestamp"
+              ],
+              "type": "string",
+              "pattern": "^.*$"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {}
+}

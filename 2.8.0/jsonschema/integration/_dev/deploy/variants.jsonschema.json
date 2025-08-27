@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/2.8.0/integration/_dev/deploy/variants.jsonschema.json",
+  "type": "object",
+  "required": [
+    "variants",
+    "default"
+  ],
+  "properties": {
+    "default": {
+      "description": "Default variant to use",
+      "type": "string"
+    },
+    "variants": {
+      "description": "Variant names and their configurations",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
