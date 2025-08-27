@@ -110,9 +110,9 @@ func writeSchemas(git *GitRepository, ref *plumbing.Reference) error {
 	}
 
 	var written []string
-	err = util.Walk(wt.Filesystem, repoPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
+	err = util.Walk(wt.Filesystem, repoPath, func(path string, info os.FileInfo, walkErr error) (err error) {
+		if walkErr != nil {
+			return walkErr
 		}
 		// The pseudo JSON Schema files have a .spec.yml suffix.
 		if !strings.HasSuffix(filepath.Base(path), ".spec.yml") {
@@ -123,7 +123,11 @@ func writeSchemas(git *GitRepository, ref *plumbing.Reference) error {
 		if err != nil {
 			return err
 		}
-		defer f.Close()
+		defer func() {
+			if closeErr := f.Close(); closeErr != nil {
+				err = errors.Join(err, closeErr)
+			}
+		}()
 
 		// Get the schema file path relative directory containing the specs.
 		relPath := strings.TrimPrefix(filepath.ToSlash(path), filepath.ToSlash(repoPath)+"/")
