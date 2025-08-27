@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.3.1/integration/_dev/test/config.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "asset": {
+      "description": "Configuration for asset tests",
+      "$ref": "#/definitions/config_tests"
+    },
+    "pipeline": {
+      "description": "Configuration for pipeline tests",
+      "$ref": "#/definitions/config_tests"
+    },
+    "policy": {
+      "description": "Configuration for policy tests",
+      "$ref": "#/definitions/config_tests"
+    },
+    "static": {
+      "description": "Configuration for static tests",
+      "$ref": "#/definitions/config_tests"
+    },
+    "system": {
+      "description": "Configuration for system tests",
+      "$ref": "#/definitions/config_tests"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "config_tests": {
+      "type": "object",
+      "properties": {
+        "parallel": {
+          "description": "Tests defined can be run in parallel (default true).",
+          "default": false,
+          "type": "boolean"
+        },
+        "skip": {
+          "$ref": "../../data_stream/_dev/test/config.jsonschema.json#/definitions/skip"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

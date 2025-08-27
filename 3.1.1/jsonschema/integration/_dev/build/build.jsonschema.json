@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.1.1/integration/_dev/build/build.jsonschema.json",
+  "type": "object",
+  "required": [
+    "dependencies"
+  ],
+  "properties": {
+    "dependencies": {
+      "description": "Package dependencies",
+      "type": "object",
+      "properties": {
+        "ecs": {
+          "description": "ECS dependency",
+          "type": "object",
+          "required": [
+            "reference"
+          ],
+          "properties": {
+            "import_mappings": {
+              "description": "Whether or not import common used dynamic templates and properties into the package\n",
+              "default": false,
+              "type": "boolean"
+            },
+            "reference": {
+              "description": "Source reference",
+              "type": "string",
+              "pattern": "^git@.+"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

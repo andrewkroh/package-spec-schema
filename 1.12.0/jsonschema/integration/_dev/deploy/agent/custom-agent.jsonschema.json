@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/1.12.0/integration/_dev/deploy/agent/custom-agent.jsonschema.json",
+  "type": "object",
+  "required": [
+    "version",
+    "services"
+  ],
+  "properties": {
+    "services": {
+      "description": "Service list",
+      "type": "object",
+      "required": [
+        "docker-custom-agent"
+      ],
+      "properties": {
+        "docker-custom-agent": {
+          "description": "Custom agent service definition",
+          "type": "object",
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "hostname"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "version": {
+      "description": "Docker Compose version",
+      "type": "string",
+      "pattern": "^2.3$"
+    }
+  },
+  "additionalProperties": false
+}

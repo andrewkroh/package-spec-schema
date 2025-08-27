@@ -1,0 +1,716 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.1.3/integration/data_stream/manifest.jsonschema.json",
+  "type": "object",
+  "required": [
+    "title"
+  ],
+  "properties": {
+    "title": {
+      "description": "Title of data stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+      "examples": [
+        "AWS Billing Metrics",
+        "Linux Metrics",
+        "User Activity Logs"
+      ],
+      "type": "string"
+    },
+    "type": {
+      "description": "Type of data stream",
+      "examples": [
+        "metrics"
+      ],
+      "type": "string",
+      "enum": [
+        "metrics",
+        "logs",
+        "synthetics",
+        "traces",
+        "profiling"
+      ]
+    },
+    "agent": {
+      "$ref": "../../integration/manifest.jsonschema.json#/definitions/agent"
+    },
+    "dataset": {
+      "description": "Name of data set.",
+      "type": "string"
+    },
+    "dataset_is_prefix": {
+      "description": "if true, the index pattern in the ES template will contain the dataset as a prefix only",
+      "default": false,
+      "type": "boolean"
+    },
+    "elasticsearch": {
+      "description": "Elasticsearch asset definitions",
+      "type": "object",
+      "properties": {
+        "dynamic_dataset": {
+          "description": "When set to true, agents running this integration are granted data stream privileges for all datasets of its type",
+          "type": "boolean"
+        },
+        "dynamic_namespace": {
+          "description": "When set to true, agents running this integration are granted data stream privileges for all namespaces of its type",
+          "type": "boolean"
+        },
+        "index_mode": {
+          "description": "Index mode to use. Index mode can be used to enable use case specific functionalities.\nThis setting must be installed in the composable index template, not in the package component templates.",
+          "examples": [
+            "time_series"
+          ],
+          "type": "string",
+          "enum": [
+            "time_series"
+          ]
+        },
+        "index_template": {
+          "$ref": "#/definitions/elasticsearch_index_template"
+        },
+        "privileges": {
+          "description": "Elasticsearch privilege requirements",
+          "type": "object",
+          "properties": {
+            "indices": {
+              "description": "Elasticsearch index privilege requirements",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "source_mode": {
+          "description": "Source mode to use. This configures how the document source (`_source`) is stored\nfor this data stream.\nIf configured as `default`, this mode is not configured and it uses Elasticsearch defaults.\nIf configured as `synthetic`, it enables [synthetic source](https://www.elastic.co/guide/en/elasticsearch/reference/8.4/mapping-source-field.html#synthetic-source),\nthat doesn't store the source, but tries to rebuild it from the indexed fields when queried.\nIf no configured or set to `synthetic`, users may override the setting from Fleet UI.",
+          "examples": [
+            "synthetic"
+          ],
+          "type": "string",
+          "enum": [
+            "default",
+            "synthetic"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "hidden": {
+      "description": "Specifies if a data stream is hidden, resulting in dot prefixed system indices. To set the data stream hidden without those dot prefixed indices, check `elasticsearch.index_template.data_stream.hidden` flag.\n",
+      "deprecated": true,
+      "type": "boolean"
+    },
+    "ilm_policy": {
+      "description": "The name of an existing ILM (Index Lifecycle Management) policy",
+      "examples": [
+        "diagnostics"
+      ],
+      "type": "string"
+    },
+    "release": {
+      "description": "Stability of data stream.",
+      "examples": [
+        "beta"
+      ],
+      "type": "string",
+      "enum": [
+        "experimental",
+        "beta"
+      ]
+    },
+    "streams": {
+      "description": "Streams offered by data stream.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "input"
+        ],
+        "properties": {
+          "title": {
+            "description": "Title of the stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+            "examples": [
+              "AWS Billing Metrics",
+              "Linux Metrics",
+              "User Activity Logs"
+            ],
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the stream. It should describe what is being collected and with what collector, following the structure \"Collect X from Y with X\".\n",
+            "examples": [
+              "Collect Metrics from AWS Billing service using Elastic Agent.",
+              "Collect Metrics from Linux servers with Elastic Agent.",
+              "Collect Logs from Apache Web Server using Elastic Agent."
+            ],
+            "type": "string"
+          },
+          "enabled": {
+            "description": "Is stream enabled?",
+            "type": "boolean"
+          },
+          "input": {
+            "examples": [
+              "aws/metrics",
+              "s3",
+              "file"
+            ],
+            "type": "string"
+          },
+          "template_path": {
+            "description": "Path to Elasticsearch index template for stream.",
+            "type": "string"
+          },
+          "vars": {
+            "$ref": "#/definitions/vars"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "elasticsearch_index_template": {
+      "description": "Index template definition",
+      "type": "object",
+      "properties": {
+        "data_stream": {
+          "description": "Data stream section of index template",
+          "type": "object",
+          "properties": {
+            "hidden": {
+              "description": "Makes the data stream hidden",
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ingest_pipeline": {
+          "description": "Elasticsearch ingest pipeline settings",
+          "type": "object",
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "description": "Ingest pipeline name",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "mappings": {
+          "description": "Mappings section of index template",
+          "type": "object",
+          "properties": {
+            "date_detection": {
+              "description": "If true, new string fields will be checked to see if their contents match with `dynamic_date_formats`. If they do, the field is dynamically added with type `date`. Set to false to disable this feature.\n",
+              "type": "boolean"
+            },
+            "dynamic": {
+              "description": "Control if new fields can be added dynamically. When set to `false`, new fields are not indexed. When set to `strict`, fields must be explicitly added to the mapping. With `runtime`, fields are not indexed, but added as runtime fields. Defaults to `true`, where Elasticsearch tries to index any new field.\n",
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "runtime",
+                    "strict"
+                  ]
+                }
+              ]
+            },
+            "dynamic_date_formats": {
+              "description": "Custom date formats to use for date detection.",
+              "type": "array",
+              "items": {
+                "examples": [
+                  [
+                    "strict_date_optional_time",
+                    "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"
+                  ],
+                  [
+                    "MM/dd/yyyy"
+                  ]
+                ],
+                "type": "string"
+              }
+            },
+            "dynamic_templates": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "maxProperties": 1,
+                "patternProperties": {
+                  "^_embedded_ecs": {
+                    "type": "object",
+                    "properties": {
+                      "mapping": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "$ref": "./fields/fields.jsonschema.json#/items/properties/type"
+                          },
+                          "doc_values": {
+                            "$ref": "./fields/fields.jsonschema.json#/items/properties/doc_values"
+                          },
+                          "fields": {
+                            "type": "object",
+                            "minProperties": 1,
+                            "additionalProperties": {
+                              "$ref": "#/definitions/elasticsearch_index_template/properties/mappings/properties/dynamic_templates/items/patternProperties/%5E_embedded_ecs/properties/mapping"
+                            }
+                          },
+                          "ignore_malformed": {
+                            "$ref": "./fields/fields.jsonschema.json#/items/properties/ignore_malformed"
+                          },
+                          "index": {
+                            "$ref": "./fields/fields.jsonschema.json#/items/properties/index"
+                          },
+                          "scaling_factor": {
+                            "$ref": "./fields/fields.jsonschema.json#/items/properties/scaling_factor"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "match": {
+                        "type": "string"
+                      },
+                      "match_mapping_type": {
+                        "$ref": "#/definitions/elasticsearch_index_template/properties/mappings/properties/dynamic_templates/items/additionalProperties/properties/match_mapping_type"
+                      },
+                      "path_match": {
+                        "type": "string"
+                      },
+                      "path_unmatch": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "mapping": {
+                      "type": "object",
+                      "properties": {
+                        "default_metric": {
+                          "$ref": "./fields/fields.jsonschema.json#/items/properties/default_metric"
+                        },
+                        "type": {
+                          "$ref": "./fields/fields.jsonschema.json#/items/properties/type"
+                        },
+                        "ignore_above": {
+                          "$ref": "./fields/fields.jsonschema.json#/items/properties/ignore_above"
+                        },
+                        "index": {
+                          "$ref": "./fields/fields.jsonschema.json#/items/properties/index"
+                        },
+                        "metrics": {
+                          "$ref": "./fields/fields.jsonschema.json#/items/properties/metrics"
+                        },
+                        "scaling_factor": {
+                          "$ref": "./fields/fields.jsonschema.json#/items/properties/scaling_factor"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "match_mapping_type": {
+                      "oneOf": [
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "string",
+                          "enum": [
+                            "null",
+                            "true",
+                            "false",
+                            "double",
+                            "long",
+                            "string",
+                            "object",
+                            "array"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "subobjects": {
+              "description": "Turn the support for subobjects on or off in the mapping configuration for the data stream.\nBy default, it's set to `true`, enabling Elasticsearch to expands fields that contain dots in their names to their corresponding object structure.\nSetting it to `false` restricts objects from holding subobjects, enabling storing documents with dot-contained field names and common prefixes.\nIt is still possible to send documents that have objects to a data stream that has set subobjects to `false`.\nExample when the subobjects mapping option is `false`:\nPUT my-index-000001 {\n  \"mappings\": {\n    \"subobjects\": false \n  }\n}\nPUT my-index-000001/_doc/metric_1 {\n  \"time\" : \"100ms\", \n  \"time.min\" : \"10ms\",\n  \"time.max\" : \"900ms\"\n}                \nBefore disabling subobjects, consider the following implications:\n\n  - Nested field types cannot be used in data streams.\n  - The subobjects mapping definition is immutable.\n  - This setting depends on auto-flattening mappings,\n    which comes with limitations [^1] for integration\n    and custom mappings in data streams without\n    subobjects.\n  - Auto-flattening is available starting from version\n    8.14, integrations must be on at least this\n    version.\n\nFor comprehensive details on subobjects, refer to the Elasticsearch documentation [^2].\n\n[^1]: Auto-flattening limitations are documented at: https://www.elastic.co/guide/en/elasticsearch/reference/master/subobjects.html#_auto_flattening_object_mappings\n[^2]: Elasticsearch documentation on subobjects: https://www.elastic.co/guide/en/elasticsearch/reference/current/subobjects.html\n",
+              "default": true,
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "settings": {
+          "description": "Settings section of index template",
+          "type": "object",
+          "properties": {
+            "analysis": {
+              "type": "object",
+              "properties": {
+                "analyzer": {
+                  "description": "Definition of custom analyzer.",
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "description": "Type of analyzer",
+                        "type": "string",
+                        "enum": [
+                          "pattern"
+                        ]
+                      },
+                      "pattern": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "index": {
+              "type": "object",
+              "properties": {
+                "codec": {
+                  "description": "Type of compression to use. The default is to use LZ4, `best_compression` uses DEFLATE, with higher compression but lower ingestion performance.\n",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "best_compression"
+                  ]
+                },
+                "mapping": {
+                  "type": "object",
+                  "patternProperties": {
+                    "^(dimension|nested|total)_fields$": {
+                      "type": "object",
+                      "properties": {
+                        "limit": {
+                          "description": "Limit on the number of fields of this kind on this data stream.",
+                          "type": "integer"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "sort": {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "description": "Fields used to sort the document in the Lucene segments.",
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ]
+                    },
+                    "order": {
+                      "description": "The sort order to use for each field.",
+                      "oneOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "asc",
+                            "desc"
+                          ]
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "asc",
+                              "desc"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            "number_of_shards": {
+              "description": "Number of primary shards that the data stream should have.",
+              "default": 1,
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "input_variable_value": {
+      "examples": [
+        "null",
+        "",
+        "some string",
+        1234,
+        true,
+        [
+          3,
+          "mixed",
+          true
+        ],
+        [
+          [
+            "array",
+            1
+          ],
+          [
+            "array",
+            2
+          ]
+        ]
+      ],
+      "anyOf": [
+        {
+          "type": [
+            "string",
+            "integer",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/input_variable_value"
+          }
+        }
+      ]
+    },
+    "vars": {
+      "description": "Input variables.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "select"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "options"
+              ],
+              "properties": {
+                "options": {
+                  "description": "List of options for select type",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "value",
+                      "text"
+                    ],
+                    "properties": {
+                      "text": {
+                        "examples": [
+                          "node",
+                          "cluster"
+                        ],
+                        "type": "string"
+                      },
+                      "value": {
+                        "examples": [
+                          "node",
+                          "cluster"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "min_items": 1
+                }
+              }
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "options"
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "anyOf": [
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "name": {
+                          "pattern": "(access_key|api_key|passphrase|password|secret|token)"
+                        }
+                      }
+                    },
+                    {
+                      "not": {
+                        "properties": {
+                          "name": {
+                            "pattern": "(_file|_url)$"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "properties": {
+                    "type": {
+                      "const": "password"
+                    }
+                  }
+                }
+              ]
+            },
+            "then": {
+              "required": [
+                "secret"
+              ]
+            }
+          }
+        ],
+        "required": [
+          "name",
+          "type"
+        ],
+        "properties": {
+          "title": {
+            "description": "Title of variable.",
+            "examples": [
+              "Hosts"
+            ],
+            "type": "string"
+          },
+          "description": {
+            "description": "Short description of variable.",
+            "examples": [
+              "Hosts of integration service to connect to"
+            ],
+            "type": "string"
+          },
+          "default": {
+            "description": "Default value(s) for variable",
+            "$ref": "#/definitions/input_variable_value"
+          },
+          "type": {
+            "description": "Data type of variable.",
+            "examples": [
+              "text"
+            ],
+            "type": "string",
+            "enum": [
+              "bool",
+              "email",
+              "integer",
+              "password",
+              "select",
+              "text",
+              "textarea",
+              "time_zone",
+              "url",
+              "yaml"
+            ]
+          },
+          "required": {
+            "description": "Is variable required?",
+            "examples": [
+              true
+            ],
+            "default": false,
+            "type": "boolean"
+          },
+          "multi": {
+            "description": "Can variable contain multiple values?",
+            "examples": [
+              true
+            ],
+            "default": false,
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Variable name.",
+            "examples": [
+              "hosts"
+            ],
+            "type": "string"
+          },
+          "options": true,
+          "secret": {
+            "description": "Specifying that a variable is secret means that Kibana will store the value separate from the package policy in a more secure index.  This is useful for passwords and other sensitive information. One caveat is that secrets are write-only, once a user writes a secret var they cannot read it again, only overwrite it.\n",
+            "examples": [
+              true
+            ],
+            "default": false,
+            "type": "boolean"
+          },
+          "show_user": {
+            "description": "Should this variable be shown to the user by default?",
+            "examples": [
+              false
+            ],
+            "default": true,
+            "type": "boolean"
+          },
+          "url_allowed_schemes": {
+            "description": "List of allowed URL schemes for the url type. If empty, any scheme is allowed. An empty string can be used to indicate that the scheme is not mandatory.\n",
+            "examples": [
+              [
+                "http",
+                "https"
+              ],
+              [
+                "redis",
+                "rediss"
+              ],
+              [
+                "",
+                "mysql"
+              ]
+            ],
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

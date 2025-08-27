@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.3.4/integration/data_stream/_dev/test/skip.jsonschema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "definitions": {
+    "skip": {
+      "description": "If this test should be skipped, more information about why it was skipped.",
+      "type": "object",
+      "required": [
+        "reason",
+        "link"
+      ],
+      "properties": {
+        "link": {
+          "description": "Link to issue with more details about skipped test or to track re-enabling skipped test.",
+          "type": "string",
+          "example": "https://github.com/elastic/integrations/issues/520"
+        },
+        "reason": {
+          "description": "Short explanation for why test has been skipped.",
+          "type": "string",
+          "example": "Flaky test"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
