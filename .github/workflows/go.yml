@@ -1,0 +1,26 @@
+name: Go
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-generator:
+    name: test-generator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache-dependency-path: .generate/go.sum
+
+      - uses: sourcemeta/jsonschema@v11.5.0
+      - uses: extractions/setup-just@v3
+
+      - name: Test
+        working-directory: ./generate
+        run: just generate v3.4.1

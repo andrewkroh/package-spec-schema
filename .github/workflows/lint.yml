@@ -1,0 +1,61 @@
+---
+
+name: lint
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  golangci:
+    name: golangci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: '0'
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache-dependency-path: .generate/go.sum
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: latest
+          working-directory: ./generate
+
+  go-mod-tidy:
+    name: go-mod-tidy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache-dependency-path: .generate/go.sum
+
+      - name: Run go mod tidy
+        working-directory: ./generate
+        run: go mod tidy
+
+      - name: Check git diff
+        run: git diff --exit-code
+
+  go-licenser:
+    name: go-licenser
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache-dependency-path: .generate/go.sum
+
+      - name: Check headers
+        run: go tool github.com/elastic/go-licenser -license ASL2-Short -d
+        working-directory: ./generate

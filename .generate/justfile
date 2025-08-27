@@ -1,0 +1,58 @@
+release_pattern := '../[1-9].[0-9]*.[0-9]*'
+
+# List available targets.
+default:
+    @just --list
+
+all: clean-all clone bundle fmt
+
+# Delete all generated content.
+clean-all:
+  #!/bin/bash
+  set -eiou pipefail
+  rm -rf {{release_pattern}}
+
+# Import all non-prerelease tags from package-spec.
+clone:
+  @echo Importing schemas...
+  go run ./clone -git-fetch -o ../
+  @echo ✅ Done importing schemas.
+
+# Bundle schemas for use with IDEs. These are non-compliant JSON schema files.
+bundle:
+  @echo Bundling JSON schemas
+  @for i in {{release_pattern}}; do \
+    echo Bundling $i; \
+    go run ./bundle -i $i/jsonschema -o $i/bundles; \
+  done
+  @echo ✅ Done bundling schemas.
+
+# Format JSON schema files for consistency.
+fmt:
+  @echo Formatting all schemas.
+  find .. -type f -name '*.jsonschema.json' -exec jsonschema fmt {} \;
+  # Undo the array formatting of jsonschema fmt.
+  find .. -type f -name '*.jsonschema.json' -exec yq -i -o json {} \;
+  @echo ✅ Done formatting schemas.
+
+# Generate schemas and bundles for a specific commit branch, or tag.
+generate git-ref:
+  #!/bin/bash
+  set -eiou pipefail
+
+  ref="{{git-ref}}"
+  rm -rf "../${ref#v}"
+  go run ./clone -git-ref '{{git-ref}}' -o ../
+  go run ./bundle -i "../${ref#v}/jsonschema" -o "../${ref#v}/bundles"
+  jsonschema fmt "../${ref#v}/"
+  find "../${ref#v}/" -type f -name '*.jsonschema.json' -exec yq -i -o json {} \;
+
+# Lint generated schemas.
+jsonschema-lint git-ref:
+  jsonschema lint '../{{git-ref}}/jsonschema/' --resolve '../{{git-ref}}/jsonschema/' --exclude enum_to_const
+
+go:
+  go mod tidy
+  go tool github.com/elastic/go-licenser -license ASL2-Short
+  go tool mvdan.cc/gofumpt -w --extra $(find . -name '*.go')
+  go vet ./...
