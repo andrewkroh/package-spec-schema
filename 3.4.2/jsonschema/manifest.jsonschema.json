@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.4.2/manifest.jsonschema.json",
+  "title": "Package Manifest",
+  "description": "Schema for package manifests.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "content"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/content-manifest"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "input"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/input-manifest"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "integration"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/integration-manifest"
+      }
+    }
+  ],
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        [
+          "content",
+          "input",
+          "integration"
+        ]
+      ]
+    }
+  },
+  "$defs": {
+    "content-manifest": {
+      "$ref": "./content/manifest.jsonschema.json"
+    },
+    "input-manifest": {
+      "$ref": "./input/manifest.jsonschema.json"
+    },
+    "integration-manifest": {
+      "$ref": "./integration/manifest.jsonschema.json"
+    }
+  }
+}
