@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.5.0/input/_dev/test/config.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "policy": {
+      "description": "Configuration for policy tests",
+      "$ref": "../../../integration/_dev/test/config.jsonschema.json#/definitions/config_tests"
+    },
+    "system": {
+      "description": "Configuration for system tests",
+      "$ref": "../../../integration/_dev/test/config.jsonschema.json#/definitions/config_tests"
+    }
+  },
+  "additionalProperties": false
+}
