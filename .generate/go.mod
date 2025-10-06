@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/coreos/go-semver v0.3.1
 	github.com/go-git/go-billy/v5 v5.6.2
-	github.com/go-git/go-git/v5 v5.16.2
+	github.com/go-git/go-git/v5 v5.16.3
 	github.com/google/jsonschema-go v0.3.0
 	gopkg.in/yaml.v3 v3.0.1
 )
