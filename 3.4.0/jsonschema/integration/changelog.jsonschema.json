@@ -27,6 +27,13 @@
               ],
               "type": "string"
             },
+            "link": {
+              "description": "Link to issue or PR describing change in detail.",
+              "examples": [
+                "https://github.com/elastic/integrations/pull/550"
+              ],
+              "type": "string"
+            },
             "type": {
               "description": "Type of change.",
               "type": "string",
@@ -35,13 +42,6 @@
                 "bugfix",
                 "enhancement"
               ]
-            },
-            "link": {
-              "description": "Link to issue or PR describing change in detail.",
-              "examples": [
-                "https://github.com/elastic/integrations/pull/550"
-              ],
-              "type": "string"
             }
           },
           "additionalProperties": false

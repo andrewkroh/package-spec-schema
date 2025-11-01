@@ -6,9 +6,6 @@
     "input"
   ],
   "properties": {
-    "description": {
-      "$ref": "#/definitions/description"
-    },
     "benchmark_time_period": {
       "$ref": "#/definitions/benchmark_time_period"
     },
@@ -17,6 +14,9 @@
     },
     "data_stream": {
       "$ref": "#/definitions/data_stream"
+    },
+    "description": {
+      "$ref": "#/definitions/description"
     },
     "input": {
       "description": "The input of the package to benchmark.",
@@ -226,11 +226,6 @@
                 "object_type"
               ],
               "properties": {
-                "type": {
-                  "enum": [
-                    "object"
-                  ]
-                },
                 "object_type": {
                   "enum": [
                     "histogram",
@@ -243,6 +238,11 @@
                     "half_float",
                     "scaled_float",
                     "unsigned_long"
+                  ]
+                },
+                "type": {
+                  "enum": [
+                    "object"
                   ]
                 }
               }
@@ -292,58 +292,6 @@
           "name"
         ],
         "properties": {
-          "description": {
-            "description": "Short description of field",
-            "type": "string"
-          },
-          "default_metric": true,
-          "type": {
-            "description": "Datatype of field. If the type is set to object, a dynamic mapping is created. In this case, if the name doesn't contain any wildcard, the wildcard is added as the last segment of the path.\n",
-            "type": "string",
-            "enum": [
-              "aggregate_metric_double",
-              "alias",
-              "histogram",
-              "constant_keyword",
-              "text",
-              "match_only_text",
-              "keyword",
-              "long",
-              "integer",
-              "short",
-              "byte",
-              "double",
-              "float",
-              "half_float",
-              "scaled_float",
-              "date",
-              "date_nanos",
-              "boolean",
-              "binary",
-              "integer_range",
-              "float_range",
-              "long_range",
-              "double_range",
-              "date_range",
-              "ip_range",
-              "group",
-              "geo_point",
-              "object",
-              "ip",
-              "nested",
-              "flattened",
-              "wildcard",
-              "version",
-              "unsigned_long"
-            ]
-          },
-          "pattern": {
-            "description": "Regular expression pattern matching the allowed values for the field. This is used for development-time data validation.\n",
-            "examples": [
-              "^[a-zA-Z]$"
-            ],
-            "type": "string"
-          },
           "analyzer": {
             "description": "Name of the analyzer to use for indexing. Unless search_analyzer is specified this analyzer is used for both indexing and searching. Only valid for 'type: text'.\n",
             "type": "string"
@@ -354,6 +302,11 @@
           },
           "date_format": {
             "description": "The date format(s) that can be parsed. Type date format default to `strict_date_optional_time||epoch_millis`, see the [doc](https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html#date-params).\nIn JSON documents, dates are represented as strings. Elasticsearch uses a set of preconfigured formats to recognize and parse these strings into a long value representing _milliseconds-since-the-epoch_ in UTC.\nBesides the [built-in formats](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html#built-in-date-formats), your own [custom formats](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html#custom-date-formats) can be specified using the familiar `yyyy/MM/dd` syntax.\n",
+            "type": "string"
+          },
+          "default_metric": true,
+          "description": {
+            "description": "Short description of field",
             "type": "string"
           },
           "dimension": {
@@ -535,6 +488,13 @@
             "description": "For alias type fields this is the path to the target field. Note that this must be the full path, including any parent objects (e.g. object1.object2.field).\n",
             "type": "string"
           },
+          "pattern": {
+            "description": "Regular expression pattern matching the allowed values for the field. This is used for development-time data validation.\n",
+            "examples": [
+              "^[a-zA-Z]$"
+            ],
+            "type": "string"
+          },
           "runtime": true,
           "scaling_factor": {
             "description": "The scaling factor to use when encoding values. Values will be multiplied by this factor at index time and rounded to the closest long value. For instance, a scaled_float with a scaling_factor of 10 would internally store 2.34 as 23 and all search-time operations (queries, aggregations, sorting) will behave as if the document had a value of 2.3. High values of scaling_factor improve accuracy but also increase space requirements. Only valid for 'type: scaled_float'.\n",
@@ -544,6 +504,46 @@
           "search_analyzer": {
             "description": "Name of the analyzer to use for searching. Only valid for 'type: text'.\n",
             "type": "string"
+          },
+          "type": {
+            "description": "Datatype of field. If the type is set to object, a dynamic mapping is created. In this case, if the name doesn't contain any wildcard, the wildcard is added as the last segment of the path.\n",
+            "type": "string",
+            "enum": [
+              "aggregate_metric_double",
+              "alias",
+              "histogram",
+              "constant_keyword",
+              "text",
+              "match_only_text",
+              "keyword",
+              "long",
+              "integer",
+              "short",
+              "byte",
+              "double",
+              "float",
+              "half_float",
+              "scaled_float",
+              "date",
+              "date_nanos",
+              "boolean",
+              "binary",
+              "integer_range",
+              "float_range",
+              "long_range",
+              "double_range",
+              "date_range",
+              "ip_range",
+              "group",
+              "geo_point",
+              "object",
+              "ip",
+              "nested",
+              "flattened",
+              "wildcard",
+              "version",
+              "unsigned_long"
+            ]
           },
           "unit": {
             "description": "Unit type to associate with a numeric field. This is attached to the field as metadata (via `meta`). By default, a field does not have a unit. The convention for percents is to use value 1 to mean 100%.\n",
@@ -621,29 +621,6 @@
         "title"
       ],
       "properties": {
-        "title": {
-          "description": "Title of data stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
-          "examples": [
-            "AWS Billing Metrics",
-            "Linux Metrics",
-            "User Activity Logs"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of data stream",
-          "examples": [
-            "metrics"
-          ],
-          "type": "string",
-          "enum": [
-            "metrics",
-            "logs",
-            "synthetics",
-            "traces",
-            "profiling"
-          ]
-        },
         "agent": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/agent"
         },
@@ -743,15 +720,6 @@
               "input"
             ],
             "properties": {
-              "title": {
-                "description": "Title of the stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
-                "examples": [
-                  "AWS Billing Metrics",
-                  "Linux Metrics",
-                  "User Activity Logs"
-                ],
-                "type": "string"
-              },
               "description": {
                 "description": "Description of the stream. It should describe what is being collected and with what collector, following the structure \"Collect X from Y with X\".\n",
                 "examples": [
@@ -777,12 +745,44 @@
                 "description": "Path to Elasticsearch index template for stream.",
                 "type": "string"
               },
+              "title": {
+                "description": "Title of the stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+                "examples": [
+                  "AWS Billing Metrics",
+                  "Linux Metrics",
+                  "User Activity Logs"
+                ],
+                "type": "string"
+              },
               "vars": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
               }
             },
             "additionalProperties": false
           }
+        },
+        "title": {
+          "description": "Title of data stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+          "examples": [
+            "AWS Billing Metrics",
+            "Linux Metrics",
+            "User Activity Logs"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of data stream",
+          "examples": [
+            "metrics"
+          ],
+          "type": "string",
+          "enum": [
+            "metrics",
+            "logs",
+            "synthetics",
+            "traces",
+            "profiling"
+          ]
         }
       },
       "additionalProperties": false,
@@ -867,9 +867,6 @@
                           "mapping": {
                             "type": "object",
                             "properties": {
-                              "type": {
-                                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/type"
-                              },
                               "fields": {
                                 "type": "object",
                                 "minProperties": 1,
@@ -882,6 +879,9 @@
                               },
                               "scaling_factor": {
                                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/scaling_factor"
+                              },
+                              "type": {
+                                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/type"
                               }
                             },
                             "additionalProperties": false
@@ -911,9 +911,6 @@
                             "default_metric": {
                               "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/default_metric"
                             },
-                            "type": {
-                              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/type"
-                            },
                             "ignore_above": {
                               "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/ignore_above"
                             },
@@ -922,6 +919,9 @@
                             },
                             "scaling_factor": {
                               "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/scaling_factor"
+                            },
+                            "type": {
+                              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1fields~1fields.jsonschema.json/items/properties/type"
                             }
                           },
                           "additionalProperties": false
@@ -967,15 +967,15 @@
                       "additionalProperties": {
                         "type": "object",
                         "properties": {
+                          "pattern": {
+                            "type": "string"
+                          },
                           "type": {
                             "description": "Type of analyzer",
                             "type": "string",
                             "enum": [
                               "pattern"
                             ]
-                          },
-                          "pattern": {
-                            "type": "string"
                           }
                         },
                         "additionalProperties": false
@@ -1168,12 +1168,9 @@
               "type"
             ],
             "properties": {
-              "title": {
-                "description": "Title of variable.",
-                "examples": [
-                  "Hosts"
-                ],
-                "type": "string"
+              "default": {
+                "description": "Default value(s) for variable",
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
               },
               "description": {
                 "description": "Short description of variable.",
@@ -1182,9 +1179,52 @@
                 ],
                 "type": "string"
               },
-              "default": {
-                "description": "Default value(s) for variable",
-                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
+              "multi": {
+                "description": "Can variable contain multiple values?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Variable name.",
+                "examples": [
+                  "hosts"
+                ],
+                "type": "string"
+              },
+              "options": true,
+              "required": {
+                "description": "Is variable required?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "secret": {
+                "description": "Specifying that a variable is secret means that Kibana will store the value separate from the package policy in a more secure index.  This is useful for passwords and other sensitive information. One caveat is that secrets are write-only, once a user writes a secret var they cannot read it again, only overwrite it.\n",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "show_user": {
+                "description": "Should this variable be shown to the user by default?",
+                "examples": [
+                  false
+                ],
+                "default": true,
+                "type": "boolean"
+              },
+              "title": {
+                "description": "Title of variable.",
+                "examples": [
+                  "Hosts"
+                ],
+                "type": "string"
               },
               "type": {
                 "description": "Data type of variable.",
@@ -1204,46 +1244,6 @@
                   "url",
                   "yaml"
                 ]
-              },
-              "required": {
-                "description": "Is variable required?",
-                "examples": [
-                  true
-                ],
-                "default": false,
-                "type": "boolean"
-              },
-              "multi": {
-                "description": "Can variable contain multiple values?",
-                "examples": [
-                  true
-                ],
-                "default": false,
-                "type": "boolean"
-              },
-              "name": {
-                "description": "Variable name.",
-                "examples": [
-                  "hosts"
-                ],
-                "type": "string"
-              },
-              "options": true,
-              "secret": {
-                "description": "Specifying that a variable is secret means that Kibana will store the value separate from the package policy in a more secure index.  This is useful for passwords and other sensitive information. One caveat is that secrets are write-only, once a user writes a secret var they cannot read it again, only overwrite it.\n",
-                "examples": [
-                  true
-                ],
-                "default": false,
-                "type": "boolean"
-              },
-              "show_user": {
-                "description": "Should this variable be shown to the user by default?",
-                "examples": [
-                  false
-                ],
-                "default": true,
-                "type": "boolean"
               },
               "url_allowed_schemes": {
                 "description": "List of allowed URL schemes for the url type. If empty, any scheme is allowed. An empty string can be used to indicate that the scheme is not mandatory.\n",
@@ -1286,26 +1286,6 @@
         "owner"
       ],
       "properties": {
-        "title": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/title"
-        },
-        "description": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/description"
-        },
-        "type": {
-          "description": "The type of package.",
-          "examples": [
-            "integration"
-          ],
-          "type": "string",
-          "enum": [
-            "integration"
-          ]
-        },
-        "format_version": {
-          "description": "The version of the package specification format used by this package.",
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/version"
-        },
         "agent": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/agent"
         },
@@ -1314,6 +1294,9 @@
         },
         "conditions": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/conditions"
+        },
+        "description": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/description"
         },
         "elasticsearch": {
           "description": "Elasticsearch requirements",
@@ -1335,6 +1318,10 @@
             }
           },
           "additionalProperties": false
+        },
+        "format_version": {
+          "description": "The version of the package specification format used by this package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/version"
         },
         "icons": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/icons"
@@ -1361,20 +1348,6 @@
               "description"
             ],
             "properties": {
-              "title": {
-                "description": "Title of policy template.",
-                "examples": [
-                  "Apache logs and metrics"
-                ],
-                "type": "string"
-              },
-              "description": {
-                "description": "Longer description of policy template.",
-                "examples": [
-                  "Collect logs and metrics from Apache instances"
-                ],
-                "type": "string"
-              },
               "categories": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/categories"
               },
@@ -1392,6 +1365,13 @@
                   "format": "data-stream-name"
                 }
               },
+              "description": {
+                "description": "Longer description of policy template.",
+                "examples": [
+                  "Collect logs and metrics from Apache instances"
+                ],
+                "type": "string"
+              },
               "icons": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/icons"
               },
@@ -1406,22 +1386,11 @@
                     "description"
                   ],
                   "properties": {
-                    "title": {
-                      "description": "Title of input.",
-                      "examples": [
-                        "Collect logs from Apache instances"
-                      ],
-                      "type": "string"
-                    },
                     "description": {
                       "description": "Longer description of input.",
                       "examples": [
                         "Collecting Apache access and error logs"
                       ],
-                      "type": "string"
-                    },
-                    "type": {
-                      "description": "Type of input.",
                       "type": "string"
                     },
                     "input_group": {
@@ -1444,6 +1413,17 @@
                       ],
                       "type": "string"
                     },
+                    "title": {
+                      "description": "Title of input.",
+                      "examples": [
+                        "Collect logs from Apache instances"
+                      ],
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of input.",
+                      "type": "string"
+                    },
                     "vars": {
                       "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
                     }
@@ -1464,6 +1444,13 @@
               "screenshots": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/screenshots"
               },
+              "title": {
+                "description": "Title of policy template.",
+                "examples": [
+                  "Apache logs and metrics"
+                ],
+                "type": "string"
+              },
               "vars": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
               }
@@ -1477,6 +1464,19 @@
         "source": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/source"
         },
+        "title": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1manifest.jsonschema.json/definitions/title"
+        },
+        "type": {
+          "description": "The type of package.",
+          "examples": [
+            "integration"
+          ],
+          "type": "string",
+          "enum": [
+            "integration"
+          ]
+        },
         "vars": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.0.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
         },
@@ -1487,23 +1487,6 @@
       },
       "additionalProperties": false,
       "definitions": {
-        "title": {
-          "description": "Title of the package. It should be the usual title given to the product, service or kind of source being managed by this package.\n",
-          "examples": [
-            "Apache HTTP Server",
-            "MySQL",
-            "AWS"
-          ],
-          "type": "string"
-        },
-        "description": {
-          "description": "A longer description of the package. It should describe, at least all the kinds of data that is collected and with what collectors, following the structure \"Collect X from Y with X\".\n",
-          "examples": [
-            "Collect logs and metrics from Apache HTTP Servers with Elastic Agent.",
-            "Collect logs and metrics from Amazon Web Services with Elastic Agent."
-          ],
-          "type": "string"
-        },
         "agent": {
           "description": "Declarations related to Agent configurations or requirements.",
           "type": "object",
@@ -1657,6 +1640,14 @@
           },
           "additionalProperties": false
         },
+        "description": {
+          "description": "A longer description of the package. It should describe, at least all the kinds of data that is collected and with what collectors, following the structure \"Collect X from Y with X\".\n",
+          "examples": [
+            "Collect logs and metrics from Apache HTTP Servers with Elastic Agent.",
+            "Collect logs and metrics from Amazon Web Services with Elastic Agent."
+          ],
+          "type": "string"
+        },
         "icons": {
           "description": "List of icons for by this package.",
           "type": "array",
@@ -1666,20 +1657,6 @@
               "src"
             ],
             "properties": {
-              "title": {
-                "description": "Title of icon.",
-                "examples": [
-                  "Apache Logo"
-                ],
-                "type": "string"
-              },
-              "type": {
-                "description": "MIME type of the icon image file.",
-                "examples": [
-                  "image/svg+xml"
-                ],
-                "type": "string"
-              },
               "dark_mode": {
                 "description": "Is this icon to be shown in dark mode?",
                 "default": false,
@@ -1699,6 +1676,20 @@
                 ],
                 "type": "string",
                 "format": "relative-path"
+              },
+              "title": {
+                "description": "Title of icon.",
+                "examples": [
+                  "Apache Logo"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "MIME type of the icon image file.",
+                "examples": [
+                  "image/svg+xml"
+                ],
+                "type": "string"
               }
             },
             "additionalProperties": false
@@ -1711,6 +1702,11 @@
             "type"
           ],
           "properties": {
+            "github": {
+              "description": "Github team name of the package maintainer.",
+              "type": "string",
+              "pattern": "^(([a-zA-Z0-9-]+)|([a-zA-Z0-9-]+\\/[a-zA-Z0-9-]+))$"
+            },
             "type": {
               "description": "Describes who owns the package and the level of support that is provided. The 'elastic' value indicates that the package is built and maintained by Elastic. The 'partner' value indicates that the package is built and maintained by a partner vendor and may include involvement from Elastic. The 'community' value indicates the package is built and maintained by non-Elastic community members.\n",
               "examples": [
@@ -1723,11 +1719,6 @@
                 "partner",
                 "community"
               ]
-            },
-            "github": {
-              "description": "Github team name of the package maintainer.",
-              "type": "string",
-              "pattern": "^(([a-zA-Z0-9-]+)|([a-zA-Z0-9-]+\\/[a-zA-Z0-9-]+))$"
             }
           },
           "additionalProperties": false
@@ -1742,20 +1733,6 @@
               "title"
             ],
             "properties": {
-              "title": {
-                "description": "Title of screenshot.",
-                "examples": [
-                  "Apache HTTPD Server Status"
-                ],
-                "type": "string"
-              },
-              "type": {
-                "description": "MIME type of the screenshot image file.",
-                "examples": [
-                  "image/png"
-                ],
-                "type": "string"
-              },
               "size": {
                 "description": "Size of the screenshot.",
                 "examples": [
@@ -1770,6 +1747,20 @@
                 ],
                 "type": "string",
                 "format": "relative-path"
+              },
+              "title": {
+                "description": "Title of screenshot.",
+                "examples": [
+                  "Apache HTTPD Server Status"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "MIME type of the screenshot image file.",
+                "examples": [
+                  "image/png"
+                ],
+                "type": "string"
               }
             },
             "additionalProperties": false
@@ -1793,6 +1784,15 @@
           },
           "additionalProperties": false
         },
+        "title": {
+          "description": "Title of the package. It should be the usual title given to the product, service or kind of source being managed by this package.\n",
+          "examples": [
+            "Apache HTTP Server",
+            "MySQL",
+            "AWS"
+          ],
+          "type": "string"
+        },
         "version": {
           "description": "Version of the package, following semantic versioning. It can include pre-release labels.",
           "examples": [
@@ -1808,10 +1808,6 @@
     }
   },
   "definitions": {
-    "description": {
-      "description": "A description of the benchmark scenario.",
-      "type": "string"
-    },
     "benchmark_time_period": {
       "description": "A time period as a duration string for the duration of the benchmark.\nBy default the value is 0 seconds, which means that the benchmark will run until no more data is ingested.\n",
       "default": "",
@@ -1869,6 +1865,14 @@
               "description": "Configuration for the generator template.",
               "type": "object",
               "properties": {
+                "path": {
+                  "description": "Template path.",
+                  "type": "string"
+                },
+                "raw": {
+                  "description": "Raw template.",
+                  "type": "string"
+                },
                 "type": {
                   "description": "The type of template.",
                   "default": "placeholder",
@@ -1877,14 +1881,6 @@
                     "placeholder",
                     "gotext"
                   ]
-                },
-                "path": {
-                  "description": "Template path.",
-                  "type": "string"
-                },
-                "raw": {
-                  "description": "Raw template.",
-                  "type": "string"
                 }
               },
               "additionalProperties": false
@@ -1954,6 +1950,10 @@
         }
       },
       "additionalProperties": false
+    },
+    "description": {
+      "description": "A description of the benchmark scenario.",
+      "type": "string"
     },
     "package": {
       "description": "The package to benchmark.",
