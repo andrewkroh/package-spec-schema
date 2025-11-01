@@ -22,28 +22,6 @@
         "title"
       ],
       "properties": {
-        "title": {
-          "description": "Title of data stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
-          "examples": [
-            "AWS Billing Metrics",
-            "Linux Metrics",
-            "User Activity Logs"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of data stream",
-          "examples": [
-            "metrics"
-          ],
-          "type": "string",
-          "enum": [
-            "metrics",
-            "logs",
-            "synthetics",
-            "traces"
-          ]
-        },
         "dataset": {
           "description": "Name of data set.",
           "type": "string"
@@ -140,15 +118,6 @@
               "input"
             ],
             "properties": {
-              "title": {
-                "description": "Title of the stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
-                "examples": [
-                  "AWS Billing Metrics",
-                  "Linux Metrics",
-                  "User Activity Logs"
-                ],
-                "type": "string"
-              },
               "description": {
                 "description": "Description of the stream. It should describe what is being collected and with what collector, following the structure \"Collect X from Y with X\".\n",
                 "examples": [
@@ -174,12 +143,43 @@
                 "description": "Path to Elasticsearch index template for stream.",
                 "type": "string"
               },
+              "title": {
+                "description": "Title of the stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+                "examples": [
+                  "AWS Billing Metrics",
+                  "Linux Metrics",
+                  "User Activity Logs"
+                ],
+                "type": "string"
+              },
               "vars": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.6.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
               }
             },
             "additionalProperties": false
           }
+        },
+        "title": {
+          "description": "Title of data stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+          "examples": [
+            "AWS Billing Metrics",
+            "Linux Metrics",
+            "User Activity Logs"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of data stream",
+          "examples": [
+            "metrics"
+          ],
+          "type": "string",
+          "enum": [
+            "metrics",
+            "logs",
+            "synthetics",
+            "traces"
+          ]
         }
       },
       "additionalProperties": false,
@@ -324,12 +324,9 @@
               "type"
             ],
             "properties": {
-              "title": {
-                "description": "Title of variable.",
-                "examples": [
-                  "Hosts"
-                ],
-                "type": "string"
+              "default": {
+                "description": "Default value(s) for variable",
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.6.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
               },
               "description": {
                 "description": "Short description of variable.",
@@ -338,9 +335,44 @@
                 ],
                 "type": "string"
               },
-              "default": {
-                "description": "Default value(s) for variable",
-                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.6.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
+              "multi": {
+                "description": "Can variable contain multiple values?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Variable name.",
+                "examples": [
+                  "hosts"
+                ],
+                "type": "string"
+              },
+              "options": true,
+              "required": {
+                "description": "Is variable required?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "show_user": {
+                "description": "Should this variable be shown to the user by default?",
+                "examples": [
+                  false
+                ],
+                "default": true,
+                "type": "boolean"
+              },
+              "title": {
+                "description": "Title of variable.",
+                "examples": [
+                  "Hosts"
+                ],
+                "type": "string"
               },
               "type": {
                 "description": "Data type of variable.",
@@ -360,38 +392,6 @@
                   "url",
                   "yaml"
                 ]
-              },
-              "required": {
-                "description": "Is variable required?",
-                "examples": [
-                  true
-                ],
-                "default": false,
-                "type": "boolean"
-              },
-              "multi": {
-                "description": "Can variable contain multiple values?",
-                "examples": [
-                  true
-                ],
-                "default": false,
-                "type": "boolean"
-              },
-              "name": {
-                "description": "Variable name.",
-                "examples": [
-                  "hosts"
-                ],
-                "type": "string"
-              },
-              "options": true,
-              "show_user": {
-                "description": "Should this variable be shown to the user by default?",
-                "examples": [
-                  false
-                ],
-                "default": true,
-                "type": "boolean"
               },
               "url_allowed_schemes": {
                 "description": "List of allowed URL schemes for the url type. If empty, any scheme is allowed. An empty string can be used to indicate that the scheme is not mandatory.\n",
