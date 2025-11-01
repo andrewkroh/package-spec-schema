@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.5.1/integration/_dev/benchmark/rally.scenario.jsonschema.json",
+  "type": "object",
+  "required": [
+    "data_stream",
+    "corpora"
+  ],
+  "properties": {
+    "description": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/description"
+    },
+    "corpora": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/corpora"
+    },
+    "data_stream": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/data_stream"
+    },
+    "package": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/package"
+    },
+    "version": {
+      "$ref": "../../manifest.jsonschema.json#/definitions/version"
+    }
+  },
+  "additionalProperties": false
+}
