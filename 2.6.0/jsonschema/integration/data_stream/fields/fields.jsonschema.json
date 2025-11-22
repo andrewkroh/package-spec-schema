@@ -8,56 +8,6 @@
       "name"
     ],
     "properties": {
-      "description": {
-        "description": "Short description of field",
-        "type": "string"
-      },
-      "type": {
-        "description": "Datatype of field",
-        "type": "string",
-        "enum": [
-          "alias",
-          "histogram",
-          "constant_keyword",
-          "text",
-          "match_only_text",
-          "keyword",
-          "long",
-          "integer",
-          "short",
-          "byte",
-          "double",
-          "float",
-          "half_float",
-          "scaled_float",
-          "date",
-          "date_nanos",
-          "boolean",
-          "binary",
-          "integer_range",
-          "float_range",
-          "long_range",
-          "double_range",
-          "date_range",
-          "ip_range",
-          "group",
-          "geo_point",
-          "object",
-          "ip",
-          "nested",
-          "flattened",
-          "wildcard",
-          "version",
-          "unsigned_long"
-        ]
-      },
-      "pattern": {
-        "description": "Regular expression pattern matching the allowed values for the field. This is used for development-time data validation.\n",
-        "examples": [
-          "^[a-zA-Z]$"
-        ],
-        "type": "string"
-      },
       "analyzer": {
         "description": "Name of the analyzer to use for indexing. Unless search_analyzer is specified this analyzer is used for both indexing and searching. Only valid for 'type: text'.\n",
         "type": "string"
@@ -68,6 +18,10 @@
       },
       "date_format": {
         "description": "The date format(s) that can be parsed.  Type date format default to `strict_date_optional_time||epoch_millis`, see the [doc](https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html#date-params).\nIn JSON documents, dates are represented as strings.  Elasticsearch uses a set of preconfigured formats to recognize  and parse these strings into a long value representing  _milliseconds-since-the-epoch_ in UTC.\nBesides the [built-in formats](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html#built-in-date-formats), your own [custom  formats](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html#custom-date-formats) can be specified using the familiar `yyyy/MM/dd` syntax.\n",
+        "type": "string"
+      },
+      "description": {
+        "description": "Short description of field",
         "type": "string"
       },
       "dimension": {
@@ -232,6 +186,13 @@
         "description": "For alias type fields this is the path to the target field. Note that this must be the full path, including any parent objects (e.g. object1.object2.field).\n",
         "type": "string"
       },
+      "pattern": {
+        "description": "Regular expression pattern matching the allowed values for the field. This is used for development-time data validation.\n",
+        "examples": [
+          "^[a-zA-Z]$"
+        ],
+        "type": "string"
+      },
       "scaling_factor": {
         "description": "The scaling factor to use when encoding values. Values will be multiplied by this factor at index time and rounded to the closest long value. For instance, a scaled_float with a scaling_factor of 10 would internally store 2.34 as 23 and all search-time operations (queries, aggregations, sorting) will behave as if the document had a value of 2.3. High values of scaling_factor improve accuracy but also increase space requirements. Only valid for 'type: scaled_float'.\n",
         "default": 1000,
@@ -240,6 +201,45 @@
       "search_analyzer": {
         "description": "Name of the analyzer to use for searching. Only valid for 'type: text'.\n",
         "type": "string"
+      },
+      "type": {
+        "description": "Datatype of field",
+        "type": "string",
+        "enum": [
+          "alias",
+          "histogram",
+          "constant_keyword",
+          "text",
+          "match_only_text",
+          "keyword",
+          "long",
+          "integer",
+          "short",
+          "byte",
+          "double",
+          "float",
+          "half_float",
+          "scaled_float",
+          "date",
+          "date_nanos",
+          "boolean",
+          "binary",
+          "integer_range",
+          "float_range",
+          "long_range",
+          "double_range",
+          "date_range",
+          "ip_range",
+          "group",
+          "geo_point",
+          "object",
+          "ip",
+          "nested",
+          "flattened",
+          "wildcard",
+          "version",
+          "unsigned_long"
+        ]
       },
       "unit": {
         "description": "Unit type to associate with a numeric field. This is attached to the field as metadata (via `meta`). By default, a field does not have a unit. The convention for percents is to use value 1 to mean 100%.\n",
