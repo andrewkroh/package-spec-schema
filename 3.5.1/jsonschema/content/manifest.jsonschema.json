@@ -12,26 +12,6 @@
     "owner"
   ],
   "properties": {
-    "title": {
-      "$ref": "../integration/manifest.jsonschema.json#/definitions/title"
-    },
-    "description": {
-      "$ref": "../integration/manifest.jsonschema.json#/definitions/description"
-    },
-    "type": {
-      "description": "The type of package.",
-      "examples": [
-        "content"
-      ],
-      "type": "string",
-      "enum": [
-        "content"
-      ]
-    },
-    "format_version": {
-      "description": "The version of the package specification format used by this package.",
-      "$ref": "../integration/manifest.jsonschema.json#/definitions/version"
-    },
     "categories": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/categories"
     },
@@ -48,8 +28,15 @@
       },
       "additionalProperties": false
     },
+    "description": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/description"
+    },
     "discovery": {
       "$ref": "#/definitions/discovery"
+    },
+    "format_version": {
+      "description": "The version of the package specification format used by this package.",
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/version"
     },
     "icons": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/icons"
@@ -70,6 +57,19 @@
     },
     "source": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/source"
+    },
+    "title": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/title"
+    },
+    "type": {
+      "description": "The type of package.",
+      "examples": [
+        "content"
+      ],
+      "type": "string",
+      "enum": [
+        "content"
+      ]
     },
     "version": {
       "description": "The version of the package.",
