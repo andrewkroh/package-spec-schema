@@ -13,26 +13,6 @@
     "conditions"
   ],
   "properties": {
-    "title": {
-      "$ref": "../integration/manifest.jsonschema.json#/definitions/title"
-    },
-    "description": {
-      "$ref": "../integration/manifest.jsonschema.json#/definitions/description"
-    },
-    "type": {
-      "description": "The type of package.",
-      "examples": [
-        "input"
-      ],
-      "type": "string",
-      "enum": [
-        "input"
-      ]
-    },
-    "format_version": {
-      "description": "The version of the package specification format used by this package.",
-      "$ref": "../integration/manifest.jsonschema.json#/definitions/version"
-    },
     "agent": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/agent"
     },
@@ -41,6 +21,9 @@
     },
     "conditions": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/conditions"
+    },
+    "description": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/description"
     },
     "elasticsearch": {
       "description": "Elasticsearch asset definitions",
@@ -51,6 +34,10 @@
         }
       },
       "additionalProperties": false
+    },
+    "format_version": {
+      "description": "The version of the package specification format used by this package.",
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/version"
     },
     "icons": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/icons"
@@ -80,12 +67,11 @@
           "template_path"
         ],
         "properties": {
-          "title": {
-            "description": "Title of policy template.",
-            "examples": [
-              "Apache logs and metrics"
-            ],
-            "type": "string"
+          "configuration_links": {
+            "$ref": "../integration/manifest.jsonschema.json#/definitions/configuration_links"
+          },
+          "deployment_modes": {
+            "$ref": "../integration/manifest.jsonschema.json#/definitions/deployment_modes"
           },
           "description": {
             "description": "Longer description of policy template.",
@@ -93,25 +79,6 @@
               "Collect logs and metrics from Apache instances"
             ],
             "type": "string"
-          },
-          "type": {
-            "description": "Type of data stream",
-            "examples": [
-              "metrics"
-            ],
-            "type": "string",
-            "enum": [
-              "metrics",
-              "logs",
-              "synthetics",
-              "traces"
-            ]
-          },
-          "configuration_links": {
-            "$ref": "../integration/manifest.jsonschema.json#/definitions/configuration_links"
-          },
-          "deployment_modes": {
-            "$ref": "../integration/manifest.jsonschema.json#/definitions/deployment_modes"
           },
           "fips_compatible": {
             "$ref": "../integration/manifest.jsonschema.json#/definitions/fips_compatible"
@@ -141,6 +108,26 @@
             "description": "Path to Elasticsearch index template for stream.",
             "type": "string"
           },
+          "title": {
+            "description": "Title of policy template.",
+            "examples": [
+              "Apache logs and metrics"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of data stream",
+            "examples": [
+              "metrics"
+            ],
+            "type": "string",
+            "enum": [
+              "metrics",
+              "logs",
+              "synthetics",
+              "traces"
+            ]
+          },
           "vars": {
             "$ref": "../integration/data_stream/manifest.jsonschema.json#/definitions/vars"
           }
@@ -153,6 +140,19 @@
     },
     "source": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/source"
+    },
+    "title": {
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/title"
+    },
+    "type": {
+      "description": "The type of package.",
+      "examples": [
+        "input"
+      ],
+      "type": "string",
+      "enum": [
+        "input"
+      ]
     },
     "vars": {
       "$ref": "../integration/data_stream/manifest.jsonschema.json#/definitions/vars"

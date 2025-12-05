@@ -12,34 +12,6 @@
     "owner"
   ],
   "properties": {
-    "title": {
-      "description": "The title of the package.",
-      "examples": [
-        "Apache"
-      ],
-      "type": "string"
-    },
-    "description": {
-      "description": "A longer description of the package.",
-      "examples": [
-        "Apache Integration"
-      ],
-      "type": "string"
-    },
-    "type": {
-      "description": "The type of package.",
-      "examples": [
-        "input"
-      ],
-      "type": "string",
-      "enum": [
-        "input"
-      ]
-    },
-    "format_version": {
-      "description": "The version of the package specification format used by this package.",
-      "$ref": "../integration/manifest.jsonschema.json#/definitions/version"
-    },
     "categories": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/categories"
     },
@@ -63,6 +35,17 @@
         }
       },
       "additionalProperties": false
+    },
+    "description": {
+      "description": "A longer description of the package.",
+      "examples": [
+        "Apache Integration"
+      ],
+      "type": "string"
+    },
+    "format_version": {
+      "description": "The version of the package specification format used by this package.",
+      "$ref": "../integration/manifest.jsonschema.json#/definitions/version"
     },
     "icons": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/icons"
@@ -102,32 +85,12 @@
           "input"
         ],
         "properties": {
-          "title": {
-            "description": "Title of policy template.",
-            "examples": [
-              "Apache logs and metrics"
-            ],
-            "type": "string"
-          },
           "description": {
             "description": "Longer description of policy template.",
             "examples": [
               "Collect logs and metrics from Apache instances"
             ],
             "type": "string"
-          },
-          "type": {
-            "description": "Type of data stream",
-            "examples": [
-              "metrics"
-            ],
-            "type": "string",
-            "enum": [
-              "metrics",
-              "logs",
-              "synthetics",
-              "traces"
-            ]
           },
           "icons": {
             "$ref": "../integration/manifest.jsonschema.json#/definitions/icons"
@@ -154,6 +117,26 @@
             "description": "Path to Elasticsearch index template for stream.",
             "type": "string"
           },
+          "title": {
+            "description": "Title of policy template.",
+            "examples": [
+              "Apache logs and metrics"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of data stream",
+            "examples": [
+              "metrics"
+            ],
+            "type": "string",
+            "enum": [
+              "metrics",
+              "logs",
+              "synthetics",
+              "traces"
+            ]
+          },
           "vars": {
             "$ref": "../integration/data_stream/manifest.jsonschema.json#/definitions/vars"
           }
@@ -163,6 +146,23 @@
     },
     "screenshots": {
       "$ref": "../integration/manifest.jsonschema.json#/definitions/screenshots"
+    },
+    "title": {
+      "description": "The title of the package.",
+      "examples": [
+        "Apache"
+      ],
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of package.",
+      "examples": [
+        "input"
+      ],
+      "type": "string",
+      "enum": [
+        "input"
+      ]
     },
     "vars": {
       "$ref": "../integration/data_stream/manifest.jsonschema.json#/definitions/vars"
