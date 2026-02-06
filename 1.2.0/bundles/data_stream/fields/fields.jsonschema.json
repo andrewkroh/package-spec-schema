@@ -7,12 +7,42 @@
       "name"
     ],
     "properties": {
-      "title": {
-        "description": "Title of field",
-        "type": "string"
-      },
       "description": {
         "description": "Short description of field",
+        "type": "string"
+      },
+      "external": {
+        "description": "External source reference",
+        "type": "string",
+        "enum": [
+          "ecs"
+        ]
+      },
+      "fields": {
+        "description": "Sub-fields, when type is group",
+        "$ref": "#"
+      },
+      "metric_type": {
+        "description": "Metric type",
+        "type": "string",
+        "enum": [
+          "counter",
+          "gauge"
+        ]
+      },
+      "name": {
+        "description": "Name of field",
+        "type": "string"
+      },
+      "pattern": {
+        "description": "Regular expression pattern of the field value",
+        "examples": [
+          "^[a-zA-Z]$"
+        ],
+        "type": "string"
+      },
+      "title": {
+        "description": "Title of field",
         "type": "string"
       },
       "type": {
@@ -53,36 +83,6 @@
           "version",
           "unsigned_long"
         ]
-      },
-      "pattern": {
-        "description": "Regular expression pattern of the field value",
-        "examples": [
-          "^[a-zA-Z]$"
-        ],
-        "type": "string"
-      },
-      "external": {
-        "description": "External source reference",
-        "type": "string",
-        "enum": [
-          "ecs"
-        ]
-      },
-      "fields": {
-        "description": "Sub-fields, when type is group",
-        "$ref": "#"
-      },
-      "metric_type": {
-        "description": "Metric type",
-        "type": "string",
-        "enum": [
-          "counter",
-          "gauge"
-        ]
-      },
-      "name": {
-        "description": "Name of field",
-        "type": "string"
       },
       "unit": {
         "description": "Unit",

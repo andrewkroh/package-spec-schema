@@ -11,34 +11,6 @@
     "owner"
   ],
   "properties": {
-    "title": {
-      "description": "The title of the package.",
-      "examples": [
-        "Apache"
-      ],
-      "type": "string"
-    },
-    "description": {
-      "description": "A longer description of the package.",
-      "examples": [
-        "Apache Integration"
-      ],
-      "type": "string"
-    },
-    "type": {
-      "description": "The type of package.",
-      "examples": [
-        "integration"
-      ],
-      "type": "string",
-      "enum": [
-        "integration"
-      ]
-    },
-    "format_version": {
-      "description": "The version of the package specification format used by this package.",
-      "$ref": "#/definitions/version"
-    },
     "categories": {
       "$ref": "#/definitions/categories"
     },
@@ -63,6 +35,13 @@
       },
       "additionalProperties": false
     },
+    "description": {
+      "description": "A longer description of the package.",
+      "examples": [
+        "Apache Integration"
+      ],
+      "type": "string"
+    },
     "elasticsearch": {
       "description": "Elasticsearch requirements",
       "type": "object",
@@ -83,6 +62,10 @@
         }
       },
       "additionalProperties": false
+    },
+    "format_version": {
+      "description": "The version of the package specification format used by this package.",
+      "$ref": "#/definitions/version"
     },
     "icons": {
       "$ref": "#/definitions/icons"
@@ -131,20 +114,6 @@
           "description"
         ],
         "properties": {
-          "title": {
-            "description": "Title of policy template.",
-            "examples": [
-              "Apache logs and metrics"
-            ],
-            "type": "string"
-          },
-          "description": {
-            "description": "Longer description of policy template.",
-            "examples": [
-              "Collect logs and metrics from Apache instances"
-            ],
-            "type": "string"
-          },
           "categories": {
             "$ref": "#/definitions/categories"
           },
@@ -162,6 +131,13 @@
               "format": "data-stream-name"
             }
           },
+          "description": {
+            "description": "Longer description of policy template.",
+            "examples": [
+              "Collect logs and metrics from Apache instances"
+            ],
+            "type": "string"
+          },
           "icons": {
             "$ref": "#/definitions/icons"
           },
@@ -176,22 +152,11 @@
                 "description"
               ],
               "properties": {
-                "title": {
-                  "description": "Title of input.",
-                  "examples": [
-                    "Collect logs from Apache instances"
-                  ],
-                  "type": "string"
-                },
                 "description": {
                   "description": "Longer description of input.",
                   "examples": [
                     "Collecting Apache access and error logs"
                   ],
-                  "type": "string"
-                },
-                "type": {
-                  "description": "Type of input.",
                   "type": "string"
                 },
                 "input_group": {
@@ -214,6 +179,17 @@
                   ],
                   "type": "string"
                 },
+                "title": {
+                  "description": "Title of input.",
+                  "examples": [
+                    "Collect logs from Apache instances"
+                  ],
+                  "type": "string"
+                },
+                "type": {
+                  "description": "Type of input.",
+                  "type": "string"
+                },
                 "vars": {
                   "$ref": "./data_stream/manifest.jsonschema.json#/definitions/vars"
                 }
@@ -233,6 +209,13 @@
           },
           "screenshots": {
             "$ref": "#/definitions/screenshots"
+          },
+          "title": {
+            "description": "Title of policy template.",
+            "examples": [
+              "Apache logs and metrics"
+            ],
+            "type": "string"
           },
           "vars": {
             "$ref": "./data_stream/manifest.jsonschema.json#/definitions/vars"
@@ -257,6 +240,23 @@
     },
     "screenshots": {
       "$ref": "#/definitions/screenshots"
+    },
+    "title": {
+      "description": "The title of the package.",
+      "examples": [
+        "Apache"
+      ],
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of package.",
+      "examples": [
+        "integration"
+      ],
+      "type": "string",
+      "enum": [
+        "integration"
+      ]
     },
     "vars": {
       "$ref": "./data_stream/manifest.jsonschema.json#/definitions/vars"
@@ -312,20 +312,6 @@
           "src"
         ],
         "properties": {
-          "title": {
-            "description": "Title of icon.",
-            "examples": [
-              "Apache Logo"
-            ],
-            "type": "string"
-          },
-          "type": {
-            "description": "MIME type of the icon image file.",
-            "examples": [
-              "image/svg+xml"
-            ],
-            "type": "string"
-          },
           "size": {
             "description": "Size of the icon.",
             "examples": [
@@ -340,6 +326,20 @@
             ],
             "type": "string",
             "format": "relative-path"
+          },
+          "title": {
+            "description": "Title of icon.",
+            "examples": [
+              "Apache Logo"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "MIME type of the icon image file.",
+            "examples": [
+              "image/svg+xml"
+            ],
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -355,20 +355,6 @@
           "title"
         ],
         "properties": {
-          "title": {
-            "description": "Title of screenshot.",
-            "examples": [
-              "Apache HTTPD Server Status"
-            ],
-            "type": "string"
-          },
-          "type": {
-            "description": "MIME type of the screenshot image file.",
-            "examples": [
-              "image/png"
-            ],
-            "type": "string"
-          },
           "size": {
             "description": "Size of the screenshot.",
             "examples": [
@@ -383,6 +369,20 @@
             ],
             "type": "string",
             "format": "relative-path"
+          },
+          "title": {
+            "description": "Title of screenshot.",
+            "examples": [
+              "Apache HTTPD Server Status"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "MIME type of the screenshot image file.",
+            "examples": [
+              "image/png"
+            ],
+            "type": "string"
           }
         },
         "additionalProperties": false

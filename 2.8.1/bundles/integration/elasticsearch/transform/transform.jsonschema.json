@@ -20,19 +20,14 @@
     "dest"
   ],
   "properties": {
-    "id": {
-      "title": "Id",
-      "type": "string",
-      "pattern": "^.*$"
+    "_meta": {
+      "title": "Metadata",
+      "type": "object"
     },
     "description": {
       "title": "Description",
       "type": "string",
       "pattern": "^.*$"
-    },
-    "_meta": {
-      "title": "Metadata",
-      "type": "object"
     },
     "dest": {
       "title": "Dest",
@@ -60,6 +55,11 @@
         "5m"
       ],
       "default": "60s",
+      "type": "string",
+      "pattern": "^.*$"
+    },
+    "id": {
+      "title": "Id",
       "type": "string",
       "pattern": "^.*$"
     },

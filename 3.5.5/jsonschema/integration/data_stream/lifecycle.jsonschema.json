@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.5.5/integration/data_stream/lifecycle.jsonschema.json",
+  "required": [
+    "data_retention"
+  ],
+  "properties": {
+    "data_retention": {
+      "description": "Every document collected will be stored at least during this time frame.\nAny time after this duration the documents could be deleted.",
+      "examples": [
+        "7d"
+      ],
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

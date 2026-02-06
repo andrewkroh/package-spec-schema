@@ -6,9 +6,6 @@
     "data_stream"
   ],
   "properties": {
-    "description": {
-      "$ref": "./system.scenario.jsonschema.json#/definitions/description"
-    },
     "benchmark_time_period": {
       "$ref": "./system.scenario.jsonschema.json#/definitions/benchmark_time_period"
     },
@@ -17,6 +14,9 @@
     },
     "data_stream": {
       "$ref": "./system.scenario.jsonschema.json#/definitions/data_stream"
+    },
+    "description": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/description"
     },
     "package": {
       "$ref": "./system.scenario.jsonschema.json#/definitions/package"

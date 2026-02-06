@@ -11,34 +11,6 @@
     "owner"
   ],
   "properties": {
-    "title": {
-      "description": "The title of the package.",
-      "examples": [
-        "Apache"
-      ],
-      "type": "string"
-    },
-    "description": {
-      "description": "A longer description of the package.",
-      "examples": [
-        "Apache Integration"
-      ],
-      "type": "string"
-    },
-    "type": {
-      "description": "The type of package.",
-      "examples": [
-        "integration"
-      ],
-      "type": "string",
-      "enum": [
-        "integration"
-      ]
-    },
-    "format_version": {
-      "description": "The version of the package specification format used by this package.",
-      "$ref": "#/definitions/version"
-    },
     "categories": {
       "$ref": "#/definitions/categories"
     },
@@ -62,6 +34,17 @@
         }
       },
       "additionalProperties": false
+    },
+    "description": {
+      "description": "A longer description of the package.",
+      "examples": [
+        "Apache Integration"
+      ],
+      "type": "string"
+    },
+    "format_version": {
+      "description": "The version of the package specification format used by this package.",
+      "$ref": "#/definitions/version"
     },
     "icons": {
       "$ref": "#/definitions/icons"
@@ -110,20 +93,6 @@
           "description"
         ],
         "properties": {
-          "title": {
-            "description": "Title of policy template.",
-            "examples": [
-              "Apache logs and metrics"
-            ],
-            "type": "string"
-          },
-          "description": {
-            "description": "Longer description of policy template.",
-            "examples": [
-              "Collect logs and metrics from Apache instances"
-            ],
-            "type": "string"
-          },
           "categories": {
             "$ref": "#/definitions/categories"
           },
@@ -141,6 +110,13 @@
               "format": "data-stream-name"
             }
           },
+          "description": {
+            "description": "Longer description of policy template.",
+            "examples": [
+              "Collect logs and metrics from Apache instances"
+            ],
+            "type": "string"
+          },
           "icons": {
             "$ref": "#/definitions/icons"
           },
@@ -155,22 +131,11 @@
                 "description"
               ],
               "properties": {
-                "title": {
-                  "description": "Title of input.",
-                  "examples": [
-                    "Collect logs from Apache instances"
-                  ],
-                  "type": "string"
-                },
                 "description": {
                   "description": "Longer description of input.",
                   "examples": [
                     "Collecting Apache access and error logs"
                   ],
-                  "type": "string"
-                },
-                "type": {
-                  "description": "Type of input.",
                   "type": "string"
                 },
                 "input_group": {
@@ -193,6 +158,17 @@
                   ],
                   "type": "string"
                 },
+                "title": {
+                  "description": "Title of input.",
+                  "examples": [
+                    "Collect logs from Apache instances"
+                  ],
+                  "type": "string"
+                },
+                "type": {
+                  "description": "Type of input.",
+                  "type": "string"
+                },
                 "vars": {
                   "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.0.0~1data_stream~1manifest.jsonschema.json/definitions/vars"
                 }
@@ -212,6 +188,13 @@
           },
           "screenshots": {
             "$ref": "#/definitions/screenshots"
+          },
+          "title": {
+            "description": "Title of policy template.",
+            "examples": [
+              "Apache logs and metrics"
+            ],
+            "type": "string"
           },
           "vars": {
             "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.0.0~1data_stream~1manifest.jsonschema.json/definitions/vars"
@@ -235,6 +218,23 @@
     "screenshots": {
       "$ref": "#/definitions/screenshots"
     },
+    "title": {
+      "description": "The title of the package.",
+      "examples": [
+        "Apache"
+      ],
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of package.",
+      "examples": [
+        "integration"
+      ],
+      "type": "string",
+      "enum": [
+        "integration"
+      ]
+    },
     "vars": {
       "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.0.0~1data_stream~1manifest.jsonschema.json/definitions/vars"
     },
@@ -252,26 +252,6 @@
         "title"
       ],
       "properties": {
-        "title": {
-          "description": "Title of data stream.",
-          "examples": [
-            "AWS billing metrics"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of data stream",
-          "examples": [
-            "metrics"
-          ],
-          "type": "string",
-          "enum": [
-            "metrics",
-            "logs",
-            "synthetics",
-            "traces"
-          ]
-        },
         "dataset": {
           "description": "Name of data set.",
           "type": "string"
@@ -350,12 +330,6 @@
               "input"
             ],
             "properties": {
-              "title": {
-                "examples": [
-                  "AWS Billing metrics"
-                ],
-                "type": "string"
-              },
               "description": {
                 "examples": [
                   "Collect AWS billing metrics"
@@ -378,12 +352,38 @@
                 "description": "Path to Elasticsearch index template for stream.",
                 "type": "string"
               },
+              "title": {
+                "examples": [
+                  "AWS Billing metrics"
+                ],
+                "type": "string"
+              },
               "vars": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.0.0~1data_stream~1manifest.jsonschema.json/definitions/vars"
               }
             },
             "additionalProperties": false
           }
+        },
+        "title": {
+          "description": "Title of data stream.",
+          "examples": [
+            "AWS billing metrics"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of data stream",
+          "examples": [
+            "metrics"
+          ],
+          "type": "string",
+          "enum": [
+            "metrics",
+            "logs",
+            "synthetics",
+            "traces"
+          ]
         }
       },
       "additionalProperties": false,
@@ -438,12 +438,9 @@
               "type"
             ],
             "properties": {
-              "title": {
-                "description": "Title of variable.",
-                "examples": [
-                  "Hosts"
-                ],
-                "type": "string"
+              "default": {
+                "description": "Default value(s) for variable",
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.0.0~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
               },
               "description": {
                 "description": "Short description of variable.",
@@ -451,32 +448,6 @@
                   "Hosts of integration service to connect to"
                 ],
                 "type": "string"
-              },
-              "default": {
-                "description": "Default value(s) for variable",
-                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.0.0~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
-              },
-              "type": {
-                "description": "Data type of variable.",
-                "examples": [
-                  "text"
-                ],
-                "type": "string",
-                "enum": [
-                  "integer",
-                  "bool",
-                  "password",
-                  "text",
-                  "yaml"
-                ]
-              },
-              "required": {
-                "description": "Is variable required?",
-                "examples": [
-                  true
-                ],
-                "default": false,
-                "type": "boolean"
               },
               "multi": {
                 "description": "Can variable contain multiple values?",
@@ -493,6 +464,14 @@
                 ],
                 "type": "string"
               },
+              "required": {
+                "description": "Is variable required?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
               "show_user": {
                 "description": "Should this variable be shown to the user by default?",
                 "examples": [
@@ -500,6 +479,27 @@
                 ],
                 "default": true,
                 "type": "boolean"
+              },
+              "title": {
+                "description": "Title of variable.",
+                "examples": [
+                  "Hosts"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "Data type of variable.",
+                "examples": [
+                  "text"
+                ],
+                "type": "string",
+                "enum": [
+                  "integer",
+                  "bool",
+                  "password",
+                  "text",
+                  "yaml"
+                ]
               }
             },
             "additionalProperties": false
@@ -553,20 +553,6 @@
           "src"
         ],
         "properties": {
-          "title": {
-            "description": "Title of icon.",
-            "examples": [
-              "Apache Logo"
-            ],
-            "type": "string"
-          },
-          "type": {
-            "description": "MIME type of the icon image file.",
-            "examples": [
-              "image/svg+xml"
-            ],
-            "type": "string"
-          },
           "size": {
             "description": "Size of the icon.",
             "examples": [
@@ -581,6 +567,20 @@
             ],
             "type": "string",
             "format": "relative-path"
+          },
+          "title": {
+            "description": "Title of icon.",
+            "examples": [
+              "Apache Logo"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "MIME type of the icon image file.",
+            "examples": [
+              "image/svg+xml"
+            ],
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -596,20 +596,6 @@
           "title"
         ],
         "properties": {
-          "title": {
-            "description": "Title of screenshot.",
-            "examples": [
-              "Apache HTTPD Server Status"
-            ],
-            "type": "string"
-          },
-          "type": {
-            "description": "MIME type of the screenshot image file.",
-            "examples": [
-              "image/png"
-            ],
-            "type": "string"
-          },
           "size": {
             "description": "Size of the screenshot.",
             "examples": [
@@ -624,6 +610,20 @@
             ],
             "type": "string",
             "format": "relative-path"
+          },
+          "title": {
+            "description": "Title of screenshot.",
+            "examples": [
+              "Apache HTTPD Server Status"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "MIME type of the screenshot image file.",
+            "examples": [
+              "image/png"
+            ],
+            "type": "string"
           }
         },
         "additionalProperties": false

@@ -5,26 +5,6 @@
     "title"
   ],
   "properties": {
-    "title": {
-      "description": "Title of data stream.",
-      "examples": [
-        "AWS billing metrics"
-      ],
-      "type": "string"
-    },
-    "type": {
-      "description": "Type of data stream",
-      "examples": [
-        "metrics"
-      ],
-      "type": "string",
-      "enum": [
-        "metrics",
-        "logs",
-        "synthetics",
-        "traces"
-      ]
-    },
     "dataset": {
       "description": "Name of data set.",
       "type": "string"
@@ -103,12 +83,6 @@
           "input"
         ],
         "properties": {
-          "title": {
-            "examples": [
-              "AWS Billing metrics"
-            ],
-            "type": "string"
-          },
           "description": {
             "examples": [
               "Collect AWS billing metrics"
@@ -131,12 +105,38 @@
             "description": "Path to Elasticsearch index template for stream.",
             "type": "string"
           },
+          "title": {
+            "examples": [
+              "AWS Billing metrics"
+            ],
+            "type": "string"
+          },
           "vars": {
             "$ref": "#/definitions/vars"
           }
         },
         "additionalProperties": false
       }
+    },
+    "title": {
+      "description": "Title of data stream.",
+      "examples": [
+        "AWS billing metrics"
+      ],
+      "type": "string"
+    },
+    "type": {
+      "description": "Type of data stream",
+      "examples": [
+        "metrics"
+      ],
+      "type": "string",
+      "enum": [
+        "metrics",
+        "logs",
+        "synthetics",
+        "traces"
+      ]
     }
   },
   "additionalProperties": false,
@@ -191,12 +191,9 @@
           "type"
         ],
         "properties": {
-          "title": {
-            "description": "Title of variable.",
-            "examples": [
-              "Hosts"
-            ],
-            "type": "string"
+          "default": {
+            "description": "Default value(s) for variable",
+            "$ref": "#/definitions/input_variable_value"
           },
           "description": {
             "description": "Short description of variable.",
@@ -204,32 +201,6 @@
               "Hosts of integration service to connect to"
             ],
             "type": "string"
-          },
-          "default": {
-            "description": "Default value(s) for variable",
-            "$ref": "#/definitions/input_variable_value"
-          },
-          "type": {
-            "description": "Data type of variable.",
-            "examples": [
-              "text"
-            ],
-            "type": "string",
-            "enum": [
-              "integer",
-              "bool",
-              "password",
-              "text",
-              "yaml"
-            ]
-          },
-          "required": {
-            "description": "Is variable required?",
-            "examples": [
-              true
-            ],
-            "default": false,
-            "type": "boolean"
           },
           "multi": {
             "description": "Can variable contain multiple values?",
@@ -246,6 +217,14 @@
             ],
             "type": "string"
           },
+          "required": {
+            "description": "Is variable required?",
+            "examples": [
+              true
+            ],
+            "default": false,
+            "type": "boolean"
+          },
           "show_user": {
             "description": "Should this variable be shown to the user by default?",
             "examples": [
@@ -253,6 +232,27 @@
             ],
             "default": true,
             "type": "boolean"
+          },
+          "title": {
+            "description": "Title of variable.",
+            "examples": [
+              "Hosts"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "Data type of variable.",
+            "examples": [
+              "text"
+            ],
+            "type": "string",
+            "enum": [
+              "integer",
+              "bool",
+              "password",
+              "text",
+              "yaml"
+            ]
           }
         },
         "additionalProperties": false
