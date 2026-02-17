@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.5.6/integration/elasticsearch/view.jsonschema.json",
+  "type": "object",
+  "required": [
+    "name",
+    "query"
+  ],
+  "properties": {
+    "name": {
+      "description": "Name of the ES|QL view",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-]+$"
+    },
+    "query": {
+      "description": "ES|QL query defining the view",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

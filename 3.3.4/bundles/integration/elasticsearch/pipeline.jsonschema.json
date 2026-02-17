@@ -207,11 +207,11 @@
                     "if"
                   ],
                   "properties": {
-                    "if": {
-                      "const": "ctx.event?.original != null"
-                    },
                     "field": {
                       "const": "message"
+                    },
+                    "if": {
+                      "const": "ctx.event?.original != null"
                     },
                     "ignore_missing": {
                       "const": true

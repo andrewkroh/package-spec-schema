@@ -11,31 +11,18 @@
     "owner"
   ],
   "properties": {
-    "title": {
-      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/title"
-    },
-    "description": {
-      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/description"
-    },
-    "type": {
-      "description": "The type of package.",
-      "examples": [
-        "input"
-      ],
-      "type": "string",
-      "enum": [
-        "input"
-      ]
-    },
-    "format_version": {
-      "description": "The version of the package specification format used by this package.",
-      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/version"
-    },
     "categories": {
       "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/categories"
     },
     "conditions": {
       "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/conditions"
+    },
+    "description": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/description"
+    },
+    "format_version": {
+      "description": "The version of the package specification format used by this package.",
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/version"
     },
     "icons": {
       "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/icons"
@@ -64,32 +51,12 @@
           "input"
         ],
         "properties": {
-          "title": {
-            "description": "Title of policy template.",
-            "examples": [
-              "Apache logs and metrics"
-            ],
-            "type": "string"
-          },
           "description": {
             "description": "Longer description of policy template.",
             "examples": [
               "Collect logs and metrics from Apache instances"
             ],
             "type": "string"
-          },
-          "type": {
-            "description": "Type of data stream",
-            "examples": [
-              "metrics"
-            ],
-            "type": "string",
-            "enum": [
-              "metrics",
-              "logs",
-              "synthetics",
-              "traces"
-            ]
           },
           "icons": {
             "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/icons"
@@ -116,6 +83,26 @@
             "description": "Path to Elasticsearch index template for stream.",
             "type": "string"
           },
+          "title": {
+            "description": "Title of policy template.",
+            "examples": [
+              "Apache logs and metrics"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of data stream",
+            "examples": [
+              "metrics"
+            ],
+            "type": "string",
+            "enum": [
+              "metrics",
+              "logs",
+              "synthetics",
+              "traces"
+            ]
+          },
           "vars": {
             "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
           }
@@ -128,6 +115,19 @@
     },
     "source": {
       "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/source"
+    },
+    "title": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/title"
+    },
+    "type": {
+      "description": "The type of package.",
+      "examples": [
+        "input"
+      ],
+      "type": "string",
+      "enum": [
+        "input"
+      ]
     },
     "vars": {
       "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
@@ -146,28 +146,6 @@
         "title"
       ],
       "properties": {
-        "title": {
-          "description": "Title of data stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
-          "examples": [
-            "AWS Billing Metrics",
-            "Linux Metrics",
-            "User Activity Logs"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of data stream",
-          "examples": [
-            "metrics"
-          ],
-          "type": "string",
-          "enum": [
-            "metrics",
-            "logs",
-            "synthetics",
-            "traces"
-          ]
-        },
         "dataset": {
           "description": "Name of data set.",
           "type": "string"
@@ -289,15 +267,6 @@
               "input"
             ],
             "properties": {
-              "title": {
-                "description": "Title of the stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
-                "examples": [
-                  "AWS Billing Metrics",
-                  "Linux Metrics",
-                  "User Activity Logs"
-                ],
-                "type": "string"
-              },
               "description": {
                 "description": "Description of the stream. It should describe what is being collected and with what collector, following the structure \"Collect X from Y with X\".\n",
                 "examples": [
@@ -323,12 +292,43 @@
                 "description": "Path to Elasticsearch index template for stream.",
                 "type": "string"
               },
+              "title": {
+                "description": "Title of the stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+                "examples": [
+                  "AWS Billing Metrics",
+                  "Linux Metrics",
+                  "User Activity Logs"
+                ],
+                "type": "string"
+              },
               "vars": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
               }
             },
             "additionalProperties": false
           }
+        },
+        "title": {
+          "description": "Title of data stream. It should include the source of the data that is being collected, and the kind of data collected such as logs or metrics. Words should be uppercased.\n",
+          "examples": [
+            "AWS Billing Metrics",
+            "Linux Metrics",
+            "User Activity Logs"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of data stream",
+          "examples": [
+            "metrics"
+          ],
+          "type": "string",
+          "enum": [
+            "metrics",
+            "logs",
+            "synthetics",
+            "traces"
+          ]
         }
       },
       "additionalProperties": false,
@@ -383,12 +383,9 @@
               "type"
             ],
             "properties": {
-              "title": {
-                "description": "Title of variable.",
-                "examples": [
-                  "Hosts"
-                ],
-                "type": "string"
+              "default": {
+                "description": "Default value(s) for variable",
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
               },
               "description": {
                 "description": "Short description of variable.",
@@ -397,9 +394,43 @@
                 ],
                 "type": "string"
               },
-              "default": {
-                "description": "Default value(s) for variable",
-                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/input_variable_value"
+              "multi": {
+                "description": "Can variable contain multiple values?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Variable name.",
+                "examples": [
+                  "hosts"
+                ],
+                "type": "string"
+              },
+              "required": {
+                "description": "Is variable required?",
+                "examples": [
+                  true
+                ],
+                "default": false,
+                "type": "boolean"
+              },
+              "show_user": {
+                "description": "Should this variable be shown to the user by default?",
+                "examples": [
+                  false
+                ],
+                "default": true,
+                "type": "boolean"
+              },
+              "title": {
+                "description": "Title of variable.",
+                "examples": [
+                  "Hosts"
+                ],
+                "type": "string"
               },
               "type": {
                 "description": "Data type of variable.",
@@ -418,37 +449,6 @@
                   "url",
                   "yaml"
                 ]
-              },
-              "required": {
-                "description": "Is variable required?",
-                "examples": [
-                  true
-                ],
-                "default": false,
-                "type": "boolean"
-              },
-              "multi": {
-                "description": "Can variable contain multiple values?",
-                "examples": [
-                  true
-                ],
-                "default": false,
-                "type": "boolean"
-              },
-              "name": {
-                "description": "Variable name.",
-                "examples": [
-                  "hosts"
-                ],
-                "type": "string"
-              },
-              "show_user": {
-                "description": "Should this variable be shown to the user by default?",
-                "examples": [
-                  false
-                ],
-                "default": true,
-                "type": "boolean"
               },
               "url_allowed_schemes": {
                 "description": "List of allowed URL schemes for the url type. If empty, any scheme is allowed. An empty string can be used to indicate that the scheme is not mandatory.\n",
@@ -491,31 +491,14 @@
         "owner"
       ],
       "properties": {
-        "title": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/title"
-        },
-        "description": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/description"
-        },
-        "type": {
-          "description": "The type of package.",
-          "examples": [
-            "integration"
-          ],
-          "type": "string",
-          "enum": [
-            "integration"
-          ]
-        },
-        "format_version": {
-          "description": "The version of the package specification format used by this package.",
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/version"
-        },
         "categories": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/categories"
         },
         "conditions": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/conditions"
+        },
+        "description": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/description"
         },
         "elasticsearch": {
           "description": "Elasticsearch requirements",
@@ -537,6 +520,10 @@
             }
           },
           "additionalProperties": false
+        },
+        "format_version": {
+          "description": "The version of the package specification format used by this package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/version"
         },
         "icons": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/icons"
@@ -563,20 +550,6 @@
               "description"
             ],
             "properties": {
-              "title": {
-                "description": "Title of policy template.",
-                "examples": [
-                  "Apache logs and metrics"
-                ],
-                "type": "string"
-              },
-              "description": {
-                "description": "Longer description of policy template.",
-                "examples": [
-                  "Collect logs and metrics from Apache instances"
-                ],
-                "type": "string"
-              },
               "categories": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/categories"
               },
@@ -594,6 +567,13 @@
                   "format": "data-stream-name"
                 }
               },
+              "description": {
+                "description": "Longer description of policy template.",
+                "examples": [
+                  "Collect logs and metrics from Apache instances"
+                ],
+                "type": "string"
+              },
               "icons": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/icons"
               },
@@ -608,22 +588,11 @@
                     "description"
                   ],
                   "properties": {
-                    "title": {
-                      "description": "Title of input.",
-                      "examples": [
-                        "Collect logs from Apache instances"
-                      ],
-                      "type": "string"
-                    },
                     "description": {
                       "description": "Longer description of input.",
                       "examples": [
                         "Collecting Apache access and error logs"
                       ],
-                      "type": "string"
-                    },
-                    "type": {
-                      "description": "Type of input.",
                       "type": "string"
                     },
                     "input_group": {
@@ -646,6 +615,17 @@
                       ],
                       "type": "string"
                     },
+                    "title": {
+                      "description": "Title of input.",
+                      "examples": [
+                        "Collect logs from Apache instances"
+                      ],
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of input.",
+                      "type": "string"
+                    },
                     "vars": {
                       "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
                     }
@@ -665,6 +645,13 @@
               },
               "screenshots": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/screenshots"
+              },
+              "title": {
+                "description": "Title of policy template.",
+                "examples": [
+                  "Apache logs and metrics"
+                ],
+                "type": "string"
               },
               "vars": {
                 "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
@@ -693,6 +680,19 @@
         "source": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/source"
         },
+        "title": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1manifest.jsonschema.json/definitions/title"
+        },
+        "type": {
+          "description": "The type of package.",
+          "examples": [
+            "integration"
+          ],
+          "type": "string",
+          "enum": [
+            "integration"
+          ]
+        },
         "vars": {
           "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~12.2.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
         },
@@ -703,23 +703,6 @@
       },
       "additionalProperties": false,
       "definitions": {
-        "title": {
-          "description": "Title of the package. It should be the usual title given to the product, service or kind of source being managed by this package.\n",
-          "examples": [
-            "Apache HTTP Server",
-            "MySQL",
-            "AWS"
-          ],
-          "type": "string"
-        },
-        "description": {
-          "description": "A longer description of the package. It should describe, at least all the kinds of data that is collected and with what collectors, following the structure \"Collect X from Y with X\".\n",
-          "examples": [
-            "Collect logs and metrics from Apache HTTP Servers with Elastic Agent.",
-            "Collect logs and metrics from Amazon Web Services with Elastic Agent."
-          ],
-          "type": "string"
-        },
         "categories": {
           "description": "Categories to which this package belongs.",
           "type": "array",
@@ -799,6 +782,14 @@
           },
           "additionalProperties": false
         },
+        "description": {
+          "description": "A longer description of the package. It should describe, at least all the kinds of data that is collected and with what collectors, following the structure \"Collect X from Y with X\".\n",
+          "examples": [
+            "Collect logs and metrics from Apache HTTP Servers with Elastic Agent.",
+            "Collect logs and metrics from Amazon Web Services with Elastic Agent."
+          ],
+          "type": "string"
+        },
         "icons": {
           "description": "List of icons for by this package.",
           "type": "array",
@@ -808,20 +799,6 @@
               "src"
             ],
             "properties": {
-              "title": {
-                "description": "Title of icon.",
-                "examples": [
-                  "Apache Logo"
-                ],
-                "type": "string"
-              },
-              "type": {
-                "description": "MIME type of the icon image file.",
-                "examples": [
-                  "image/svg+xml"
-                ],
-                "type": "string"
-              },
               "dark_mode": {
                 "description": "Is this icon to be shown in dark mode?",
                 "default": false,
@@ -841,6 +818,20 @@
                 ],
                 "type": "string",
                 "format": "relative-path"
+              },
+              "title": {
+                "description": "Title of icon.",
+                "examples": [
+                  "Apache Logo"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "MIME type of the icon image file.",
+                "examples": [
+                  "image/svg+xml"
+                ],
+                "type": "string"
               }
             },
             "additionalProperties": false
@@ -870,20 +861,6 @@
               "title"
             ],
             "properties": {
-              "title": {
-                "description": "Title of screenshot.",
-                "examples": [
-                  "Apache HTTPD Server Status"
-                ],
-                "type": "string"
-              },
-              "type": {
-                "description": "MIME type of the screenshot image file.",
-                "examples": [
-                  "image/png"
-                ],
-                "type": "string"
-              },
               "size": {
                 "description": "Size of the screenshot.",
                 "examples": [
@@ -898,6 +875,20 @@
                 ],
                 "type": "string",
                 "format": "relative-path"
+              },
+              "title": {
+                "description": "Title of screenshot.",
+                "examples": [
+                  "Apache HTTPD Server Status"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "MIME type of the screenshot image file.",
+                "examples": [
+                  "image/png"
+                ],
+                "type": "string"
               }
             },
             "additionalProperties": false
@@ -920,6 +911,15 @@
             }
           },
           "additionalProperties": false
+        },
+        "title": {
+          "description": "Title of the package. It should be the usual title given to the product, service or kind of source being managed by this package.\n",
+          "examples": [
+            "Apache HTTP Server",
+            "MySQL",
+            "AWS"
+          ],
+          "type": "string"
         },
         "version": {
           "description": "Version of the package, following semantic versioning. It can include pre-release labels.",

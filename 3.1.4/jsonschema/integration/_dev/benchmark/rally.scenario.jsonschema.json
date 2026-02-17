@@ -7,14 +7,14 @@
     "corpora"
   ],
   "properties": {
-    "description": {
-      "$ref": "./system.scenario.jsonschema.json#/definitions/description"
-    },
     "corpora": {
       "$ref": "./system.scenario.jsonschema.json#/definitions/corpora"
     },
     "data_stream": {
       "$ref": "./system.scenario.jsonschema.json#/definitions/data_stream"
+    },
+    "description": {
+      "$ref": "./system.scenario.jsonschema.json#/definitions/description"
     },
     "package": {
       "$ref": "./system.scenario.jsonschema.json#/definitions/package"

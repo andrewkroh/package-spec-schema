@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.5.5/integration/validation.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "docs_structure_enforced": {
+      "description": "Rules to manage the documentation structure",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Whether the documentation structure is enforced",
+          "default": false,
+          "type": "boolean"
+        },
+        "skip": {
+          "description": "List of sections to skip in the documentation validation",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "version": {
+          "description": "Version of the documentation structure",
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "errors": {
+      "description": "Rules to manage the validation results",
+      "type": "object",
+      "properties": {
+        "exclude_checks": {
+          "description": "List of validation codes that will be skipped",
+          "type": "array",
+          "items": {
+            "examples": [
+              "SVR00001"
+            ],
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

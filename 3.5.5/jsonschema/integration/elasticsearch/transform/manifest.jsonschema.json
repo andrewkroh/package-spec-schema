@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.5.5/integration/elasticsearch/transform/manifest.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "destination_index_template": {
+      "description": "Elasticsearch index template for the transform's destination index",
+      "type": "object",
+      "properties": {
+        "data_stream": {
+          "$ref": "../../data_stream/manifest.jsonschema.json#/definitions/elasticsearch_index_template/properties/data_stream"
+        },
+        "ingest_pipeline": {
+          "$ref": "../../data_stream/manifest.jsonschema.json#/definitions/elasticsearch_index_template/properties/ingest_pipeline"
+        },
+        "mappings": {
+          "$ref": "../../data_stream/manifest.jsonschema.json#/definitions/elasticsearch_index_template/properties/mappings"
+        },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "analysis": {
+              "$ref": "../../data_stream/manifest.jsonschema.json#/definitions/index_template_setting_analysis"
+            },
+            "index": {
+              "type": "object",
+              "properties": {
+                "codec": {
+                  "$ref": "../../data_stream/manifest.jsonschema.json#/definitions/index_template_setting_index/properties/codec"
+                },
+                "hidden": {
+                  "description": "Makes the index hidden.",
+                  "default": false,
+                  "type": "boolean"
+                },
+                "mapping": {
+                  "$ref": "../../data_stream/manifest.jsonschema.json#/definitions/index_template_setting_index/properties/mapping"
+                },
+                "mode": {
+                  "description": "Index mode for lookup indices.",
+                  "type": "string",
+                  "enum": [
+                    "lookup"
+                  ]
+                },
+                "number_of_routing_shards": {
+                  "description": "Number used when splitting shards.",
+                  "$ref": "../../data_stream/manifest.jsonschema.json#/definitions/index_template_setting_number_of_shards"
+                },
+                "number_of_shards": {
+                  "$ref": "../../data_stream/manifest.jsonschema.json#/definitions/index_template_setting_number_of_shards"
+                },
+                "refresh_interval": {
+                  "description": "How often to perform a refresh operation, which makes recent changes to the index visible to search.\n",
+                  "type": "string",
+                  "example": "1s"
+                },
+                "sort": {
+                  "$ref": "../../data_stream/manifest.jsonschema.json#/definitions/index_template_setting_index/properties/sort"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "start": {
+      "description": "Determines if the transform will be started upon installation",
+      "default": true,
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

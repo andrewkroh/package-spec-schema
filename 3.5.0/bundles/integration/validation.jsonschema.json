@@ -17,10 +17,10 @@
           "items": {
             "type": "object",
             "properties": {
-              "title": {
+              "reason": {
                 "type": "string"
               },
-              "reason": {
+              "title": {
                 "type": "string"
               }
             }

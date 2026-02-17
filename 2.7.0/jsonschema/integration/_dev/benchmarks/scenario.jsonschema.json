@@ -9,10 +9,6 @@
     "corpora"
   ],
   "properties": {
-    "description": {
-      "description": "A description of the benchmark scenario.",
-      "type": "string"
-    },
     "corpora": {
       "description": "Corpora settings.",
       "type": "object",
@@ -29,6 +25,10 @@
     },
     "data_stream": {
       "description": "The data-stream to benchmark.",
+      "type": "string"
+    },
+    "description": {
+      "description": "A description of the benchmark scenario.",
       "type": "string"
     },
     "version": {
