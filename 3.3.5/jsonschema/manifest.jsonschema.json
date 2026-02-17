@@ -3,6 +3,7 @@
   "$id": "https://schemas.elastic.dev/package-spec/3.3.5/manifest.jsonschema.json",
   "title": "Package Manifest",
   "description": "Schema for package manifests.",
+  "type": "object",
   "allOf": [
     {
       "if": {
