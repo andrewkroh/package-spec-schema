@@ -41,6 +41,47 @@
   },
   "additionalProperties": false,
   "$defs": {
+    "https://schemas.elastic.dev/package-spec/3.3.0/integration/data_stream/_dev/test/config.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "definitions": {
+        "skip": {
+          "description": "If this test should be skipped, more information about why it was skipped.",
+          "type": "object",
+          "required": [
+            "reason",
+            "link"
+          ],
+          "properties": {
+            "link": {
+              "description": "Link to issue with more details about skipped test or to track re-enabling skipped test.",
+              "type": "string",
+              "example": "https://github.com/elastic/integrations/issues/520"
+            },
+            "reason": {
+              "description": "Short explanation for why test has been skipped.",
+              "type": "string",
+              "example": "Flaky test"
+            }
+          },
+          "additionalProperties": false
+        },
+        "vars": {
+          "description": "Variables defined for the test case.",
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "data_stream.dataset": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9\\._]*$"
+            }
+          }
+        }
+      }
+    },
     "https://schemas.elastic.dev/package-spec/3.3.0/integration/data_stream/fields/fields.jsonschema.json": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
       "type": "array",
@@ -2019,47 +2060,6 @@
           ],
           "type": "string",
           "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?$"
-        }
-      }
-    },
-    "https://schemas.elastic.dev/package-spec/3.3.0/integration/data_stream/_dev/test/config.jsonschema.json": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "type": "object",
-      "additionalProperties": false,
-      "definitions": {
-        "skip": {
-          "description": "If this test should be skipped, more information about why it was skipped.",
-          "type": "object",
-          "required": [
-            "reason",
-            "link"
-          ],
-          "properties": {
-            "link": {
-              "description": "Link to issue with more details about skipped test or to track re-enabling skipped test.",
-              "type": "string",
-              "example": "https://github.com/elastic/integrations/issues/520"
-            },
-            "reason": {
-              "description": "Short explanation for why test has been skipped.",
-              "type": "string",
-              "example": "Flaky test"
-            }
-          },
-          "additionalProperties": false
-        },
-        "vars": {
-          "description": "Variables defined for the test case.",
-          "type": [
-            "null",
-            "object"
-          ],
-          "properties": {
-            "data_stream.dataset": {
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9\\._]*$"
-            }
-          }
         }
       }
     }
