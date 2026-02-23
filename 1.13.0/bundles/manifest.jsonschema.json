@@ -361,6 +361,167 @@
         }
       }
     },
+    "https://schemas.elastic.dev/package-spec/1.13.0/input/manifest.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "required": [
+        "format_version",
+        "name",
+        "title",
+        "description",
+        "version",
+        "type",
+        "owner"
+      ],
+      "properties": {
+        "categories": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/categories"
+        },
+        "conditions": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/conditions"
+        },
+        "description": {
+          "description": "A longer description of the package.",
+          "examples": [
+            "Apache Integration"
+          ],
+          "type": "string"
+        },
+        "format_version": {
+          "description": "The version of the package specification format used by this package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/version"
+        },
+        "icons": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/icons"
+        },
+        "license": {
+          "description": "The license under which the package is being released (deprecated, use subscription instead).",
+          "examples": [
+            "basic"
+          ],
+          "deprecated": true,
+          "default": "basic",
+          "type": "string",
+          "enum": [
+            "basic"
+          ]
+        },
+        "name": {
+          "description": "The name of the package.",
+          "examples": [
+            "apache"
+          ],
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "owner": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/owner"
+        },
+        "policy_templates": {
+          "description": "List of policy templates offered by this package.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "title",
+              "description",
+              "type",
+              "input"
+            ],
+            "properties": {
+              "description": {
+                "description": "Longer description of policy template.",
+                "examples": [
+                  "Collect logs and metrics from Apache instances"
+                ],
+                "type": "string"
+              },
+              "icons": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/icons"
+              },
+              "input": {
+                "examples": [
+                  "aws/metrics",
+                  "s3",
+                  "file"
+                ],
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of policy template.",
+                "examples": [
+                  "apache"
+                ],
+                "type": "string"
+              },
+              "screenshots": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/screenshots"
+              },
+              "template_path": {
+                "description": "Path to Elasticsearch index template for stream.",
+                "type": "string"
+              },
+              "title": {
+                "description": "Title of policy template.",
+                "examples": [
+                  "Apache logs and metrics"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "Type of data stream",
+                "examples": [
+                  "metrics"
+                ],
+                "type": "string",
+                "enum": [
+                  "metrics",
+                  "logs",
+                  "synthetics",
+                  "traces"
+                ]
+              },
+              "vars": {
+                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "screenshots": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/screenshots"
+        },
+        "source": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/source"
+        },
+        "title": {
+          "description": "The title of the package.",
+          "examples": [
+            "Apache"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of package.",
+          "examples": [
+            "input"
+          ],
+          "type": "string",
+          "enum": [
+            "input"
+          ]
+        },
+        "vars": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
+        },
+        "version": {
+          "description": "The version of the package.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/version"
+        }
+      },
+      "additionalProperties": false
+    },
     "https://schemas.elastic.dev/package-spec/1.13.0/integration/manifest.jsonschema.json": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
       "type": "object",
@@ -813,167 +974,6 @@
           "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?$"
         }
       }
-    },
-    "https://schemas.elastic.dev/package-spec/1.13.0/input/manifest.jsonschema.json": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "type": "object",
-      "required": [
-        "format_version",
-        "name",
-        "title",
-        "description",
-        "version",
-        "type",
-        "owner"
-      ],
-      "properties": {
-        "categories": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/categories"
-        },
-        "conditions": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/conditions"
-        },
-        "description": {
-          "description": "A longer description of the package.",
-          "examples": [
-            "Apache Integration"
-          ],
-          "type": "string"
-        },
-        "format_version": {
-          "description": "The version of the package specification format used by this package.",
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/version"
-        },
-        "icons": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/icons"
-        },
-        "license": {
-          "description": "The license under which the package is being released (deprecated, use subscription instead).",
-          "examples": [
-            "basic"
-          ],
-          "deprecated": true,
-          "default": "basic",
-          "type": "string",
-          "enum": [
-            "basic"
-          ]
-        },
-        "name": {
-          "description": "The name of the package.",
-          "examples": [
-            "apache"
-          ],
-          "type": "string",
-          "pattern": "^[a-z0-9_]+$"
-        },
-        "owner": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/owner"
-        },
-        "policy_templates": {
-          "description": "List of policy templates offered by this package.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "name",
-              "title",
-              "description",
-              "type",
-              "input"
-            ],
-            "properties": {
-              "description": {
-                "description": "Longer description of policy template.",
-                "examples": [
-                  "Collect logs and metrics from Apache instances"
-                ],
-                "type": "string"
-              },
-              "icons": {
-                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/icons"
-              },
-              "input": {
-                "examples": [
-                  "aws/metrics",
-                  "s3",
-                  "file"
-                ],
-                "type": "string"
-              },
-              "name": {
-                "description": "Name of policy template.",
-                "examples": [
-                  "apache"
-                ],
-                "type": "string"
-              },
-              "screenshots": {
-                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/screenshots"
-              },
-              "template_path": {
-                "description": "Path to Elasticsearch index template for stream.",
-                "type": "string"
-              },
-              "title": {
-                "description": "Title of policy template.",
-                "examples": [
-                  "Apache logs and metrics"
-                ],
-                "type": "string"
-              },
-              "type": {
-                "description": "Type of data stream",
-                "examples": [
-                  "metrics"
-                ],
-                "type": "string",
-                "enum": [
-                  "metrics",
-                  "logs",
-                  "synthetics",
-                  "traces"
-                ]
-              },
-              "vars": {
-                "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
-              }
-            },
-            "additionalProperties": false
-          }
-        },
-        "screenshots": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/screenshots"
-        },
-        "source": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/source"
-        },
-        "title": {
-          "description": "The title of the package.",
-          "examples": [
-            "Apache"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of package.",
-          "examples": [
-            "input"
-          ],
-          "type": "string",
-          "enum": [
-            "input"
-          ]
-        },
-        "vars": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1data_stream~1manifest.jsonschema.json/definitions/vars"
-        },
-        "version": {
-          "description": "The version of the package.",
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~11.13.0~1integration~1manifest.jsonschema.json/definitions/version"
-        }
-      },
-      "additionalProperties": false
     }
   }
 }

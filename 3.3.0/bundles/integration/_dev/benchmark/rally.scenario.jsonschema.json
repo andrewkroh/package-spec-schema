@@ -24,6 +24,255 @@
   },
   "additionalProperties": false,
   "$defs": {
+    "https://schemas.elastic.dev/package-spec/3.3.0/integration/data_stream/_dev/test/config.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "definitions": {
+        "skip": {
+          "description": "If this test should be skipped, more information about why it was skipped.",
+          "type": "object",
+          "required": [
+            "reason",
+            "link"
+          ],
+          "properties": {
+            "link": {
+              "description": "Link to issue with more details about skipped test or to track re-enabling skipped test.",
+              "type": "string",
+              "example": "https://github.com/elastic/integrations/issues/520"
+            },
+            "reason": {
+              "description": "Short explanation for why test has been skipped.",
+              "type": "string",
+              "example": "Flaky test"
+            }
+          },
+          "additionalProperties": false
+        },
+        "vars": {
+          "description": "Variables defined for the test case.",
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "data_stream.dataset": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9\\._]*$"
+            }
+          }
+        }
+      }
+    },
+    "https://schemas.elastic.dev/package-spec/3.3.0/integration/_dev/benchmark/system.scenario.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "required": [
+        "data_stream",
+        "input"
+      ],
+      "properties": {
+        "benchmark_time_period": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/benchmark_time_period"
+        },
+        "corpora": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/corpora"
+        },
+        "data_stream": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/data_stream"
+        },
+        "description": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/description"
+        },
+        "input": {
+          "description": "The input of the package to benchmark.",
+          "type": "string"
+        },
+        "package": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/package"
+        },
+        "vars": {
+          "description": "The package level variables.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/vars"
+        },
+        "version": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1manifest.jsonschema.json/definitions/version"
+        },
+        "wait_for_data_timeout": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/wait_for_data_timeout"
+        },
+        "warmup_time_period": {
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/warmup_time_period"
+        }
+      },
+      "additionalProperties": false,
+      "definitions": {
+        "benchmark_time_period": {
+          "description": "A time period as a duration string for the duration of the benchmark.\nBy default the value is 0 seconds, which means that the benchmark will run until no more data is ingested.\n",
+          "default": "",
+          "type": "string",
+          "example": "10m"
+        },
+        "corpora": {
+          "description": "Corpora settings.",
+          "type": "object",
+          "required": [
+            "generator"
+          ],
+          "properties": {
+            "generator": {
+              "description": "Configuration for the corpus generator.",
+              "type": "object",
+              "required": [
+                "total_events",
+                "template",
+                "config",
+                "fields"
+              ],
+              "properties": {
+                "config": {
+                  "description": "Configuration for the generator.",
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "description": "Config path.",
+                      "type": "string"
+                    },
+                    "raw": {
+                      "description": "Raw config.",
+                      "type": "object"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "fields": {
+                  "description": "Fields description for the generator.",
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "description": "Fields path.",
+                      "type": "string"
+                    },
+                    "raw": {
+                      "description": "Raw fields.",
+                      "type": "object"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "template": {
+                  "description": "Configuration for the generator template.",
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "description": "Template path.",
+                      "type": "string"
+                    },
+                    "raw": {
+                      "description": "Raw template.",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "The type of template.",
+                      "default": "placeholder",
+                      "type": "string",
+                      "enum": [
+                        "placeholder",
+                        "gotext"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "total_events": {
+                  "description": "An integer describing the total number of events to generate.",
+                  "type": "integer",
+                  "example": 1000
+                }
+              },
+              "additionalProperties": false
+            },
+            "input_service": {
+              "description": "Options for the service (found in ./deploy/docker) that will send corpora logs to the elastic agents.",
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "description": "The name of the input service.",
+                  "type": "string"
+                },
+                "signal": {
+                  "description": "The signal to send to the service once the benchmark is ready to start.",
+                  "default": "",
+                  "type": "string",
+                  "example": "SIGHUP"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "data_stream": {
+          "description": "Data-stream parameters.",
+          "type": "object",
+          "oneOf": [
+            {
+              "required": [
+                "name"
+              ]
+            },
+            {
+              "required": [
+                "dataset"
+              ]
+            }
+          ],
+          "properties": {
+            "dataset": {
+              "description": "The name of the dataset to benchmark.",
+              "type": "string"
+            },
+            "name": {
+              "description": "The name of the dataset to benchmark.",
+              "type": "string"
+            },
+            "vars": {
+              "description": "The data_stream specific variables.",
+              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/vars"
+            }
+          },
+          "additionalProperties": false
+        },
+        "description": {
+          "description": "A description of the benchmark scenario.",
+          "type": "string"
+        },
+        "package": {
+          "description": "The package to benchmark.",
+          "type": "string"
+        },
+        "policy_template": {
+          "description": "The policy template to use, if none is set, will pick the first one in the list.\n",
+          "type": "string"
+        },
+        "wait_for_data_timeout": {
+          "description": "Timeout for waiting for data during a benchmark.",
+          "default": "10m",
+          "type": "string",
+          "example": "10m"
+        },
+        "warmup_time_period": {
+          "description": "A time period as a duration string for warmup of the benchmark. \nAll response data captured during warmup will not show up in the measurement results.\nBy default the value is 0 seconds, which means that all data captured will be taken into account for the benchmark results.\n",
+          "default": "",
+          "type": "string",
+          "example": "10s"
+        }
+      }
+    },
     "https://schemas.elastic.dev/package-spec/3.3.0/integration/data_stream/fields/fields.jsonschema.json": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
       "type": "array",
@@ -2002,255 +2251,6 @@
           ],
           "type": "string",
           "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?$"
-        }
-      }
-    },
-    "https://schemas.elastic.dev/package-spec/3.3.0/integration/data_stream/_dev/test/config.jsonschema.json": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "type": "object",
-      "additionalProperties": false,
-      "definitions": {
-        "skip": {
-          "description": "If this test should be skipped, more information about why it was skipped.",
-          "type": "object",
-          "required": [
-            "reason",
-            "link"
-          ],
-          "properties": {
-            "link": {
-              "description": "Link to issue with more details about skipped test or to track re-enabling skipped test.",
-              "type": "string",
-              "example": "https://github.com/elastic/integrations/issues/520"
-            },
-            "reason": {
-              "description": "Short explanation for why test has been skipped.",
-              "type": "string",
-              "example": "Flaky test"
-            }
-          },
-          "additionalProperties": false
-        },
-        "vars": {
-          "description": "Variables defined for the test case.",
-          "type": [
-            "null",
-            "object"
-          ],
-          "properties": {
-            "data_stream.dataset": {
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9\\._]*$"
-            }
-          }
-        }
-      }
-    },
-    "https://schemas.elastic.dev/package-spec/3.3.0/integration/_dev/benchmark/system.scenario.jsonschema.json": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "type": "object",
-      "required": [
-        "data_stream",
-        "input"
-      ],
-      "properties": {
-        "benchmark_time_period": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/benchmark_time_period"
-        },
-        "corpora": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/corpora"
-        },
-        "data_stream": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/data_stream"
-        },
-        "description": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/description"
-        },
-        "input": {
-          "description": "The input of the package to benchmark.",
-          "type": "string"
-        },
-        "package": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/package"
-        },
-        "vars": {
-          "description": "The package level variables.",
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/vars"
-        },
-        "version": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1manifest.jsonschema.json/definitions/version"
-        },
-        "wait_for_data_timeout": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/wait_for_data_timeout"
-        },
-        "warmup_time_period": {
-          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1_dev~1benchmark~1system.scenario.jsonschema.json/definitions/warmup_time_period"
-        }
-      },
-      "additionalProperties": false,
-      "definitions": {
-        "benchmark_time_period": {
-          "description": "A time period as a duration string for the duration of the benchmark.\nBy default the value is 0 seconds, which means that the benchmark will run until no more data is ingested.\n",
-          "default": "",
-          "type": "string",
-          "example": "10m"
-        },
-        "corpora": {
-          "description": "Corpora settings.",
-          "type": "object",
-          "required": [
-            "generator"
-          ],
-          "properties": {
-            "generator": {
-              "description": "Configuration for the corpus generator.",
-              "type": "object",
-              "required": [
-                "total_events",
-                "template",
-                "config",
-                "fields"
-              ],
-              "properties": {
-                "config": {
-                  "description": "Configuration for the generator.",
-                  "type": "object",
-                  "properties": {
-                    "path": {
-                      "description": "Config path.",
-                      "type": "string"
-                    },
-                    "raw": {
-                      "description": "Raw config.",
-                      "type": "object"
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "fields": {
-                  "description": "Fields description for the generator.",
-                  "type": "object",
-                  "properties": {
-                    "path": {
-                      "description": "Fields path.",
-                      "type": "string"
-                    },
-                    "raw": {
-                      "description": "Raw fields.",
-                      "type": "object"
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "template": {
-                  "description": "Configuration for the generator template.",
-                  "type": "object",
-                  "properties": {
-                    "path": {
-                      "description": "Template path.",
-                      "type": "string"
-                    },
-                    "raw": {
-                      "description": "Raw template.",
-                      "type": "string"
-                    },
-                    "type": {
-                      "description": "The type of template.",
-                      "default": "placeholder",
-                      "type": "string",
-                      "enum": [
-                        "placeholder",
-                        "gotext"
-                      ]
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "total_events": {
-                  "description": "An integer describing the total number of events to generate.",
-                  "type": "integer",
-                  "example": 1000
-                }
-              },
-              "additionalProperties": false
-            },
-            "input_service": {
-              "description": "Options for the service (found in ./deploy/docker) that will send corpora logs to the elastic agents.",
-              "type": "object",
-              "required": [
-                "name"
-              ],
-              "properties": {
-                "name": {
-                  "description": "The name of the input service.",
-                  "type": "string"
-                },
-                "signal": {
-                  "description": "The signal to send to the service once the benchmark is ready to start.",
-                  "default": "",
-                  "type": "string",
-                  "example": "SIGHUP"
-                }
-              },
-              "additionalProperties": false
-            }
-          },
-          "additionalProperties": false
-        },
-        "data_stream": {
-          "description": "Data-stream parameters.",
-          "type": "object",
-          "oneOf": [
-            {
-              "required": [
-                "name"
-              ]
-            },
-            {
-              "required": [
-                "dataset"
-              ]
-            }
-          ],
-          "properties": {
-            "dataset": {
-              "description": "The name of the dataset to benchmark.",
-              "type": "string"
-            },
-            "name": {
-              "description": "The name of the dataset to benchmark.",
-              "type": "string"
-            },
-            "vars": {
-              "description": "The data_stream specific variables.",
-              "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.3.0~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/vars"
-            }
-          },
-          "additionalProperties": false
-        },
-        "description": {
-          "description": "A description of the benchmark scenario.",
-          "type": "string"
-        },
-        "package": {
-          "description": "The package to benchmark.",
-          "type": "string"
-        },
-        "policy_template": {
-          "description": "The policy template to use, if none is set, will pick the first one in the list.\n",
-          "type": "string"
-        },
-        "wait_for_data_timeout": {
-          "description": "Timeout for waiting for data during a benchmark.",
-          "default": "10m",
-          "type": "string",
-          "example": "10m"
-        },
-        "warmup_time_period": {
-          "description": "A time period as a duration string for warmup of the benchmark. \nAll response data captured during warmup will not show up in the measurement results.\nBy default the value is 0 seconds, which means that all data captured will be taken into account for the benchmark results.\n",
-          "default": "",
-          "type": "string",
-          "example": "10s"
         }
       }
     }
