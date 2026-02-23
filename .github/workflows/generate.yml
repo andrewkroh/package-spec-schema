@@ -31,9 +31,13 @@ jobs:
         run: just all
         working-directory: .generate
 
+      - name: stage meaningful changes
+        run: just git-add-modified
+        working-directory: .generate
+
       - name: check for modified versions
         id: is-changed
-        run: echo "modified=$(if git status --porcelain | grep -q -P '\d+\.\d+\.\d+'; then echo "true"; else echo "false"; fi)" >> $GITHUB_OUTPUT
+        run: echo "modified=$(if git diff --cached --name-only | grep -q -P '\d+\.\d+\.\d+'; then echo "true"; else echo "false"; fi)" >> $GITHUB_OUTPUT
 
       - name: timestamp
         id: timestamp
@@ -45,18 +49,20 @@ jobs:
         with:
           commit-message: |
             chore: Update from elastic/package-spec
-            
+
             Update code based on https://github.com/elastic/package-spec.
             Updated at ${{ steps.timestamp.outputs.timestamp }}.
           title: 'chore: Update from elastic/package-spec'
           body: |
             Update code based on based on https://github.com/elastic/package-spec.
-            
+
             Updated at ${{ steps.timestamp.outputs.timestamp }}.
           base: main
           labels: automation
           branch: package-spec-update
           delete-branch: true
+          add-paths: |
+            [1-9].[0-9]*.[0-9]*/**
 
   # Generate schemas from elastic/package-spec@main
   generate-main:

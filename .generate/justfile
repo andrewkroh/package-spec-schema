@@ -56,3 +56,7 @@ go:
   go tool github.com/elastic/go-licenser -license ASL2-Short
   go tool mvdan.cc/gofumpt -w --extra $(find . -name '*.go')
   go vet ./...
+
+# Stage only files with meaningful changes (ignoring key ordering differences).
+git-add-modified:
+  ./git-add-modified.sh '{{release_pattern}}'
