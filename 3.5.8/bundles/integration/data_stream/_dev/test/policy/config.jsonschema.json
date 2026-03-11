@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "data_stream": {
+      "description": "Configuration for the data stream.",
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "vars": {
+          "description": "Variables used to configure settings defined in the data stream manifest.",
+          "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.5.8~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/vars"
+        }
+      },
+      "additionalProperties": false
+    },
+    "input": {
+      "description": "The input of the package to test.",
+      "type": "string"
+    },
+    "policy_api_format": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.5.8~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/policy_api_format"
+    },
+    "requires": {
+      "description": "Package dependencies required for this test with exact versions.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.5.8~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/package_requirement"
+      }
+    },
+    "skip": {
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.5.8~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/skip"
+    },
+    "vars": {
+      "description": "Variables used to configure settings defined in the package manifest.",
+      "$ref": "#/$defs/https:~1~1schemas.elastic.dev~1package-spec~13.5.8~1integration~1data_stream~1_dev~1test~1config.jsonschema.json/definitions/vars"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "https://schemas.elastic.dev/package-spec/3.5.8/integration/data_stream/_dev/test/config.jsonschema.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "definitions": {
+        "deployer": {
+          "description": "Name of the service deployer to setup for this system benchmark.",
+          "type": "string",
+          "enum": [
+            "docker",
+            "tf",
+            "k8s"
+          ]
+        },
+        "package_requirement": {
+          "description": "A package requirement with an exact version used during tests.",
+          "type": "object",
+          "oneOf": [
+            {
+              "required": [
+                "package",
+                "version"
+              ],
+              "properties": {
+                "package": {
+                  "description": "Name of the required package.",
+                  "type": "string",
+                  "pattern": "^[a-z0-9_]+$"
+                },
+                "version": {
+                  "description": "Exact version of the package required.",
+                  "type": "string",
+                  "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "required": [
+                "source"
+              ],
+              "properties": {
+                "source": {
+                  "description": "Relative path to the source of the required package.",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "policy_api_format": {
+          "description": "Tests can create policies using the Fleet APIs with different formats. The \"legacy\" format requires to\nsend variables with hints about their type, and defaults are not managed automatically.\nThe newer, \"simplified\" format has better format support for variables and don't allow to include hints,\nit also uses defaults automatically, and requires explicit enablement or disablement of inputs and streams.\nIn most cases tests should not set this value. The main use case is to set it to \"legacy\" for cases that\ncannot be fully supported with the newer \"simplified\" format.",
+          "type": "string",
+          "enum": [
+            "legacy",
+            "simplified"
+          ]
+        },
+        "skip": {
+          "description": "If this test should be skipped, more information about why it was skipped.",
+          "type": "object",
+          "required": [
+            "reason",
+            "link"
+          ],
+          "properties": {
+            "link": {
+              "description": "Link to issue with more details about skipped test or to track re-enabling skipped test.",
+              "type": "string",
+              "example": "https://github.com/elastic/integrations/issues/520"
+            },
+            "reason": {
+              "description": "Short explanation for why test has been skipped.",
+              "type": "string",
+              "example": "Flaky test"
+            }
+          },
+          "additionalProperties": false
+        },
+        "vars": {
+          "description": "Variables defined for the test case.",
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "data_stream.dataset": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9\\._]*$"
+            }
+          }
+        }
+      }
+    }
+  }
+}
