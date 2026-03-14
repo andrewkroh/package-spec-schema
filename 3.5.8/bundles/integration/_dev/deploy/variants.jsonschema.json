@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "variants",
+    "default"
+  ],
+  "properties": {
+    "default": {
+      "description": "Default variant to use",
+      "type": "string"
+    },
+    "variants": {
+      "description": "Variant names and their configurations",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
