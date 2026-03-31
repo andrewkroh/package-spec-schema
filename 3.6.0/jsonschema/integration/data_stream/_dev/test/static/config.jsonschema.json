@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.elastic.dev/package-spec/3.6.0/integration/data_stream/_dev/test/static/config.jsonschema.json",
+  "type": "object",
+  "properties": {
+    "requires": {
+      "description": "Package dependencies required for this test with exact versions.",
+      "type": "array",
+      "items": {
+        "$ref": "./../config.jsonschema.json#/definitions/package_requirement"
+      }
+    },
+    "skip": {
+      "$ref": "./../config.jsonschema.json#/definitions/skip"
+    }
+  }
+}
