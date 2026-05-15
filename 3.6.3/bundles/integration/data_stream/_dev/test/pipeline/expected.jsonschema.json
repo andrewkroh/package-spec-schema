@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "expected"
+  ],
+  "properties": {
+    "expected": {
+      "description": "Expected test result",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/optionalTestResult"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "optionalTestResult": {
+      "anyOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}
