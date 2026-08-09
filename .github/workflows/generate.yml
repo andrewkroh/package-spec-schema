@@ -24,7 +24,7 @@ jobs:
           go-version: stable
           cache-dependency-path: .generate/go.sum
 
-      - uses: sourcemeta/jsonschema@v14.13.3
+      - uses: sourcemeta/jsonschema@v14.19.0
       - uses: extractions/setup-just@v3
 
       - name: generate
@@ -75,7 +75,7 @@ jobs:
           go-version: stable
           cache-dependency-path: .generate/go.sum
 
-      - uses: sourcemeta/jsonschema@v14.13.3
+      - uses: sourcemeta/jsonschema@v14.19.0
       - uses: extractions/setup-just@v3
 
       - name: generate
